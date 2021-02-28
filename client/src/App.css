@@ -1,8 +1,8 @@
 .App {
   text-align: center;
   background-color: #022249;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   padding: 0;
   margin: 0;
   display: flex;

@@ -1,12 +1,15 @@
 .movieCellWrapper {
   display: flex;
-  height: 15%;
+  height: 135px;
   width: 95%;
   border-radius: 5px;
   background-color: #1D3437;
   align-self: center;
   margin-top: 2%;
+  position: relative;
+  transition: .5s ease-in-out;
 }
+
 
 .movieImageWrapper {
   width: 35%;
@@ -26,7 +29,7 @@
 
 .title {
   display: flex;
-  height: 20%;
+  height: 40%;
   align-items: center;
   justify-content: center;
   color: white;
@@ -42,6 +45,6 @@
 
 .titleScore {
   left: 10%;
-  position: relative;
+  position: absolute;
   color: #F07B40;
 }
