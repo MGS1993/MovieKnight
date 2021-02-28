@@ -1,0 +1,47 @@
+.movieCellWrapper {
+  display: flex;
+  height: 15%;
+  width: 95%;
+  border-radius: 5px;
+  background-color: #1D3437;
+  align-self: center;
+  margin-top: 2%;
+}
+
+.movieImageWrapper {
+  width: 35%;
+  display: flex;
+  align-items: center;
+}
+
+.movieInfoWrapper {
+  flex-basis: 65%;
+  display: flex;
+  flex-direction: column;
+}
+.movieImage {
+  height: auto;
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  height: 20%;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+.bio {
+  height: 80%;
+  color: white;
+  font-size: 0.8rem;
+  overflow: hidden;
+  padding: 5px;
+  }
+
+.titleScore {
+  left: 10%;
+  position: relative;
+  color: #F07B40;
+}
