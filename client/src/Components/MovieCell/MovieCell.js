@@ -1,12 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./MovieCell.module.css";
 import { AiOutlineStar } from "react-icons/ai";
 const MovieCell = (props) => {
   let [clickedLarger, setClickedLarger] = useState(false);
+  let [movieDetail, setMovieDetail] = useState(null);
+  const apiKey = 'b88a57406d9a87698d307358f3e4f4ab';
 
+  useEffect(() => {
+    async function getMovieDetail() {
+      try {
+        const response = await fetch(` https://api.themoviedb.org/3/movie/${props.movieId}?api_key=${apiKey}&language=en-US`)
+        const data = await response.json()
+        const item = data
+        setMovieDetail(item)
+        console.log(item)
+      } catch(err) {
+        console.log(err)
+      }
+    }
+    getMovieDetail()
+  }, [props.movieId])
   let mainWrapperAppendedStyle
   let renderedCell 
-
+///YOU GOT THINGS WORKING WELL YOU FUCKING EINSTEIN. NOW WE CAN USE
+///'MOVIEDETAIL' IN PLACE OF PROPS FOR EACH INDIVIDUAL MOVIE. 
+///SPECIFICALLY FOR THE LARGE VERSION
   if(clickedLarger === true) {
     renderedCell = 
     <React.Fragment>
@@ -26,7 +44,7 @@ const MovieCell = (props) => {
         </div>
         <div>Release Date {props.yearReleased}</div>
         <div className={styles.largeBio}>{props.bio}</div>
-
+        
       </div>
     </React.Fragment>
     mainWrapperAppendedStyle = {
