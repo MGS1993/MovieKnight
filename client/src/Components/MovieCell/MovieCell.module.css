@@ -1,5 +1,6 @@
 .movieCellWrapper {
   display: flex;
+  flex-direction: row;
   height: 135px;
   width: 95%;
   border-radius: 5px;
@@ -7,7 +8,7 @@
   align-self: center;
   margin-top: 2%;
   position: relative;
-  transition: .5s ease-in-out;
+  transition: .7s ease-in-out;
 }
 
 
@@ -15,6 +16,14 @@
   width: 35%;
   display: flex;
   align-items: center;
+  transition: .7s ease-in-out;
+
+}
+.largeMovieImageWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  transition: .9s ease-out;
 }
 
 .movieInfoWrapper {
@@ -22,14 +31,29 @@
   display: flex;
   flex-direction: column;
 }
+
 .movieImage {
   height: auto;
   width: 100%;
+  transition: .5s ease-in-out;
 }
-
+.largeMovieImage {
+  height: auto;
+  width: 100%;
+  transition: .5s ease-in-out;
+}
 .title {
   display: flex;
   height: 40%;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.largeTitle {
+  display: flex;
+  height: 10%;
   align-items: center;
   justify-content: center;
   color: white;
@@ -41,10 +65,21 @@
   font-size: 0.8rem;
   overflow: hidden;
   padding: 5px;
-  }
-
+}
+.largeBio {
+  height: 50%;
+  color: white;
+  font-size: 0.9rem;
+  overflow: hidden;
+  padding: 10px;
+}
 .titleScore {
   left: 10%;
   position: absolute;
   color: #F07B40;
+}
+
+.icon {
+  position: relative;
+  top:2px;
 }

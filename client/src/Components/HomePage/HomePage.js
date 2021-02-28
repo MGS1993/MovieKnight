@@ -13,6 +13,7 @@ const HomePage = () => {
       const data = await response.json()
       const item = data.results
       setMovieData(item)
+      console.log(item)
     } catch(err) {
       console.log(err)
     }
@@ -27,9 +28,11 @@ const HomePage = () => {
         return <MovieCell
         key={index}
         title={item.title || item.name}
-        image={'https://image.tmdb.org/t/p/w300/'+ item.backdrop_path}
+        image={item.backdrop_path}
         score={item.vote_average}
-        bio={item.overview} />
+        bio={item.overview}
+        yearReleased={item.release_date}
+        movieId={item.id} />
       })}
     </div>
   )

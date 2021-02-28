@@ -9,7 +9,7 @@ const HomePageHeader = props => {
         <h2>MovieKnight</h2>
       </div>
       <div>
-        
+      This week's top 20
       </div>
       
     </div>
