@@ -3,6 +3,7 @@ import styles from './HomePage.module.css';
 import HomePageHeader from './HomePageHeader/HomePageHeader';
 import MovieCell from '../MovieCell/MovieCell';
 import FooterNavBar from '../FooterNavBar/FooterNavBar';
+import listContext from '../context/listContext';
 const HomePage = () => {
   const [movieData, setMovieData] = useState(null)
   const apiKey = 'b88a57406d9a87698d307358f3e4f4ab';
@@ -20,11 +21,14 @@ const HomePage = () => {
     }
   }
      getTrendingData()
+     
  }, [])
 
+ 
   return(
     <div className={styles.homePageLayout}>
       <HomePageHeader />
+      <listContext.Provider value={{exportedData: setMovieData}}>
       {movieData && movieData.map((item, index) => {
         return <MovieCell
         key={index}
@@ -36,7 +40,8 @@ const HomePage = () => {
         movieId={item.id}
         countryOrigin={item.origin_country} />
       })}
-      <FooterNavBar />
+      <FooterNavBar apiKey={apiKey} />
+      </listContext.Provider>
     </div>
   )
 }

@@ -1,0 +1,20 @@
+.mainWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    width: 95%;
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+    align-items: center;
+}
+h3 {
+    color: #F07B40;
+    margin: 0 auto;
+}
+.dropDownMain {
+    width: 60%;
+}
+
+.dropDownControl {
+    border: 1px solid #f2d298;
+}
