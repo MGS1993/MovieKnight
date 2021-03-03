@@ -1,5 +1,29 @@
 .navBarWrapper {
-  height: 7%;
+  position: sticky;
+  height: 50px;
   width: 100%;
-  background-color: #1D3437;
+  background-color: #022249;;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .5s ease-in-out;
+}
+
+.searchWrapper {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  border-radius: 40px;
+  background-color: #007A8E;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 5px;
+}
+.searchWrapper:hover {
+  cursor: pointer;
+}
+.searchWrapper:active {
+  background-color: Orange;
 }

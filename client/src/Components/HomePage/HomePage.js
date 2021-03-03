@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './HomePage.module.css';
 import HomePageHeader from './HomePageHeader/HomePageHeader';
 import MovieCell from '../MovieCell/MovieCell';
+import FooterNavBar from '../FooterNavBar/FooterNavBar';
 const HomePage = () => {
   const [movieData, setMovieData] = useState(null)
   const apiKey = 'b88a57406d9a87698d307358f3e4f4ab';
@@ -32,8 +33,10 @@ const HomePage = () => {
         score={item.vote_average}
         bio={item.overview}
         yearReleased={item.release_date}
-        movieId={item.id} />
+        movieId={item.id}
+        countryOrigin={item.origin_country} />
       })}
+      <FooterNavBar />
     </div>
   )
 }
