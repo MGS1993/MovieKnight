@@ -28,7 +28,7 @@ const HomePage = () => {
   return(
     <div className={styles.homePageLayout}>
       <HomePageHeader />
-      <listContext.Provider value={{exportedData: setMovieData}}>
+      
       {movieData && movieData.map((item, index) => {
         return <MovieCell
         key={index}
@@ -40,6 +40,7 @@ const HomePage = () => {
         movieId={item.id}
         countryOrigin={item.origin_country} />
       })}
+      <listContext.Provider value={{exportedData: setMovieData}}>
       <FooterNavBar apiKey={apiKey} />
       </listContext.Provider>
     </div>

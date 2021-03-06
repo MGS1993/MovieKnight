@@ -6,6 +6,7 @@ import NavSearch from '../NavSearch/NavSearch';
 const FooterNavBar = props => {
   const [expandedNav, setExpandedNav] = useState(false)
   const [genreList, setGenreList] = useState('');
+ 
   let expandedStyle = null;
   let icon = <GoSearch color="orange" />
   if(expandedNav === true) {
