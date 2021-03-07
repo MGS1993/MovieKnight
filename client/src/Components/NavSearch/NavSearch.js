@@ -6,14 +6,14 @@ import 'react-dropdown/style.css';
 import CheckBox from '../UI/CheckBox/CheckBox';
 const NavSearch = props => {
     // const [exportedData, setExportedData] = useState(null)
-    const [ clickedAll, setClickedAll ] = useState(false)
-    const [netFlixCheck, setNetFlixCheck] = useState(false)
-    const [ primeVideoChecked, setPrimeVideoChecked ] = useState(false)
-    const [ appleTvChecked, setAppleTvChecked ] = useState(false)
-    const [ huluChecked, setHuluCheck ] = useState(false)
-    const [ hboMaxCheck, setHboMaxCheck ] = useState(false)
-    const [ peacockChecked, setPeacockCheck ] = useState(false)
-    const [ discoveryChecked, setDiscoveryCheck ] = useState(false)
+    // const [ clickedAll, setClickedAll ] = useState(false)
+    // const [netFlixCheck, setNetFlixCheck] = useState(false)
+    // const [ primeVideoChecked, setPrimeVideoChecked ] = useState(false)
+    // const [ appleTvChecked, setAppleTvChecked ] = useState(false)
+    // const [ huluChecked, setHuluCheck ] = useState(false)
+    // const [ hboMaxCheck, setHboMaxCheck ] = useState(false)
+    // const [ peacockChecked, setPeacockCheck ] = useState(false)
+    // const [ discoveryChecked, setDiscoveryCheck ] = useState(false)
     const listContext = useContext(ListContext)
     let expandedStyle = null
     let genreList = props.genreList
@@ -26,25 +26,25 @@ const NavSearch = props => {
             })
         })
     }
-    const checkAllHandler = () => {
-        if(clickedAll === false) {
-          setNetFlixCheck(true)
-          setPrimeVideoChecked(true)
-          setAppleTvChecked(true)
-          setHuluCheck(true)
-          setHboMaxCheck(true)
-          setPeacockCheck(true)
-          setDiscoveryCheck(true)
-        } else if(clickedAll === true) {
-          setNetFlixCheck(false)
-          setPrimeVideoChecked(false)
-          setAppleTvChecked(false)
-          setHuluCheck(false)
-          setHboMaxCheck(false)
-          setPeacockCheck(false)
-          setDiscoveryCheck(false)
-        }
-      }
+    // const checkAllHandler = () => {
+    //     if(clickedAll === false) {
+    //       setNetFlixCheck(true)
+    //       setPrimeVideoChecked(true)
+    //       setAppleTvChecked(true)
+    //       setHuluCheck(true)
+    //       setHboMaxCheck(true)
+    //       setPeacockCheck(true)
+    //       setDiscoveryCheck(true)
+    //     } else if(clickedAll === true) {
+    //       setNetFlixCheck(false)
+    //       setPrimeVideoChecked(false)
+    //       setAppleTvChecked(false)
+    //       setHuluCheck(false)
+    //       setHboMaxCheck(false)
+    //       setPeacockCheck(false)
+    //       setDiscoveryCheck(false)
+    //     }
+    //   }
     // console.log(genreList)
     const options = genreListNames
     // const defaultOption = options[0];
@@ -84,7 +84,7 @@ const NavSearch = props => {
             <div>
                 <h3>Available in...</h3>
                 <div className={styles.checkBoxWrapper}>
-                    <CheckBox 
+                    {/* <CheckBox 
                     allCheck={()=>  setClickedAll(!clickedAll)}
                         checked={clickedAll}
                         changed={checkAllHandler}
@@ -101,7 +101,7 @@ const NavSearch = props => {
                     clickedPeacockCheck={()=> setPeacockCheck(!peacockChecked)}
                         peacockChecked={peacockChecked}
                     clickedDiscoveryCheck={()=> setDiscoveryCheck(!discoveryChecked)}
-                        discoveryChecked={discoveryChecked}/>
+                        discoveryChecked={discoveryChecked}/> */}
                 </div>
             </div>
         </React.Fragment>
