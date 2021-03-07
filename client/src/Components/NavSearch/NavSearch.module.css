@@ -13,8 +13,61 @@ h3 {
 }
 .dropDownMain {
     width: 100%;
+    margin-top: 10px;
 }
 
 .dropDownControl {
     border: 1px solid #f2d298;
+}
+
+.navRouteWrapper {
+    display: flex;
+    justify-content: center;
+    height: 40%;
+    width: 90%;
+}
+.navRouteWrapper > div {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.navRouteWrapper > div > button {
+    margin: 0 13px;
+    height: 50px;
+    background-color: #DF622C;
+    border: 1px solid #E85515;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.navRouteWrapper > div > button:hover {
+    background-color: #e08158;
+}
+.navRouteWrapper > div > button:active {
+    background-color: #e08158;
+}
+
+.movieNavWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 60%;
+    width: 60%;
+    justify-content: space-around;
+}
+
+.movieNavWrapper > div > button {
+    margin: 10px 13px;
+    height: 40px;
+    background-color: #DF622C;
+    border: 1px solid #E85515;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    border-radius: 3px;
+    width: 120px;
+    font-size: 16px;
 }

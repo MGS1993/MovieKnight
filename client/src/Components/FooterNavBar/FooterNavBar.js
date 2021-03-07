@@ -20,13 +20,11 @@ const FooterNavBar = props => {
   useEffect(() => {
     const queryData = async() => {
       try {
-        const response = await fetch(` https://api.themoviedb.org/3/search/multi?api_key=${props.apiKey}&language=en-US&page=1&include_adult=false&query=batman`)
         const responseGenre = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${props.apiKey}&language=en-US`)
-        const data = await response.json();
         const dataGenre = await responseGenre.json();
         const genreListQuery = dataGenre.genres;
         setGenreList(genreListQuery);
-        console.log(data) //this is a test for the multi search query
+        console.log(genreListQuery)
       }catch(err) {
         console.log(err)
       }
@@ -37,7 +35,8 @@ const FooterNavBar = props => {
    
   return(
     <div style={expandedStyle} className={styles.navBarWrapper}>
-      <NavSearch expandedNav={expandedNav} genreList={genreList} apiKey={props.apiKey} />
+      <NavSearch expandedNav={expandedNav} setExpandedNav={setExpandedNav} 
+      genreList={genreList} apiKey={props.apiKey} />
       <div onClick={() => setExpandedNav(!expandedNav)} 
         className={styles.searchWrapper}> {icon} </div>
     </div>
