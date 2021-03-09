@@ -15,7 +15,7 @@ const HomePage = () => {
       const data = await response.json()
       const item = data.results
       setMovieData(item)
-      console.log(item)
+      // console.log(item)
     } catch(err) {
       console.log(err)
     }

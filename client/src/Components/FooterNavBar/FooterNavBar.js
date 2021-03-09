@@ -21,10 +21,8 @@ const FooterNavBar = props => {
     const queryData = async() => {
       try {
         const responseGenre = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${props.apiKey}&language=en-US`)
-        const dataGenre = await responseGenre.json();
-        const genreListQuery = dataGenre.genres;
-        setGenreList(genreListQuery);
-        console.log(genreListQuery)
+        const dataGenre = await responseGenre.json();        
+        setGenreList(dataGenre.genres);
       }catch(err) {
         console.log(err)
       }
