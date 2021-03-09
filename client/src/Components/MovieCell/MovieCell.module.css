@@ -49,6 +49,7 @@
   justify-content: center;
   color: white;
   font-weight: bold;
+  flex-direction: column;
 }
 
 .largeTitle {
@@ -67,15 +68,14 @@
   padding: 5px;
 }
 .largeBio {
-  height: 50%;
+  height: 60%;
   color: white;
   font-size: 0.9rem;
-  overflow: hidden;
+  overflow: scroll;
   padding: 10px;
 }
 .titleScore {
-  left: 10%;
-  position: absolute;
+  align-self: center;
   color: #F07B40;
 }
 

@@ -3,23 +3,6 @@ import styles from "./MovieCell.module.css";
 import { AiOutlineStar } from "react-icons/ai";
 const MovieCell = (props) => {
   let [clickedLarger, setClickedLarger] = useState(false);
-  // let [movieDetail, setMovieDetail] = useState(null);
-  // const apiKey = 'b88a57406d9a87698d307358f3e4f4ab';
-
-  // useEffect(() => {
-  //   async function getMovieDetail() {
-  //     try {
-  //       const response = await fetch(` https://api.themoviedb.org/3/movie/${props.movieId}?api_key=${apiKey}&language=en-US`)
-  //       const data = await response.json()
-  //       const item = data
-  //       setMovieDetail(item)
-  //       console.log(item)
-  //     } catch(err) {
-  //       console.log(err)
-  //     }
-  //   }
-  //   getMovieDetail()
-  // }, [props.movieId])
   let mainWrapperAppendedStyle
   let renderedCell 
 
