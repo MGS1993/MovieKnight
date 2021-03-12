@@ -10,14 +10,35 @@
   position: relative;
   transition: .7s ease-in-out;
 }
-
+@media only screen and (min-width: 768px) {
+  .movieCellWrapper {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    width: 50%;
+    border-radius: 5px;
+    background-color: #1D3437;
+    align-self: center;
+    margin-top: 2%;
+    position: relative;
+    transition: .7s ease-in-out;
+  }
+}
 
 .movieImageWrapper {
   width: 35%;
   display: flex;
   align-items: center;
   transition: .7s ease-in-out;
-
+}
+@media only screen and (min-width: 768px) {
+  .movieImageWrapper {
+    width: 35%;
+    display: flex;
+    align-items: center;
+    transition: .7s ease-in-out;
+    padding: 0px 5px;
+  }
 }
 .largeMovieImageWrapper {
   width: 100%;
@@ -36,6 +57,7 @@
   height: auto;
   width: 100%;
   transition: .5s ease-in-out;
+  color: white;
 }
 .largeMovieImage {
   height: auto;
@@ -73,6 +95,11 @@
   font-size: 0.9rem;
   overflow: scroll;
   padding: 10px;
+}
+@media only screen and (min-width: 768px) {
+  .largeBio {
+    overflow: hidden;
+  }
 }
 .titleScore {
   align-self: center;
