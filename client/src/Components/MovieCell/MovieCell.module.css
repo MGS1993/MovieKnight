@@ -9,6 +9,7 @@
   margin-top: 2%;
   position: relative;
   transition: .7s ease-in-out;
+  padding: 5px;
 }
 @media only screen and (min-width: 768px) {
   .movieCellWrapper {

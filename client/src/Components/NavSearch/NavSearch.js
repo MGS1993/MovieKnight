@@ -3,10 +3,12 @@ import styles from './NavSearch.module.css';
 import ListContext from '../context/listContext';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+
 const NavSearch = props => {
     const listContext = useContext(ListContext)
     const [ mediaNav, setMediaNav ] = useState('root')
     const [ tvGenreList, setTvGenreList ] = useState('')
+    // const [pageNavIO, setPageNavIO] = useState(false);
     let expandedStyle = null 
     let genreListNames = []
     let tvGenreListNames = []
@@ -46,10 +48,14 @@ const NavSearch = props => {
             console.log(err)
         }
     }
-    const queryMediaBySelectedGenre = async (e, mediaType, voteCount) => {
+    const queryMediaBySelectedGenre = async (e, mediaType, voteCount, page) => {
+        // setPageNavIO(!pageNavIO)
+        let test = `https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&with_genres=${e.value}&include_adult=false&include_video=false&page=${page}&watch_region=US`
         try {
-            const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&with_genres=${e.value}&include_adult=false&include_video=false&page=1&watch_region=US`)
+            const response = await fetch(test)
             const data = await response.json();
+            console.log(data)
+            console.log(test)
             listContext.exportedData(data.results)
             props.setExpandedNav(!props.expandedNav)
             setMediaNav('root')
@@ -122,7 +128,7 @@ const NavSearch = props => {
                     className={styles.dropDownMain} 
                     controlClassName={styles.dropDownControl}
                     options={tvGenreListNames} label={tvGenreListNames.label} value={tvGenreListNames.value}
-                    onChange={(e) => queryMediaBySelectedGenre(e, 'tv', '100' )} 
+                    onChange={(e) => queryMediaBySelectedGenre(e, 'tv', '100', '1' )} 
                     placeholder='Select a genre' />  
                </div>
                 <div>
@@ -135,7 +141,9 @@ const NavSearch = props => {
 
     return(
         <div style={expandedStyle} className={styles.mainWrapper}>
+            <div></div>
            {rendered}
+           <div></div>
         </div>
     )
 }

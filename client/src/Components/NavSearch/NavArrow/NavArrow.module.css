@@ -1,0 +1,7 @@
+.pageSelArrow {
+    margin: 0 10px;
+  }
+  
+  .pageSelArrow:hover {
+    cursor: pointer;
+  }

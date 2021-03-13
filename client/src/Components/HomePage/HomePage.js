@@ -13,6 +13,7 @@ const HomePage = () => {
     try {
       const response = await fetch(` https://api.themoviedb.org/3/trending/all/week?api_key=${apiKey}`)
       const data = await response.json()
+      console.log(data)
       const item = data.results
       setMovieData(item)
       // console.log(item)
@@ -27,7 +28,7 @@ const HomePage = () => {
   return(
     <div className={styles.homePageLayout}>
       <HomePageHeader />
-      
+      <div className={styles.movieCellWrapper}>
       {movieData && movieData.map((item, index) => {
         return <MovieCell
         key={index}
@@ -39,6 +40,7 @@ const HomePage = () => {
         movieId={item.id}
         countryOrigin={item.origin_country} />
       })}
+      </div>
       <listContext.Provider value={{exportedData: setMovieData}}>
       <FooterNavBar apiKey={apiKey} />
       </listContext.Provider>

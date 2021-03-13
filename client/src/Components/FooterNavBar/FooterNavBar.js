@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import styles from './FooterNavBar.module.css';
 import { GoSearch } from "react-icons/go";
 import { IoIosArrowDown } from "react-icons/io";
+import NavArrow from '../NavSearch/NavArrow/NavArrow';
 import NavSearch from '../NavSearch/NavSearch';
 const FooterNavBar = props => {
   const [expandedNav, setExpandedNav] = useState(false)
   const [genreList, setGenreList] = useState('');
- 
+  
   let expandedStyle = null;
   let icon = <GoSearch color="orange" />
+  
+     
   if(expandedNav === true) {
     expandedStyle = {
       height: '500px',
@@ -29,14 +32,22 @@ const FooterNavBar = props => {
      }
      queryData()
   }, [props.apiKey])
-  
+
+
    
   return(
     <div style={expandedStyle} className={styles.navBarWrapper}>
+
+      <NavArrow arrowDir='left' apiKey={props.apiKey} setExpandedNav={setExpandedNav} />
+
       <NavSearch expandedNav={expandedNav} setExpandedNav={setExpandedNav} 
-      genreList={genreList} apiKey={props.apiKey} />
+        genreList={genreList} apiKey={props.apiKey} />
+
       <div onClick={() => setExpandedNav(!expandedNav)} 
         className={styles.searchWrapper}> {icon} </div>
+        <NavArrow arrowDir='right' apiKey={props.apiKey} setExpandedNav={setExpandedNav} />
+      
+      
     </div>
   )
 }
