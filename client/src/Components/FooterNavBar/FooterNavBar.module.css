@@ -29,3 +29,8 @@
   background-color: Orange;
 }
 
+.pageCounterWrapper {
+  color: white;
+  position: absolute;
+  left: 250px;
+}

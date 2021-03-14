@@ -80,7 +80,7 @@ const NavSearch = props => {
                </div>
                 <div>
                     <h3>Top TV all genres</h3>
-                    <button onClick={() => props.queryTopMediaAllGenres('tv', '5000')}>Search All</button>
+                    <button onClick={() => props.queryTopMediaAllGenres('tv', '1000')}>Search All</button>
                 </div>
             </div>
             )

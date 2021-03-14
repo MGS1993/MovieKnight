@@ -6,14 +6,20 @@ import ListContext from '../context/listContext';
 import NavArrow from '../NavSearch/NavArrow/NavArrow';
 import NavSearch from '../NavSearch/NavSearch';
 const FooterNavBar = props => {
-  const [expandedNav, setExpandedNav] = useState(false)
-  const [genreList, setGenreList] = useState('');
+  const [ expandedNav, setExpandedNav ] = useState(false)
+  const [ genreList, setGenreList ] = useState('');
   const listContext = useContext(ListContext)
   const [ mediaNav, setMediaNav ] = useState('root')
   const [ tvGenreList, setTvGenreList ] = useState('')
+  const [ showArrow, setShowArrow ] = useState(false)
+  const [ currentApiCall, setCurrentApiCall ] = useState('')
+  const [ renderedPage, setRenderedPage] = useState(1)
+  const [ maxPages, setMaxPages ] = useState(0);
   let expandedStyle = null;
+  let expandedCounterStyle = null;
   let icon = <GoSearch color="orange" />
-  
+  let leftArr
+  let rightArr
      
   if(expandedNav === true) {
     expandedStyle = {
@@ -21,16 +27,24 @@ const FooterNavBar = props => {
       transition: '.5s ease-in-out'
     }
     icon = <IoIosArrowDown color="orange" />
+    expandedCounterStyle = {
+      position: 'absolute',
+      opacity: '0',
+    }
   }
-  const queryMediaBySelectedGenre = async (e, mediaType, voteCount, page) => {
-
+  const queryMediaBySelectedGenre = async (e, mediaType, voteCount) => {
     try {
-        const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&with_genres=${e.value}&include_adult=false&include_video=false&page=${page}&watch_region=US`)
+        const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&with_genres=${e.value}&include_adult=false&include_video=false&page=${renderedPage}&watch_region=US`)
         const data = await response.json();
-        console.log(data)
+        console.log(response.url)
+        setMaxPages(data.total_pages)
+        setCurrentApiCall(response.url)
         listContext.exportedData(data.results)
         setExpandedNav(!expandedNav)
         setMediaNav('root')
+        setShowArrow(true)
+        
+
     }catch(err) {
         console.log(err)
     }
@@ -42,17 +56,22 @@ const queryTrendingMedia = async (mediaType) => {
       listContext.exportedData(data.results)
       setExpandedNav(!expandedNav)
       setMediaNav('root')
+      setShowArrow(false)
   }catch(err) {
       console.log(err)
   }
 }
 const queryTopMediaAllGenres = async (mediaType, voteCount) => {
   try {
-      const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&page=1&timezone=America%2FTexas&include_null_first_air_dates=false`)
+      const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&page=${renderedPage}&timezone=America%2FTexas&include_null_first_air_dates=false`)
       const data = await response.json();
+      setCurrentApiCall(response.url)
+      console.log(data)
       listContext.exportedData(data.results)
       setExpandedNav(!expandedNav)
       setMediaNav('root')
+      
+      setShowArrow(true)
   }catch(err) {
       console.log(err)
   }
@@ -72,7 +91,7 @@ const callApiForTvGenre = async (e) => {
     const queryData = async() => {
       try {
         const responseGenre = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${props.apiKey}&language=en-US`)
-        const dataGenre = await responseGenre.json();        
+        const dataGenre = await responseGenre.json();      
         setGenreList(dataGenre.genres);
       }catch(err) {
         console.log(err)
@@ -81,11 +100,52 @@ const callApiForTvGenre = async (e) => {
      queryData()
   }, [props.apiKey])
 
+  useEffect(() => {
+    /*FIND A WAY TO MAKE IT SO THAT WHEN YOU SWITCH TO A NEW GENRE
+    THE PAGE COUNT AND RENDER GO BACK TO 1 */
+     const nextPage = async () => {
+      // if(currentApiCall.includes('page=1') === false) {
+      //   setCurrentApiCall(currentApiCall.replace(`page=${renderedPage}`, `page=1`))
+      //  }
+      // console.log(currentApiCall.includes('page=1') === false)
+        setCurrentApiCall(currentApiCall.replace(`page=1`, `page=${renderedPage}`))
+        try {
+          const response = await fetch(currentApiCall);
+          const data = await response.json();
+          listContext.exportedData(data.results)
+       } catch(err) {
+         console.log(err)
+       }
+     }
+     if(currentApiCall !== '') {
+      nextPage()
+    }
+     // eslint-disable-next-line
+  }, [renderedPage, currentApiCall ])
+
+
+  if(showArrow) {
+    leftArr = (
+    <NavArrow arrowDir='left' apiKey={props.apiKey} 
+      renderedPage={renderedPage} setRenderedPage={setRenderedPage}
+      currentApiCall={currentApiCall} setExpandedNav={setExpandedNav} 
+      queryMediaBySelectedGenre={queryMediaBySelectedGenre}
+      setCurrentApiCall={setCurrentApiCall} maxPages={maxPages}
+      />
+    )
+    rightArr = (
+      <NavArrow arrowDir='right' apiKey={props.apiKey} 
+      renderedPage={renderedPage} setRenderedPage={setRenderedPage}
+      currentApiCall={currentApiCall} setExpandedNav={setExpandedNav}
+      setCurrentApiCall={setCurrentApiCall} maxPages={maxPages}
+       />
+    )
+  }
   return(
     <div style={expandedStyle} className={styles.navBarWrapper}>
 
-      <NavArrow arrowDir='left' apiKey={props.apiKey} setExpandedNav={setExpandedNav} />
-
+      {leftArr}
+      {/* 1,2,3,4 */}
       <NavSearch expandedNav={expandedNav} setExpandedNav={setExpandedNav} 
         genreList={genreList} apiKey={props.apiKey}
         mediaNav={mediaNav}
@@ -94,12 +154,17 @@ const callApiForTvGenre = async (e) => {
         queryTrendingMedia={queryTrendingMedia}
         queryTopMediaAllGenres={queryTopMediaAllGenres}
         callApiForTvGenre={callApiForTvGenre}
+        renderedPage={renderedPage}
+        setRenderedPage={setRenderedPage}
         tvGenreList={tvGenreList} />
 
       <div onClick={() => setExpandedNav(!expandedNav)} 
         className={styles.searchWrapper}> {icon} </div>
-        <NavArrow arrowDir='right' apiKey={props.apiKey} setExpandedNav={setExpandedNav} />
-      
+        <div className={styles.pageCounterWrapper} style={expandedCounterStyle}>
+        <p>Page: {renderedPage}</p>
+        </div>
+      {rightArr}
+
     </div>
   )
 }
