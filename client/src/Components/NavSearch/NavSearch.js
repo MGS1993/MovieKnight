@@ -32,55 +32,7 @@ const NavSearch = props => {
          transition: '.5s ease-in-out'
         }
     }
-    // const queryTrendingMedia = async (mediaType) => {
-    //     try{   
-    //         const response = await fetch(` https://api.themoviedb.org/3/trending/${mediaType}/week?api_key=${props.apiKey}`)
-    //         const data = await response.json();
-    //         listContext.exportedData(data.results)
-    //         props.setExpandedNav(!props.expandedNav)
-    //         props.setMediaNav('root')
-    //     }catch(err) {
-    //         console.log(err)
-    //     }
-    // }
-    // const queryMediaBySelectedGenre = async (e, mediaType, voteCount, page) => {
-    //     // setPageNavIO(!pageNavIO)
-    //     let test = `https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&with_genres=${e.value}&include_adult=false&include_video=false&page=${page}&watch_region=US`
-    //     try {
-    //         const response = await fetch(test)
-    //         const data = await response.json();
-    //         console.log(data)
-    //         console.log(test)
-    //         listContext.exportedData(data.results)
-    //         props.setExpandedNav(!props.expandedNav)
-    //         setMediaNav('root')
-    //     }catch(err) {
-    //         console.log(err)
-    //     }
-    // }
-    // const queryTopMediaAllGenres = async (mediaType, voteCount) => {
-    //     try {
-    //         const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&page=1&timezone=America%2FTexas&include_null_first_air_dates=false`)
-    //         const data = await response.json();
-    //         listContext.exportedData(data.results)
-    //         props.setExpandedNav(!props.expandedNav)
-    //         props.setMediaNav('root')
-    //     }catch(err) {
-    //         console.log(err)
-    //     }
-    // }
-
-    // const callApiForTvGenre = async (e) => {
-    //     props.setMediaNav('topTvShows')
-    //     try{
-    //         const responseGenre = await fetch(`https://api.themoviedb.org/3/genre/tv/list?api_key=${props.apiKey}&language=en-US`)
-    //         const dataGenre = await responseGenre.json();
-    //         const genreListQuery = dataGenre.genres;
-    //         setTvGenreList(genreListQuery);
-    //     }catch(err) {
-    //         console.log(err)
-    //     }
-    // }
+   
     let rendered = null
         if(props.mediaNav === 'root') {
             rendered = (
@@ -136,9 +88,8 @@ const NavSearch = props => {
 
     return(
         <div style={expandedStyle} className={styles.mainWrapper}>
-            
            {rendered}
-           
+
         </div>
     )
 }
