@@ -1,5 +1,7 @@
 .pageSelArrow {
-    margin: 0 10px;
+  margin: 0 10px;
+  height: 30px;
+  width: auto;
   }
   
   .pageSelArrow:hover {

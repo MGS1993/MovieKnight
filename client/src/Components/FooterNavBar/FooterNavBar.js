@@ -32,19 +32,27 @@ const FooterNavBar = props => {
       opacity: '0',
     }
   }
+ 
   const queryMediaBySelectedGenre = async (e, mediaType, voteCount) => {
     try {
-        const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&with_genres=${e.value}&include_adult=false&include_video=false&page=${renderedPage}&watch_region=US`)
+      if(renderedPage !== 1) {
+        setRenderedPage(1)
+        let renderHelper = 1;
+        const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&with_genres=${e.value}&include_adult=false&include_video=false&page=${renderHelper}&watch_region=US`)
         const data = await response.json();
-        console.log(response.url)
         setMaxPages(data.total_pages)
         setCurrentApiCall(response.url)
         listContext.exportedData(data.results)
-        setExpandedNav(!expandedNav)
-        setMediaNav('root')
-        setShowArrow(true)
-        
-
+      } else {
+        const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&with_genres=${e.value}&include_adult=false&include_video=false&page=${renderedPage}&watch_region=US`)
+        const data = await response.json();
+        setMaxPages(data.total_pages)
+        setCurrentApiCall(response.url)
+        listContext.exportedData(data.results)
+      }
+      setExpandedNav(!expandedNav)
+      setMediaNav('root')
+      setShowArrow(true)
     }catch(err) {
         console.log(err)
     }
@@ -63,14 +71,21 @@ const queryTrendingMedia = async (mediaType) => {
 }
 const queryTopMediaAllGenres = async (mediaType, voteCount) => {
   try {
+    if(renderedPage !== 1) {
+      setRenderedPage(1)
+      let renderHelper = 1;
+      const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&page=${renderHelper}&timezone=America%2FTexas&include_null_first_air_dates=false`)
+      const data = await response.json();
+      setCurrentApiCall(response.url)
+      listContext.exportedData(data.results)
+    } else {
       const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&page=${renderedPage}&timezone=America%2FTexas&include_null_first_air_dates=false`)
       const data = await response.json();
       setCurrentApiCall(response.url)
-      console.log(data)
       listContext.exportedData(data.results)
+    }
       setExpandedNav(!expandedNav)
       setMediaNav('root')
-      
       setShowArrow(true)
   }catch(err) {
       console.log(err)
@@ -101,13 +116,8 @@ const callApiForTvGenre = async (e) => {
   }, [props.apiKey])
 
   useEffect(() => {
-    /*FIND A WAY TO MAKE IT SO THAT WHEN YOU SWITCH TO A NEW GENRE
-    THE PAGE COUNT AND RENDER GO BACK TO 1 */
+    //maybe this is why it updates state in NavArrow too much if clicked quickly?
      const nextPage = async () => {
-      // if(currentApiCall.includes('page=1') === false) {
-      //   setCurrentApiCall(currentApiCall.replace(`page=${renderedPage}`, `page=1`))
-      //  }
-      // console.log(currentApiCall.includes('page=1') === false)
         setCurrentApiCall(currentApiCall.replace(`page=1`, `page=${renderedPage}`))
         try {
           const response = await fetch(currentApiCall);
@@ -144,8 +154,8 @@ const callApiForTvGenre = async (e) => {
   return(
     <div style={expandedStyle} className={styles.navBarWrapper}>
 
-      {leftArr}
-      {/* 1,2,3,4 */}
+      {expandedNav ? null: [leftArr]}
+      
       <NavSearch expandedNav={expandedNav} setExpandedNav={setExpandedNav} 
         genreList={genreList} apiKey={props.apiKey}
         mediaNav={mediaNav}
@@ -156,14 +166,19 @@ const callApiForTvGenre = async (e) => {
         callApiForTvGenre={callApiForTvGenre}
         renderedPage={renderedPage}
         setRenderedPage={setRenderedPage}
-        tvGenreList={tvGenreList} />
+        tvGenreList={tvGenreList}
+      />
 
       <div onClick={() => setExpandedNav(!expandedNav)} 
-        className={styles.searchWrapper}> {icon} </div>
+        className={styles.searchWrapper}>
+            {icon} 
+      </div>
+
         <div className={styles.pageCounterWrapper} style={expandedCounterStyle}>
-        <p>Page: {renderedPage}</p>
+          { showArrow ? <p>Page: {renderedPage}</p> : null }
         </div>
-      {rightArr}
+
+        {expandedNav ? null: [rightArr]}
 
     </div>
   )

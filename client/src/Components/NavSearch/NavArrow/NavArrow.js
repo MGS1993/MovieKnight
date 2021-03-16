@@ -9,34 +9,32 @@ const NavArrow = (props) => {
     //Infinite loop on 10th page.
     if (props.renderedPage <= 8 && props.renderedPage < props.maxPages) {
         //second argument prevents loading a page that isn't there.
-      props.setRenderedPage(props.renderedPage + 1);
+      props.setRenderedPage(currPage => currPage + 1);
       props.setCurrentApiCall(
         props.currentApiCall.replace(
           `page=${props.renderedPage}`,
           `page=${props.renderedPage + 1}`
         )
       );
-      console.log(props.currentApiCall);
+    //   console.log(props.currentApiCall);
     } else {
       return null;
     }
   };
-  //Add a prevention from going to a blank page
   const prevPage = () => {
     if (props.renderedPage <= 1) {
       return null;
     } else {
-      props.setRenderedPage(props.renderedPage - 1);
+      props.setRenderedPage(currPage => currPage -1);
       props.setCurrentApiCall(
         props.currentApiCall.replace(
           `page=${props.renderedPage}`,
           `page=${props.renderedPage - 1}`
         )
       );
-      console.log(props.currentApiCall);
     }
   };
-
+  //IF CLICKED TOO FAST PAGES SKIP. FIX LATER
   if (props.arrowDir === "left") {
     rendered = (
       <IoMdPlay
