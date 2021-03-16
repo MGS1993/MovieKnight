@@ -5,7 +5,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import ListContext from '../context/listContext';
 import NavArrow from '../NavSearch/NavArrow/NavArrow';
 import NavSearch from '../NavSearch/NavSearch';
-const FooterNavBar = props => {
+const FooterNavBar = React.memo(props => {
   const [ expandedNav, setExpandedNav ] = useState(false)
   const [ genreList, setGenreList ] = useState('');
   const listContext = useContext(ListContext)
@@ -154,7 +154,7 @@ const callApiForTvGenre = async (e) => {
   return(
     <div style={expandedStyle} className={styles.navBarWrapper}>
 
-      {expandedNav ? null: [leftArr]}
+      {expandedNav ? null: leftArr}
       
       <NavSearch expandedNav={expandedNav} setExpandedNav={setExpandedNav} 
         genreList={genreList} apiKey={props.apiKey}
@@ -178,11 +178,11 @@ const callApiForTvGenre = async (e) => {
           { showArrow ? <p>Page: {renderedPage}</p> : null }
         </div>
 
-        {expandedNav ? null: [rightArr]}
+        {expandedNav ? null: rightArr}
 
     </div>
   )
-}
+})
 
 
 export default FooterNavBar
