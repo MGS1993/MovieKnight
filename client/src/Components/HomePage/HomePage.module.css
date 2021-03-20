@@ -10,6 +10,15 @@
   flex-direction: column;
   position: relative;
 }
+@media only screen and (min-width: 768px) {
+  .movieCellWrapper {
+    display: flex;
+    flex-direction: row;
+    position: inherit;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}
 .movieCellWrapper > *:last-child {
   margin-bottom: 50px;
 }

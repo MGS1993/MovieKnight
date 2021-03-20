@@ -12,8 +12,13 @@ h3 {
     margin: 0 auto;
 }
 .dropDownMain {
-    width: 100%;
+    width: 200px;
     margin-top: 10px;
+}
+@media only screen and (min-width: 768px) {
+    .dropDownMain {
+        align-self: center;
+    }
 }
 
 .dropDownControl {
@@ -58,6 +63,11 @@ h3 {
     width: 60%;
     justify-content: space-around;
 }
+@media only screen and (min-width: 768px) {
+    .movieNavWrapper {
+        align-items: center;
+    }
+}
 
 .movieNavWrapper > div > button {
     margin: 10px 13px;
@@ -70,4 +80,11 @@ h3 {
     border-radius: 3px;
     width: 120px;
     font-size: 16px;
+}
+
+@media only screen and (min-width: 768px) {
+    .dropDown {
+        display: flex;
+        flex-direction: column;
+    }
 }

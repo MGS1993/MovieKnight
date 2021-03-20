@@ -51,7 +51,7 @@ const NavSearch = props => {
         } else if(props.mediaNav === 'topMovies') {
             rendered = (
             <div className={styles.movieNavWrapper}>
-                <div>
+                <div className={styles.dropDown}>
                     <h3>Top movies by selected genre</h3>
                     <Dropdown
                     className={styles.dropDownMain} 
@@ -69,7 +69,7 @@ const NavSearch = props => {
         } else if(props.mediaNav === 'topTvShows') {
             rendered = (
                 <div className={styles.movieNavWrapper}>
-                <div>
+                <div className={styles.dropDown}>
                     <h3>Top TV by selected genre</h3>
                     <Dropdown
                     className={styles.dropDownMain} 

@@ -7,7 +7,6 @@ import listContext from '../context/listContext';
 const HomePage = () => {
   const [movieData, setMovieData] = useState(null)
   const apiKey = 'b88a57406d9a87698d307358f3e4f4ab';
-
  useEffect(()=> {
   async function getTrendingData() {
     try {

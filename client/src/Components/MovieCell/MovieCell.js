@@ -41,6 +41,7 @@ const MovieCell = (props) => {
       transition: ".9s ease-out",
       color: "white",
       textAlign: "center",
+      
     };
   } else if (clickedLarger === true) {
     renderedCell = (
@@ -99,6 +100,7 @@ const MovieCell = (props) => {
   }
 
   return (
+    
     <div
       style={mainWrapperAppendedStyle}
       className={styles.movieCellWrapper}
