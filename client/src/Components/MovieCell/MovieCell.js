@@ -5,12 +5,12 @@ const MovieCell = (props) => {
   let [clickedLarger, setClickedLarger] = useState(false);
   let mainWrapperAppendedStyle;
   let renderedCell;
-  let titleRender;
+  let releaseRender;
   const mq = window.matchMedia("(min-width: 768px)");
 
   props.yearReleased === undefined
-    ? (titleRender = null)
-    : (titleRender = <div>Release Date {props.yearReleased}</div>);
+    ? (releaseRender = null)
+    : (releaseRender = <div>Release Date {props.yearReleased}</div>);
 
   if (clickedLarger === true && mq.matches) {
     renderedCell = (
@@ -30,7 +30,7 @@ const MovieCell = (props) => {
               {props.score}
             </div>
           </div>
-          {titleRender}
+          {releaseRender}
           <div className={styles.largeBio}>{props.bio}</div>
         </div>
       </React.Fragment>
@@ -62,7 +62,7 @@ const MovieCell = (props) => {
               {props.score}
             </div>
           </div>
-          {titleRender}
+          {releaseRender}
           <div className={styles.largeBio}>{props.bio}</div>
         </div>
       </React.Fragment>

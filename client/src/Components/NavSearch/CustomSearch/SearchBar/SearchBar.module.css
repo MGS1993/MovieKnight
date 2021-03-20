@@ -1,0 +1,20 @@
+.mainWrapper {
+  display: flex;
+  flex-direction: column;
+}
+.mainWrapper > button {
+  margin: 0 13px;
+    height: 50px;
+    background-color: #DF622C;
+    border: 1px solid #E85515;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+form > input {
+  padding: 5px;
+  font-size: 16px;
+}

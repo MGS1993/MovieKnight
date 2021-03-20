@@ -5,6 +5,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import ListContext from '../context/listContext';
 import NavArrow from '../NavSearch/NavArrow/NavArrow';
 import NavSearch from '../NavSearch/NavSearch';
+import expandedContext from '../context/expandedNavContext';
 const FooterNavBar = React.memo(props => {
   const [ expandedNav, setExpandedNav ] = useState(false)
   const [ genreList, setGenreList ] = useState('');
@@ -106,7 +107,8 @@ const callApiForTvGenre = async (e) => {
     const queryData = async() => {
       try {
         const responseGenre = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${props.apiKey}&language=en-US`)
-        const dataGenre = await responseGenre.json();      
+        const dataGenre = await responseGenre.json(); 
+        console.log(dataGenre)     
         setGenreList(dataGenre.genres);
       }catch(err) {
         console.log(err)
@@ -155,20 +157,23 @@ const callApiForTvGenre = async (e) => {
     <div style={expandedStyle} className={styles.navBarWrapper}>
 
       {expandedNav ? null: leftArr}
-      
-      <NavSearch expandedNav={expandedNav} setExpandedNav={setExpandedNav} 
-        genreList={genreList} apiKey={props.apiKey}
-        mediaNav={mediaNav}
-        setMediaNav={setMediaNav}
-        queryMediaBySelectedGenre={queryMediaBySelectedGenre}
-        queryTrendingMedia={queryTrendingMedia}
-        queryTopMediaAllGenres={queryTopMediaAllGenres}
-        callApiForTvGenre={callApiForTvGenre}
-        renderedPage={renderedPage}
-        setRenderedPage={setRenderedPage}
-        tvGenreList={tvGenreList}
-      />
-
+      <expandedContext.Provider value={{setExpandedNav: setExpandedNav, 
+        renderedPage: renderedPage, setRenderedPage: setRenderedPage,
+        currentApiCall: currentApiCall, setCurrentApiCall: setCurrentApiCall,
+        setShowArrow: setShowArrow, setMaxPages: setMaxPages}}>
+        <NavSearch expandedNav={expandedNav} setExpandedNav={setExpandedNav} 
+          genreList={genreList} apiKey={props.apiKey}
+          mediaNav={mediaNav}
+          setMediaNav={setMediaNav}
+          queryMediaBySelectedGenre={queryMediaBySelectedGenre}
+          queryTrendingMedia={queryTrendingMedia}
+          queryTopMediaAllGenres={queryTopMediaAllGenres}
+          callApiForTvGenre={callApiForTvGenre}
+          renderedPage={renderedPage}
+          setRenderedPage={setRenderedPage}
+          tvGenreList={tvGenreList}
+        />
+      </expandedContext.Provider>
       <div onClick={() => setExpandedNav(!expandedNav)} 
         className={styles.searchWrapper}>
             {icon} 

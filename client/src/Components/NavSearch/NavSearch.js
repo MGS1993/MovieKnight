@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './NavSearch.module.css';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-
+import CustomSearch from './CustomSearch/CustomSearch';
 const NavSearch = props => {
     let expandedStyle = null 
     let genreListNames = []
     let tvGenreListNames = []
-
+    const [customSearch, setCustomSearch] = useState(false)
     //props passed down from footer to get labels and values for dropdown
     if(props.genreList !== '') {
         props.genreList.forEach(el => {
@@ -32,10 +32,10 @@ const NavSearch = props => {
          transition: '.5s ease-in-out'
         }
     }
-   
-    let rendered = null
+    let rendered = null;
+    let renderedButtons = null
         if(props.mediaNav === 'root') {
-            rendered = (
+            renderedButtons = (
                 <div className={styles.navRouteWrapper}>
                 <div>
                                 {/*gets genreList as props from footer*/}
@@ -46,10 +46,11 @@ const NavSearch = props => {
                     <button onClick={props.callApiForTvGenre}>Top TV Shows</button>
                     <button onClick={() => props.queryTrendingMedia('tv')}>Trending TV Shows</button>
                 </div>
+              
             </div>
             )
         } else if(props.mediaNav === 'topMovies') {
-            rendered = (
+            renderedButtons = (
             <div className={styles.movieNavWrapper}>
                 <div className={styles.dropDown}>
                     <h3>Top movies by selected genre</h3>
@@ -67,16 +68,16 @@ const NavSearch = props => {
            </div> 
             )
         } else if(props.mediaNav === 'topTvShows') {
-            rendered = (
+            renderedButtons = (
                 <div className={styles.movieNavWrapper}>
-                <div className={styles.dropDown}>
-                    <h3>Top TV by selected genre</h3>
-                    <Dropdown
-                    className={styles.dropDownMain} 
-                    controlClassName={styles.dropDownControl}
-                    options={tvGenreListNames} label={tvGenreListNames.label} value={tvGenreListNames.value}
-                    onChange={(e) => props.queryMediaBySelectedGenre(e, 'tv', '100', '1' )} 
-                    placeholder='Select a genre' />  
+                    <div className={styles.dropDown}>
+                        <h3>Top TV by selected genre</h3>
+                        <Dropdown
+                        className={styles.dropDownMain} 
+                        controlClassName={styles.dropDownControl}
+                        options={tvGenreListNames} label={tvGenreListNames.label} value={tvGenreListNames.value}
+                        onChange={(e) => props.queryMediaBySelectedGenre(e, 'tv', '100', '1' )} 
+                        placeholder='Select a genre' />  
                </div>
                 <div>
                     <h3>Top TV all genres</h3>
@@ -86,10 +87,25 @@ const NavSearch = props => {
             )
         }
 
+        if(customSearch === false) {
+            rendered = (
+                <React.Fragment>
+                {renderedButtons}
+                <div>
+                    <button className={styles.customSearchBtn}
+                    onClick={() => setCustomSearch(!customSearch)}>Custom Search</button>
+                </div>
+                </React.Fragment>
+            )
+        } else {
+            rendered = (
+                <CustomSearch setCustomSearch={setCustomSearch} />
+            )
+        }
+
     return(
         <div style={expandedStyle} className={styles.mainWrapper}>
            {rendered}
-
         </div>
     )
 }

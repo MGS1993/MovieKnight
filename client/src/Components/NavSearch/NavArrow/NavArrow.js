@@ -24,10 +24,7 @@ const NavArrow = props => {
     }
     
   };
-    // useEffect(() => {
-    //     setTimeout(setTimePause(false), 3000);
-    // }, [nextPage])
-    
+
   let prevPage = () => {
     setTimePause(true)
     if (props.renderedPage <= 1) {
@@ -63,7 +60,6 @@ const NavArrow = props => {
         }, 500)
     }
     
-  //IF CLICKED TOO FAST PAGES SKIP. FIX LATER
   if (props.arrowDir === "left") {
     rendered = (
       <IoMdPlay
