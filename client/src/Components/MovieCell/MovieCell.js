@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./MovieCell.module.css";
 import { AiOutlineStar } from "react-icons/ai";
+import MiscInfo from './MiscInfo/MiscInfo';
 const MovieCell = (props) => {
   let [clickedLarger, setClickedLarger] = useState(false);
+  const [ streamingServices, setStreamingServices ] = useState('')
   let mainWrapperAppendedStyle;
   let renderedCell;
   let releaseRender;
@@ -11,6 +13,21 @@ const MovieCell = (props) => {
   props.yearReleased === undefined
     ? (releaseRender = null)
     : (releaseRender = <div>Release Date {props.yearReleased}</div>);
+
+    useEffect(() => {
+      const getStreamingData = async() => {
+        try {
+          const response = await fetch(` https://api.themoviedb.org/3/movie/${props.movieId}/watch/providers?api_key=${props.apiKey}`)
+          const data = await response.json();
+          const item = data.results.US
+          // console.log(item)
+          setStreamingServices(item)
+        }catch(err) {
+          console.log(err)
+        }
+      }
+      getStreamingData()
+    }, [props.apiKey, props.movieId])
 
   if (clickedLarger === true && mq.matches) {
     renderedCell = (
@@ -37,6 +54,7 @@ const MovieCell = (props) => {
     );
     mainWrapperAppendedStyle = {
       height: "700px",
+      backgroundColor: "rgb(77, 64, 42)",
       flexDirection: "column",
       transition: ".9s ease-out",
       color: "white",
@@ -64,6 +82,7 @@ const MovieCell = (props) => {
           </div>
           {releaseRender}
           <div className={styles.largeBio}>{props.bio}</div>
+          <MiscInfo streamingServices={streamingServices} />
         </div>
       </React.Fragment>
     );

@@ -24,7 +24,6 @@ const clickedSearchHandler = async(e) => {
       console.log(data.results)
       listContext.exportedData(data.results)
       expanded.setExpandedNav(false)
-      props.setCustomSearch(false)
     } else {
       const response = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=b88a57406d9a87698d307358f3e4f4ab&language=en-US&query=${searchData}&page=${expanded.renderedPage}&include_adult=false`)
       const data = await response.json()
@@ -33,7 +32,6 @@ const clickedSearchHandler = async(e) => {
       console.log(data.results)
       listContext.exportedData(data.results)
       expanded.setExpandedNav(false)
-      props.setCustomSearch(false)
     }
     expanded.setShowArrow(true);
   }catch(err) {
@@ -45,7 +43,7 @@ const clickedSearchHandler = async(e) => {
       <SearchBar searchData={searchData} 
       setSearchData={setSearchData}  />
       <button className={styles.submitBtn} 
-      onClick={clickedSearchHandler}>Search</button>
+      onClick={clickedSearchHandler}>Submit</button>
     </div>
   )
 }

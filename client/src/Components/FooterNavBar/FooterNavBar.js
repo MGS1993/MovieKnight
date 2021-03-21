@@ -97,6 +97,7 @@ const callApiForTvGenre = async (e) => {
   try{
       const responseGenre = await fetch(`https://api.themoviedb.org/3/genre/tv/list?api_key=${props.apiKey}&language=en-US`)
       const dataGenre = await responseGenre.json();
+      console.log(dataGenre)
       const genreListQuery = dataGenre.genres;
       setTvGenreList(genreListQuery);
   }catch(err) {

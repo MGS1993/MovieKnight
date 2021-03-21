@@ -12,15 +12,20 @@
 }
 @media only screen and (min-width: 768px) {
   .movieCellWrapper {
-    display: flex;
-    flex-direction: row;
-    position: inherit;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 3%;
+    margin-bottom: 50px;
   }
 }
 .movieCellWrapper > *:last-child {
   margin-bottom: 50px;
+}
+
+@media only screen and (min-width: 768px) {
+  .movieCellWrapper > *:last-child {
+    margin-bottom: 0px;
+  }
 }
 
 

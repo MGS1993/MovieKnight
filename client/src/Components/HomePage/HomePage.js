@@ -25,17 +25,18 @@ const HomePage = () => {
     <div className={styles.homePageLayout}>
       <HomePageHeader />
       <div className={styles.movieCellWrapper}>
-      {movieData && movieData.map((item, index) => {
-        return <MovieCell
-        key={index}
-        title={item.title || item.name}
-        image={item.backdrop_path}
-        score={item.vote_average}
-        bio={item.overview}
-        yearReleased={item.release_date}
-        movieId={item.id}
-        countryOrigin={item.origin_country} />
-      })}
+        {movieData && movieData.map((item, index) => {
+          return <MovieCell
+          key={index}
+          title={item.title || item.name}
+          image={item.backdrop_path}
+          score={item.vote_average}
+          bio={item.overview}
+          yearReleased={item.release_date}
+          movieId={item.id}
+          countryOrigin={item.origin_country}
+          apiKey={apiKey} />
+        })}
       </div>
       <listContext.Provider value={{exportedData: setMovieData}}>
       <FooterNavBar apiKey={apiKey} />
