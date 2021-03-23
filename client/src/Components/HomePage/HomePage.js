@@ -21,11 +21,22 @@ const HomePage = () => {
      getTrendingData()
  }, [])
 
+ const config = async() => {
+  try {
+    const response = await fetch(` https://api.themoviedb.org/3/configuration?api_key=${apiKey}`)
+    const data = await response.json()
+    console.log(data)
+  }catch(err) {
+    console.log(err)
+  }
+ }
+ config()
   return(
     <div className={styles.homePageLayout}>
       <HomePageHeader />
       <div className={styles.movieCellWrapper}>
-        {movieData && movieData.map((item, index) => {
+        {/*optional chaining */}
+        {movieData?.map((item, index) => {
           return <MovieCell
           key={index}
           title={item.title || item.name}
@@ -33,9 +44,10 @@ const HomePage = () => {
           score={item.vote_average}
           bio={item.overview}
           yearReleased={item.release_date}
-          movieId={item.id}
+          mediaId={item.id}
           countryOrigin={item.origin_country}
-          apiKey={apiKey} />
+          apiKey={apiKey}
+          mediaType={item.media_type} />
         })}
       </div>
       <listContext.Provider value={{exportedData: setMovieData}}>

@@ -16,18 +16,27 @@ const MovieCell = (props) => {
 
     useEffect(() => {
       const getStreamingData = async() => {
-        try {
-          const response = await fetch(` https://api.themoviedb.org/3/movie/${props.movieId}/watch/providers?api_key=${props.apiKey}`)
-          const data = await response.json();
-          const item = data.results.US
-          // console.log(item)
-          setStreamingServices(item)
-        }catch(err) {
-          console.log(err)
+        if (props.mediaType === 'movie') {
+          try {
+            const response = await fetch(` https://api.themoviedb.org/3/movie/${props.mediaId}/watch/providers?api_key=${props.apiKey}`)
+            const data = await response.json();
+            const item = data
+            console.log(data)
+            setStreamingServices(item)
+          }catch(err) {
+            console.log(err)
+          }
+        } else {
+          const response = await fetch(` https://api.themoviedb.org/3/tv/${props.mediaId}/watch/providers?api_key=${props.apiKey}`)
+            const data = await response.json();
+            const item = data
+            // console.log(data)
+            setStreamingServices(item)
         }
+        
       }
       getStreamingData()
-    }, [props.apiKey, props.movieId])
+    }, [props.apiKey, props.mediaId, props.mediaType])
 
   if (clickedLarger === true && mq.matches) {
     renderedCell = (
@@ -59,7 +68,6 @@ const MovieCell = (props) => {
       transition: ".9s ease-out",
       color: "white",
       textAlign: "center",
-      
     };
   } else if (clickedLarger === true) {
     renderedCell = (
@@ -74,7 +82,7 @@ const MovieCell = (props) => {
         <div className={styles.movieInfoWrapper}>
           <div className={styles.largeTitle}>
             <div>{props.title}</div>
-
+            
             <div className={styles.titleScore}>
               <AiOutlineStar />
               {props.score}
