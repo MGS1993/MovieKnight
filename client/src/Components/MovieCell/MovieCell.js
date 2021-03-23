@@ -21,19 +21,16 @@ const MovieCell = (props) => {
             const response = await fetch(` https://api.themoviedb.org/3/movie/${props.mediaId}/watch/providers?api_key=${props.apiKey}`)
             const data = await response.json();
             const item = data
-            console.log(data)
             setStreamingServices(item)
           }catch(err) {
             console.log(err)
-          }
-        } else {
+          } } 
+        if (props.mediaType === 'tv') {
           const response = await fetch(` https://api.themoviedb.org/3/tv/${props.mediaId}/watch/providers?api_key=${props.apiKey}`)
             const data = await response.json();
             const item = data
-            // console.log(data)
             setStreamingServices(item)
         }
-        
       }
       getStreamingData()
     }, [props.apiKey, props.mediaId, props.mediaType])
@@ -90,7 +87,8 @@ const MovieCell = (props) => {
           </div>
           {releaseRender}
           <div className={styles.largeBio}>{props.bio}</div>
-          <MiscInfo streamingServices={streamingServices} />
+          <MiscInfo streamingServices={streamingServices}
+            mediaType={props.mediaType} />
         </div>
       </React.Fragment>
     );

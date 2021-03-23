@@ -20,17 +20,18 @@ const HomePage = () => {
   }
      getTrendingData()
  }, [])
+//  const config = async() => {
+//   try {
+//     const response = await fetch(` https://api.themoviedb.org/3/configuration?api_key=${apiKey}`)
+//     const data = await response.json()
+//     console.log(data)
+//   }catch(err) {
+//     console.log(err)
+//   }
+//  }
+//  config()
+console.log(movieData)
 
- const config = async() => {
-  try {
-    const response = await fetch(` https://api.themoviedb.org/3/configuration?api_key=${apiKey}`)
-    const data = await response.json()
-    console.log(data)
-  }catch(err) {
-    console.log(err)
-  }
- }
- config()
   return(
     <div className={styles.homePageLayout}>
       <HomePageHeader />
