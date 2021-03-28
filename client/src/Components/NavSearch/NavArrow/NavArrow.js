@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./NavArrow.module.css";
 import { IoMdPlay } from "react-icons/io";
 const NavArrow = props => {
@@ -18,13 +18,10 @@ const NavArrow = props => {
           `page=${props.renderedPage + 1}`
         )
       );
-    //   console.log(props.currentApiCall);
     } else {
       return null;
     }
-    
   };
-
   let prevPage = () => {
     setTimePause(true)
     if (props.renderedPage <= 1) {
@@ -43,9 +40,6 @@ const NavArrow = props => {
     nextPage = null;
     prevPage = null;
 }
-    useEffect(() => {
-        console.log('NavArrow rendered...')
-    })
     const shiftNext = () => {
         //optional chaining('?.') skips nextPage() if it's undefined or null
         nextPage?.();
@@ -59,7 +53,6 @@ const NavArrow = props => {
             setTimePause(false)
         }, 500)
     }
-    
   if (props.arrowDir === "left") {
     rendered = (
       <IoMdPlay
@@ -76,7 +69,6 @@ const NavArrow = props => {
       />
     );
   }
-
   return <div>{rendered}</div>;
 };
 

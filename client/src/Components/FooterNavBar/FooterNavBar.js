@@ -97,7 +97,6 @@ const callApiForTvGenre = async (e) => {
   try{
       const responseGenre = await fetch(`https://api.themoviedb.org/3/genre/tv/list?api_key=${props.apiKey}&language=en-US`)
       const dataGenre = await responseGenre.json();
-      console.log(dataGenre)
       const genreListQuery = dataGenre.genres;
       setTvGenreList(genreListQuery);
   }catch(err) {
@@ -109,7 +108,6 @@ const callApiForTvGenre = async (e) => {
       try {
         const responseGenre = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${props.apiKey}&language=en-US`)
         const dataGenre = await responseGenre.json(); 
-        console.log(dataGenre)     
         setGenreList(dataGenre.genres);
       }catch(err) {
         console.log(err)
@@ -119,7 +117,6 @@ const callApiForTvGenre = async (e) => {
   }, [props.apiKey])
 
   useEffect(() => {
-    //maybe this is why it updates state in NavArrow too much if clicked quickly?
      const nextPage = async () => {
         setCurrentApiCall(currentApiCall.replace(`page=1`, `page=${renderedPage}`))
         try {
@@ -135,7 +132,6 @@ const callApiForTvGenre = async (e) => {
     }
      // eslint-disable-next-line
   }, [renderedPage, currentApiCall ])
-
 
   if(showArrow) {
     leftArr = (
@@ -156,7 +152,6 @@ const callApiForTvGenre = async (e) => {
   }
   return(
     <div style={expandedStyle} className={styles.navBarWrapper}>
-
       {expandedNav ? null: leftArr}
       <expandedContext.Provider value={{setExpandedNav: setExpandedNav, 
         renderedPage: renderedPage, setRenderedPage: setRenderedPage,
@@ -179,13 +174,10 @@ const callApiForTvGenre = async (e) => {
         className={styles.searchWrapper}>
             {icon} 
       </div>
-
         <div className={styles.pageCounterWrapper} style={expandedCounterStyle}>
           { showArrow ? <p>Page: {renderedPage}</p> : null }
         </div>
-
         {expandedNav ? null: rightArr}
-
     </div>
   )
 })

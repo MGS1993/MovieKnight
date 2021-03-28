@@ -123,9 +123,7 @@ const MovieCell = (props) => {
     );
     mainWrapperAppendedStyle = null;
   }
-
-  return (
-    
+  return ( 
     <div
       style={mainWrapperAppendedStyle}
       className={styles.movieCellWrapper}

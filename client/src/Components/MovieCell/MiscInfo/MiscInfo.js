@@ -28,8 +28,7 @@ const MiscInfo = (props) => {
       <img className={styles.streamLogos}
             src={'https://image.tmdb.org/t/p/w92/' + props.streamingServices.results?.US?.rent[0]?.logo_path} alt="logo" />
     }
-// console.log(serviceLogo)
-// console.log(props.streamingServices.results?.US)
+
   return (
     <div className={styles.mainWrapper}>
       {masterLogo.buy !== undefined ? <div>

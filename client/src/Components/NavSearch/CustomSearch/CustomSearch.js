@@ -13,7 +13,6 @@ const expanded = useContext(expandedContext)
     if(searchData === '') {
       return null
     }
-    
     try {
       if(expanded.renderedPage !== 1 ) {
         expanded.setRenderedPage(1)

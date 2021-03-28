@@ -4,7 +4,6 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import CustomSearch from './CustomSearch/CustomSearch'
 import MediaTypeBtn from './MediaTypeBtn/MediaTypeBtn';
-// import CheckBox from '../UI/CheckBox/CheckBox';
 const NavSearch = props => {
   let expandedStyle = null;
   let genreListNames = [];
