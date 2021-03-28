@@ -51,7 +51,7 @@ console.log(movieData)
           mediaType={item.media_type} />
         })}
       </div>
-      <listContext.Provider value={{exportedData: setMovieData}}>
+      <listContext.Provider value={{exportedData: setMovieData, mediaType: movieData?.mediaType}}>
       <FooterNavBar apiKey={apiKey} />
       </listContext.Provider>
     </div>

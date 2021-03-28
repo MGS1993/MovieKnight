@@ -1,14 +1,38 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from './NavSearch.module.css';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import CustomSearch from './CustomSearch/CustomSearch';
+import CustomSearch from './CustomSearch/CustomSearch'
+import MediaTypeBtn from './MediaTypeBtn/MediaTypeBtn';
 // import CheckBox from '../UI/CheckBox/CheckBox';
 const NavSearch = props => {
   let expandedStyle = null;
   let genreListNames = [];
   let tvGenreListNames = [];
+  const [ mediaSearch, setMediaSearch ] = useState('')
 
+  let renderedSearch
+  let renderedMediaTypeBtn
+
+  if (mediaSearch === '') {
+    renderedSearch = null
+    renderedMediaTypeBtn = <MediaTypeBtn clickedBtn={(e) => setMediaSearch(e.target.textContent)}/>
+  }
+  if (mediaSearch === 'Movie') {
+    renderedSearch = <CustomSearch searchType={'movie'} />
+    renderedMediaTypeBtn = null
+  }
+  if(mediaSearch === 'TV') {
+    renderedSearch = <CustomSearch searchType={'tv'} />
+    renderedMediaTypeBtn = null
+  }
+
+  useEffect(() => {
+    if (props.expandedNav === false) {
+      setMediaSearch('')
+    }
+  }, [props.expandedNav])
+  
   //props passed down from footer to get labels and values for dropdown
   if (props.genreList !== "") {
     props.genreList.forEach((el) => {
@@ -55,7 +79,8 @@ const NavSearch = props => {
         </div>
       </div>
       <div>
-        <CustomSearch />
+        {renderedMediaTypeBtn}
+        {renderedSearch}
       </div>
       </React.Fragment>
     );

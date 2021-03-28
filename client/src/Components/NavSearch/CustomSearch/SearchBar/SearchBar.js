@@ -4,7 +4,6 @@ import styles from './SearchBar.module.css';
 const SearchBar = props => (
   
     <div className={styles.mainWrapper}>
-      <h3>Search</h3>
       <form>
         <input type="search" 
         value={props.searchData} 
