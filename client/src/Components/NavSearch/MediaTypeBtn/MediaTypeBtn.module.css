@@ -1,4 +1,4 @@
-button {
+.mediaBtn {
   margin: 13px;
   height: 50px;
   background-color: #DF622C;
@@ -8,4 +8,5 @@ button {
   font-weight: bold;
   border-radius: 3px;
   font-size: 16px;
+  width: 66px;
 }

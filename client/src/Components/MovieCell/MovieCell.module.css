@@ -24,7 +24,7 @@
   width: 35%;
   display: flex;
   align-items: center;
-  transition: .7s ease-in-out;
+  transition: .5s ease;
 }
 @media only screen and (min-width: 768px) {
   .movieImageWrapper {
@@ -39,7 +39,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  transition: .9s ease-out;
+  transition: .5s ease-out;
 }
 
 .movieInfoWrapper {
@@ -53,6 +53,7 @@
   width: 100%;
   transition: .5s ease-in-out;
   color: white;
+  max-height: 100%;
 }
 .largeMovieImage {
   height: auto;
