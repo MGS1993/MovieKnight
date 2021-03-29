@@ -63,6 +63,8 @@ const MovieCell = (props) => {
           </div>
           {releaseRender}
           <div className={styles.largeBio}>{props.bio}</div>
+          <MiscInfo streamingServices={streamingServices}
+            mediaType={props.mediaType} />
         </div>
       </React.Fragment>
     );
