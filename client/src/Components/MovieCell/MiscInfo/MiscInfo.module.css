@@ -2,6 +2,14 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
+@media only screen and (min-width: 768px) {
+  .mainWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 50%;
+    margin: 0 auto;
+  }
+}
 .iconWrapper {
   height: 50px;
 }
