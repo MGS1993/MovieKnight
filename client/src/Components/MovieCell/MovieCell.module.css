@@ -15,7 +15,7 @@
   .movieCellWrapper {
     border-radius: 5px;
     background-color: #1D3437;
-    transition: .7s ease-in-out;
+    transition: .7s ease;
   }
   
 }
@@ -31,7 +31,7 @@
     width: 35%;
     display: flex;
     align-items: center;
-    transition: .7s ease-in-out;
+    transition: width .5s ease-in-out;
     padding: 0px 5px;
   }
 }
@@ -51,7 +51,7 @@
 .movieImage {
   height: auto;
   width: 100%;
-  transition: .5s ease-in-out;
+  transition: .5s ease;
   color: white;
   max-height: 100%;
 }
@@ -59,6 +59,14 @@
   height: auto;
   width: 100%;
   transition: .5s ease-in-out;
+}
+@media only screen and (min-width: 768px) {
+  .largeMovieImage {
+    transition-property: height, width;
+    transition: .5s ease;
+    width: 50%;
+    margin: 0 auto;
+  }
 }
 .title {
   display: flex;

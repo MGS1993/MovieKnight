@@ -8,6 +8,7 @@ const MovieCell = (props) => {
   let mainWrapperAppendedStyle;
   let renderedCell;
   let releaseRender;
+  let movieImageAppendedStyle
   const mq = window.matchMedia("(min-width: 768px)");
   let largeMovieImageStyle = null
   props.yearReleased === undefined
@@ -34,7 +35,14 @@ const MovieCell = (props) => {
       }
       getStreamingData()
     }, [props.apiKey, props.mediaId, props.mediaType])
-    
+
+    if (props.pathType === 'poster') {
+      movieImageAppendedStyle = {
+        width: 'auto',
+        height: '100%',
+        margin: '0 auto'
+      }
+    }
   if (clickedLarger === true && mq.matches) {
     renderedCell = (
       <React.Fragment>
@@ -107,6 +115,7 @@ const MovieCell = (props) => {
         <div className={styles.movieImageWrapper}>
           <img
             className={styles.movieImage}
+            style={movieImageAppendedStyle}
             src={"https://image.tmdb.org/t/p/w300/" + props.image}
             alt={`Movie Poster for ${props.title}`}
           ></img>
@@ -125,6 +134,7 @@ const MovieCell = (props) => {
     );
     mainWrapperAppendedStyle = null;
   }
+  
   return ( 
     <div
       style={mainWrapperAppendedStyle}
