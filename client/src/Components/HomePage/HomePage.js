@@ -4,8 +4,10 @@ import HomePageHeader from './HomePageHeader/HomePageHeader';
 import MovieCell from '../MovieCell/MovieCell';
 import FooterNavBar from '../FooterNavBar/FooterNavBar';
 import listContext from '../context/listContext';
-const HomePage = () => {
+// import { getMediaType } from '../../Util/apiCalls';
+const HomePage = React.memo(() => {
   const [movieData, setMovieData] = useState(null)
+  const [ mediaSearch, setMediaSearch ] = useState('');
   const apiKey = 'b88a57406d9a87698d307358f3e4f4ab';
  useEffect(()=> {
   async function getTrendingData() {
@@ -20,7 +22,9 @@ const HomePage = () => {
     }
   }
      getTrendingData()
+     
  }, [])
+<<<<<<< HEAD
 
 /* So we can probably fix the issue by taking into account the lack of state
 in MiscInfo exceptions. That's just a bandaid though. Unless HomePage 
@@ -47,6 +51,10 @@ PART OF THE APP. WE CAN FIX THIS. */
      return item.backdrop_path
    }
  }
+=======
+//  getMediaType(317442)
+console.log('homepage rendered...')
+>>>>>>> old-state
   return(
     <div className={styles.homePageLayout}>
       <HomePageHeader />
@@ -63,15 +71,21 @@ PART OF THE APP. WE CAN FIX THIS. */
           mediaId={item.id}
           countryOrigin={item.origin_country}
           apiKey={apiKey}
+<<<<<<< HEAD
           mediaType={item.media_type}
           pathType={pathType} />
+=======
+          mediaType={item.mediaType}
+          mediaSearch={mediaSearch} />
+>>>>>>> old-state
         })}
       </div>
-      <listContext.Provider value={{exportedData: setMovieData, mediaType: movieData?.mediaType}}>
+      <listContext.Provider value={{exportedData: setMovieData,
+         mediaSearch: mediaSearch, setMediaSearch: setMediaSearch}}>
       <FooterNavBar apiKey={apiKey} />
       </listContext.Provider>
     </div>
   )
-}
+})
 
 export default HomePage

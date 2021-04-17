@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext} from 'react';
 import styles from './NavSearch.module.css';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import CustomSearch from './CustomSearch/CustomSearch'
 import MediaTypeBtn from './MediaTypeBtn/MediaTypeBtn';
+import ListContext from '../context/listContext';
+
 const NavSearch = props => {
+  const listContext = useContext(ListContext)
   let expandedStyle = null;
   let genreListNames = [];
   let tvGenreListNames = [];
@@ -31,6 +34,9 @@ const NavSearch = props => {
   //     setMediaSearch('')
   //   }
   // }, [props.expandedNav])
+  //     listContext.setMediaSearch('')
+  //   }
+  // }, [props.expandedNav, listContext])
   
   //props passed down from footer to get labels and values for dropdown
   if (props.genreList !== "") {

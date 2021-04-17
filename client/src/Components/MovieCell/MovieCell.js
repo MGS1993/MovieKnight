@@ -18,8 +18,7 @@ const MovieCell = React.memo( function MemoCell(props) {
   // console.log(props.mediaType)
     useEffect(() => {
       const getStreamingData = async() => {
-        console.log(props.mediaType)
-        if (props.mediaType === 'movie') {
+        if (props.mediaSearch === 'movie') {
           try {
             const response = await fetch(` https://api.themoviedb.org/3/movie/${props.mediaId}/watch/providers?api_key=${props.apiKey}`)
             const data = await response.json();
@@ -28,7 +27,7 @@ const MovieCell = React.memo( function MemoCell(props) {
           }catch(err) {
             console.log(err)
           } } 
-        if (props.mediaType === 'tv') {
+        if (props.mediaSearch === 'tv') {
           try {
             const response = await fetch(` https://api.themoviedb.org/3/tv/${props.mediaId}/watch/providers?api_key=${props.apiKey}`)
             const data = await response.json();
@@ -37,10 +36,11 @@ const MovieCell = React.memo( function MemoCell(props) {
           }catch(err) {
             console.log(err)
           }
+          
         }
       }
       getStreamingData()
-    }, [props.apiKey, props.mediaId, props.mediaType])
+    }, [props.apiKey, props.mediaId, props.mediaSearch])
 
     if (props.pathType === 'poster') {
       movieImageAppendedStyle = {
@@ -104,8 +104,7 @@ const MovieCell = React.memo( function MemoCell(props) {
           </div>
           {releaseRender}
           <div className={styles.largeBio}>{props.bio}</div>
-          <MiscInfo streamingServices={streamingServices}
-            mediaType={props.mediaType} />
+          <MiscInfo streamingServices={streamingServices} />
         </div>
       </React.Fragment>
     );
