@@ -5,15 +5,15 @@ import styles from './MiscInfo.module.css';
 const MiscInfo = (props) => {
   let results = props.streamingServices.results
   let masterLogo = {}
-
-    if ( Object.keys(results).length === 0 || props.streamingServices.results.US === undefined || props.streamingServices.results.US.flatrate === undefined) {
+  // console.log(results)
+    if ( results === undefined || props.streamingServices.results.US === undefined || props.streamingServices.results.US.flatrate === undefined) {
       masterLogo.stream = null
     } else {
       masterLogo.stream = <img className={styles.streamLogos}
             src={'https://image.tmdb.org/t/p/w92/' + props.streamingServices.results?.US?.flatrate[0]?.logo_path} alt="logo" />
      
     }
-    if ( Object.keys(results).length === 0 || props.streamingServices.results.US === undefined || props.streamingServices.results.US.buy === undefined  ) {
+    if ( results === undefined || props.streamingServices.results.US === undefined || props.streamingServices.results.US.buy === undefined  ) {
       masterLogo.buy = null
     } else {
       
@@ -21,7 +21,7 @@ const MiscInfo = (props) => {
       <img className={styles.streamLogos}
       src={'https://image.tmdb.org/t/p/w92/' + props.streamingServices.results?.US?.buy[0]?.logo_path} alt="logo" />
     }
-    if ( Object.keys(results).length === 0 || props.streamingServices.results.US === undefined || props.streamingServices.results.US.rent === undefined  ) {
+    if ( results === undefined || props.streamingServices.results.US === undefined || props.streamingServices.results.US.rent === undefined  ) {
       masterLogo.rent = null
     } else {
       masterLogo.rent = 

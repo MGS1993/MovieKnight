@@ -9,14 +9,13 @@ const MovieCell = (props) => {
   let renderedCell;
   let releaseRender;
   const mq = window.matchMedia("(min-width: 768px)");
-
   props.yearReleased === undefined
     ? (releaseRender = null)
     : (releaseRender = <div>Release Date {props.yearReleased}</div>);
 
     useEffect(() => {
       const getStreamingData = async() => {
-        if (props.mediaType === 'movie') {
+        if (props.mediaSearch === 'movie') {
           try {
             const response = await fetch(` https://api.themoviedb.org/3/movie/${props.mediaId}/watch/providers?api_key=${props.apiKey}`)
             const data = await response.json();
@@ -25,15 +24,20 @@ const MovieCell = (props) => {
           }catch(err) {
             console.log(err)
           } } 
-        if (props.mediaType === 'tv') {
-          const response = await fetch(` https://api.themoviedb.org/3/tv/${props.mediaId}/watch/providers?api_key=${props.apiKey}`)
+        if (props.mediaSearch === 'tv') {
+          try {
+            const response = await fetch(` https://api.themoviedb.org/3/tv/${props.mediaId}/watch/providers?api_key=${props.apiKey}`)
             const data = await response.json();
             const item = data
             setStreamingServices(item)
+          }catch(err) {
+            console.log(err)
+          }
+          
         }
       }
       getStreamingData()
-    }, [props.apiKey, props.mediaId, props.mediaType])
+    }, [props.apiKey, props.mediaId, props.mediaSearch])
 
   if (clickedLarger === true && mq.matches) {
     renderedCell = (
@@ -87,8 +91,7 @@ const MovieCell = (props) => {
           </div>
           {releaseRender}
           <div className={styles.largeBio}>{props.bio}</div>
-          <MiscInfo streamingServices={streamingServices}
-            mediaType={props.mediaType} />
+          <MiscInfo streamingServices={streamingServices} />
         </div>
       </React.Fragment>
     );

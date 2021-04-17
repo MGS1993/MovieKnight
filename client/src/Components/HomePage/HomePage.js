@@ -4,8 +4,10 @@ import HomePageHeader from './HomePageHeader/HomePageHeader';
 import MovieCell from '../MovieCell/MovieCell';
 import FooterNavBar from '../FooterNavBar/FooterNavBar';
 import listContext from '../context/listContext';
-const HomePage = () => {
+// import { getMediaType } from '../../Util/apiCalls';
+const HomePage = React.memo(() => {
   const [movieData, setMovieData] = useState(null)
+  const [ mediaSearch, setMediaSearch ] = useState('');
   const apiKey = 'b88a57406d9a87698d307358f3e4f4ab';
  useEffect(()=> {
   async function getTrendingData() {
@@ -19,7 +21,10 @@ const HomePage = () => {
     }
   }
      getTrendingData()
+     
  }, [])
+//  getMediaType(317442)
+console.log('homepage rendered...')
   return(
     <div className={styles.homePageLayout}>
       <HomePageHeader />
@@ -36,14 +41,16 @@ const HomePage = () => {
           mediaId={item.id}
           countryOrigin={item.origin_country}
           apiKey={apiKey}
-          mediaType={item.media_type} />
+          mediaType={item.mediaType}
+          mediaSearch={mediaSearch} />
         })}
       </div>
-      <listContext.Provider value={{exportedData: setMovieData, mediaType: movieData?.mediaType}}>
+      <listContext.Provider value={{exportedData: setMovieData,
+         mediaSearch: mediaSearch, setMediaSearch: setMediaSearch}}>
       <FooterNavBar apiKey={apiKey} />
       </listContext.Provider>
     </div>
   )
-}
+})
 
 export default HomePage

@@ -35,6 +35,7 @@ const FooterNavBar = React.memo(props => {
   }
  
   const queryMediaBySelectedGenre = async (e, mediaType, voteCount) => {
+    listContext.setMediaSearch(mediaType)
     try {
       if(renderedPage !== 1) {
         setRenderedPage(1)
@@ -59,6 +60,7 @@ const FooterNavBar = React.memo(props => {
     }
 }
 const queryTrendingMedia = async (mediaType) => {
+  listContext.setMediaSearch(mediaType)
   try{   
       const response = await fetch(` https://api.themoviedb.org/3/trending/${mediaType}/week?api_key=${props.apiKey}`)
       const data = await response.json();
@@ -71,6 +73,7 @@ const queryTrendingMedia = async (mediaType) => {
   }
 }
 const queryTopMediaAllGenres = async (mediaType, voteCount) => {
+  listContext.setMediaSearch(mediaType)
   try {
     if(renderedPage !== 1) {
       setRenderedPage(1)
@@ -122,6 +125,10 @@ const callApiForTvGenre = async (e) => {
         try {
           const response = await fetch(currentApiCall);
           const data = await response.json();
+          data.results.forEach(item => {
+            item['mediaType'] = listContext.mediaSearch
+          })
+          // console.log(data)
           listContext.exportedData(data.results)
        } catch(err) {
          console.log(err)

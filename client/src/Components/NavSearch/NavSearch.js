@@ -1,36 +1,39 @@
-import React, {useState, useEffect} from 'react';
+import React, { useContext} from 'react';
 import styles from './NavSearch.module.css';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import CustomSearch from './CustomSearch/CustomSearch'
 import MediaTypeBtn from './MediaTypeBtn/MediaTypeBtn';
+import ListContext from '../context/listContext';
+
 const NavSearch = props => {
+  const listContext = useContext(ListContext)
   let expandedStyle = null;
   let genreListNames = [];
   let tvGenreListNames = [];
-  const [ mediaSearch, setMediaSearch ] = useState('')
+  // const [ mediaSearch, setMediaSearch ] = useState('')
 
   let renderedSearch
   let renderedMediaTypeBtn
 
-  if (mediaSearch === '') {
+  if (listContext.mediaSearch === '') {
     renderedSearch = null
-    renderedMediaTypeBtn = <MediaTypeBtn clickedBtn={(e) => setMediaSearch(e.target.textContent)}/>
+    renderedMediaTypeBtn = <MediaTypeBtn clickedBtn={(e) => listContext.setMediaSearch(e.target.value)}/>
   }
-  if (mediaSearch === 'Movie') {
+  if (listContext.mediaSearch === 'movie') {
     renderedSearch = <CustomSearch searchType={'movie'} />
     renderedMediaTypeBtn = null
   }
-  if(mediaSearch === 'TV') {
+  if(listContext.mediaSearch === 'tv') {
     renderedSearch = <CustomSearch searchType={'tv'} />
     renderedMediaTypeBtn = null
   }
 
-  useEffect(() => {
-    if (props.expandedNav === false) {
-      setMediaSearch('')
-    }
-  }, [props.expandedNav])
+  // useEffect(() => {
+  //   if (props.expandedNav === false) {
+  //     listContext.setMediaSearch('')
+  //   }
+  // }, [props.expandedNav, listContext])
   
   //props passed down from footer to get labels and values for dropdown
   if (props.genreList !== "") {
