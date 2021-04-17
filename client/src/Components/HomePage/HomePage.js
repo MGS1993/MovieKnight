@@ -13,6 +13,7 @@ const HomePage = () => {
       const response = await fetch(` https://api.themoviedb.org/3/trending/all/week?api_key=${apiKey}`)
       const data = await response.json()
       const item = data.results
+      console.log(data)
       setMovieData(item)
     } catch(err) {
       console.log(err)
@@ -20,6 +21,21 @@ const HomePage = () => {
   }
      getTrendingData()
  }, [])
+
+/* So we can probably fix the issue by taking into account the lack of state
+in MiscInfo exceptions. That's just a bandaid though. Unless HomePage 
+renders from getTrendingData() it doesn't seem that LargeMovie cells get thier
+state and therefore cause an error. 
+
+Could be lack of mediaType
+Could be an issue with state rendering and fixed by useRef
+Could be an issue with different types of api calls. search, discover etc.
+I THINK I FOUND IT!!!! 
+IT'S FOR SURE MEDIATYPE. WHEN WE LOOK FOR MOVIES THE MEDIATYPES FROM 
+THE PREVIOUS ARRAY DON'T CHANGE. WE MADE AN ERROR WHEN BUILDING THAT
+PART OF THE APP. WE CAN FIX THIS. */
+
+
  let pathType
  let imagePath = (path, item) => {
    if (path === null) {

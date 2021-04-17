@@ -6,14 +6,16 @@ const MiscInfo = (props) => {
   let results = props.streamingServices.results
   let masterLogo = {}
 
-    if ( Object.keys(results).length === 0 || props.streamingServices.results.US === undefined || props.streamingServices.results.US.flatrate === undefined) {
+    if ( Object.keys(results).length === 0 || props.streamingServices.results.US === undefined || 
+    props.streamingServices.results.US.flatrate === undefined || props.streamingServices === '') {
       masterLogo.stream = null
     } else {
       masterLogo.stream = <img className={styles.streamLogos}
             src={'https://image.tmdb.org/t/p/w92/' + props.streamingServices.results?.US?.flatrate[0]?.logo_path} alt="logo" />
      
     }
-    if ( Object.keys(results).length === 0 || props.streamingServices.results.US === undefined || props.streamingServices.results.US.buy === undefined  ) {
+    if ( Object.keys(results).length === 0 || props.streamingServices.results.US === undefined || 
+    props.streamingServices.results.US.buy === undefined || props.streamingServices === ''  ) {
       masterLogo.buy = null
     } else {
       

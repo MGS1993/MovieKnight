@@ -19,6 +19,11 @@ const expanded = useContext(expandedContext)
         let renderHelper = 1
         const response = await fetch(`https://api.themoviedb.org/3/search/${props.searchType}?api_key=b88a57406d9a87698d307358f3e4f4ab&language=en-US&query=${searchData}&page=${renderHelper}&include_adult=false`)                                  
         const data = await response.json()
+        data.results.forEach((el, index) => {
+          el['media_type'] = props.searchType
+        })
+        console.log(data)
+        //'expanded' is in FooterNavBar
         expanded.setMaxPages(data.total_pages)
         expanded.setCurrentApiCall(response.url)
         listContext.exportedData(data.results)
@@ -26,10 +31,15 @@ const expanded = useContext(expandedContext)
       } else {
         const response = await fetch(`https://api.themoviedb.org/3/search/${props.searchType}?api_key=b88a57406d9a87698d307358f3e4f4ab&language=en-US&query=${searchData}&page=${expanded.renderedPage}&include_adult=false`)
         const data = await response.json()
+        data.results.forEach((el, index) => {
+          el['media_type'] = props.searchType
+        })
+        console.log(data)
         expanded.setMaxPages(data.total_pages)
         expanded.setCurrentApiCall(response.url)
         listContext.exportedData(data.results)
         expanded.setExpandedNav(false)
+        // console.log(data)
       }
       expanded.setShowArrow(true);
     }catch(err) {
@@ -39,9 +49,10 @@ const expanded = useContext(expandedContext)
   return(
     <div className={styles.mainWrapper}>
       <SearchBar searchData={searchData} 
-      setSearchData={setSearchData}  />
-      <button className={styles.submitBtn} 
-      onClick={clickedSearchHandler}>Submit</button>
+      setSearchData={setSearchData}
+      clickedSearchHandler={clickedSearchHandler}  />
+      {/* <button className={styles.submitBtn} 
+      onClick={clickedSearchHandler}>Submit</button> */}
     </div>
   )
 }

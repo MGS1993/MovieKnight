@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./MovieCell.module.css";
 import { AiOutlineStar } from "react-icons/ai";
 import MiscInfo from './MiscInfo/MiscInfo';
-const MovieCell = (props) => {
+const MovieCell = React.memo( function MemoCell(props) {
   let [clickedLarger, setClickedLarger] = useState(false);
   const [ streamingServices, setStreamingServices ] = useState('')
   let mainWrapperAppendedStyle;
@@ -14,9 +14,11 @@ const MovieCell = (props) => {
   props.yearReleased === undefined
     ? (releaseRender = null)
     : (releaseRender = <div>Release Date {props.yearReleased}</div>);
-
+  // console.log(streamingServices)
+  // console.log(props.mediaType)
     useEffect(() => {
       const getStreamingData = async() => {
+        console.log(props.mediaType)
         if (props.mediaType === 'movie') {
           try {
             const response = await fetch(` https://api.themoviedb.org/3/movie/${props.mediaId}/watch/providers?api_key=${props.apiKey}`)
@@ -27,10 +29,14 @@ const MovieCell = (props) => {
             console.log(err)
           } } 
         if (props.mediaType === 'tv') {
-          const response = await fetch(` https://api.themoviedb.org/3/tv/${props.mediaId}/watch/providers?api_key=${props.apiKey}`)
+          try {
+            const response = await fetch(` https://api.themoviedb.org/3/tv/${props.mediaId}/watch/providers?api_key=${props.apiKey}`)
             const data = await response.json();
             const item = data
             setStreamingServices(item)
+          }catch(err) {
+            console.log(err)
+          }
         }
       }
       getStreamingData()
@@ -55,7 +61,7 @@ const MovieCell = (props) => {
         </div>
         <div className={styles.movieInfoWrapper}>
           <div className={styles.largeTitle}>
-            <div>{props.title}</div>
+          <div>{props.title}</div>
             <div className={styles.titleScore}>
               <AiOutlineStar />
               {props.score}
@@ -89,7 +95,7 @@ const MovieCell = (props) => {
         </div>
         <div className={styles.movieInfoWrapper}>
           <div className={styles.largeTitle}>
-            <div>{props.title}</div>
+            <div data-testid='titleTest' >{props.title}</div>
             
             <div className={styles.titleScore}>
               <AiOutlineStar />
@@ -124,7 +130,7 @@ const MovieCell = (props) => {
         </div>
         <div className={styles.movieInfoWrapper}>
           <div className={styles.title}>
-            <div>{props.title}</div>
+            <div data-testid='titleTest'>{props.title}</div>
             <div className={styles.titleScore}>
               <AiOutlineStar />
               {props.score}
@@ -145,6 +151,6 @@ const MovieCell = (props) => {
       {renderedCell}
     </div>
   );
-};
+});
 
 export default MovieCell;
