@@ -29,8 +29,6 @@ const NavSearch = props => {
     renderedSearch = <CustomSearch searchType={'tv'} />
     renderedMediaTypeBtn = null
   }
-  
-
   useEffect(() => {
     if (props.expandedNav === false) {
       props.setShowSearchBar(false)
@@ -38,8 +36,8 @@ const NavSearch = props => {
   }, [props])
   
   //props passed down from footer to get labels and values for dropdown
-  if (props.genreList !== "") {
-    props.genreList.forEach((el) => {
+  if (props.movieGenreList !== "") {
+    props.movieGenreList.forEach((el) => {
       genreListNames.push({
         value: el.id,
         label: el.name,

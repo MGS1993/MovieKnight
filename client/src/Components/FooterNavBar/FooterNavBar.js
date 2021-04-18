@@ -12,7 +12,7 @@ import {
 } from "../../Util/apiCalls";
 const FooterNavBar = React.memo(props => {
   const [ expandedNav, setExpandedNav ] = useState(false)
-  const [ genreList, setGenreList ] = useState('');
+  const [ movieGenreList, setMovieGenreList ] = useState('');
   const listContext = useContext(ListContext)
   const [ mediaNav, setMediaNav ] = useState('root')
   const [ tvGenreList, setTvGenreList ] = useState('')
@@ -85,7 +85,7 @@ const queryTopMediaAllGenres = async (mediaType, voteCount) => {
 }
 
   useEffect(() => {
-    callApiGenreByMediaType('movie', setGenreList)
+    callApiGenreByMediaType('movie', setMovieGenreList)
     callApiGenreByMediaType('tv', setTvGenreList)
     if(currentApiCall !== '') {
       nextPageHandler(setCurrentApiCall, currentApiCall, renderedPage, 
@@ -118,7 +118,7 @@ const queryTopMediaAllGenres = async (mediaType, voteCount) => {
         currentApiCall: currentApiCall, setCurrentApiCall: setCurrentApiCall,
         setShowArrow: setShowArrow, setMaxPages: setMaxPages}}>
         <NavSearch expandedNav={expandedNav} setExpandedNav={setExpandedNav} 
-          genreList={genreList} apiKey={props.apiKey}
+           apiKey={props.apiKey}
           mediaNav={mediaNav}
           setMediaNav={setMediaNav}
           mediaSearch={props.mediaSearch}
@@ -126,10 +126,8 @@ const queryTopMediaAllGenres = async (mediaType, voteCount) => {
           queryMediaBySelectedGenre={queryMediaBySelectedGenre}
           queryTrendingMedia={queryTrendingMedia}
           queryTopMediaAllGenres={queryTopMediaAllGenres}
-          // callApiForTvGenre={callApiForTvGenre}
-          renderedPage={renderedPage}
-          setRenderedPage={setRenderedPage}
           tvGenreList={tvGenreList}
+          movieGenreList={movieGenreList}
           showSearchBar={showSearchBar}
           setShowSearchBar={setShowSearchBar}
         />

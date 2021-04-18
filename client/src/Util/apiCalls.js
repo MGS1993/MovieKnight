@@ -17,7 +17,6 @@ const getAllTrendingData = async(setState) => {
     const response = await fetch(` https://api.themoviedb.org/3/trending/all/week?api_key=${apiKey}`)
     const data = await response.json()
     const item = data.results
-    console.log(data)
     setState(item)
   } catch(err) {
     console.log(err)
@@ -25,7 +24,7 @@ const getAllTrendingData = async(setState) => {
 }
 ///////////
 
-//FOOTERNAVBAR  
+//FOOTERNAVBAR/////////////////////////
 const getTrendingByType = async (mediaType) => {
   try {
     const response = await fetch(` https://api.themoviedb.org/3/trending/${mediaType}/week?api_key=${apiKey}`)
@@ -60,7 +59,6 @@ const callApiGenreByMediaType = async(mediaType, setState, e) => {
   try {
     const response = await fetch(`https://api.themoviedb.org/3/genre/${mediaType}/list?api_key=${apiKey}&language=en-US`)
     const data = await response.json();
-    console.log(data)
     return setState(data.genres)
   }catch(err) {
 
@@ -81,6 +79,6 @@ const nextPageHandler = async(setCurrentApiCall,currentApiCall, renderedPage,
       console.log(err)
      }
    }
-///////////
+/////////////////////////
 export { getMediaType, getAllTrendingData, callApiGenreByMediaType, 
   getTrendingByType, getTopMediaAllGenres, getMediaByGenre, nextPageHandler  }
