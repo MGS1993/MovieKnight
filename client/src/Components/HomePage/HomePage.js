@@ -24,7 +24,6 @@ const HomePage = React.memo(() => {
      getTrendingData()
      
  }, [])
-<<<<<<< HEAD
 
 /* So we can probably fix the issue by taking into account the lack of state
 in MiscInfo exceptions. That's just a bandaid though. Unless HomePage 
@@ -51,10 +50,8 @@ PART OF THE APP. WE CAN FIX THIS. */
      return item.backdrop_path
    }
  }
-=======
 //  getMediaType(317442)
 console.log('homepage rendered...')
->>>>>>> old-state
   return(
     <div className={styles.homePageLayout}>
       <HomePageHeader />
@@ -71,13 +68,8 @@ console.log('homepage rendered...')
           mediaId={item.id}
           countryOrigin={item.origin_country}
           apiKey={apiKey}
-<<<<<<< HEAD
-          mediaType={item.media_type}
-          pathType={pathType} />
-=======
           mediaType={item.mediaType}
           mediaSearch={mediaSearch} />
->>>>>>> old-state
         })}
       </div>
       <listContext.Provider value={{exportedData: setMovieData,
