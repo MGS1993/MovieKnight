@@ -76,7 +76,8 @@ const NavSearch = props => {
           </button>
         </div>
         <div>
-          <button onClick={props.callApiForTvGenre}>Top TV Shows</button>
+          <button onClick={() => props.setMediaNav('topTvShows')}>
+            Top TV Shows</button>
           <button onClick={() => props.queryTrendingMedia("tv")}>
             Trending TV Shows
           </button>

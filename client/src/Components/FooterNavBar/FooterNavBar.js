@@ -6,6 +6,10 @@ import ListContext from '../context/listContext';
 import NavArrow from '../NavSearch/NavArrow/NavArrow';
 import NavSearch from '../NavSearch/NavSearch';
 import expandedContext from '../context/expandedNavContext';
+import {
+  getTrendingByType, getTopMediaAllGenres, getMediaByGenre,
+  callApiGenreByMediaType, nextPageHandler
+} from "../../Util/apiCalls";
 const FooterNavBar = React.memo(props => {
   const [ expandedNav, setExpandedNav ] = useState(false)
   const [ genreList, setGenreList ] = useState('');
@@ -36,109 +40,58 @@ const FooterNavBar = React.memo(props => {
  
   const queryMediaBySelectedGenre = async (e, mediaType, voteCount) => {
     listContext.setMediaSearch(mediaType)
-    try {
       if(renderedPage !== 1) {
         setRenderedPage(1)
-        let renderHelper = 1;
-        const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&with_genres=${e.value}&include_adult=false&include_video=false&page=${renderHelper}&watch_region=US`)
-        const data = await response.json();
-        console.log('MediaBySelectedGenre Ran')
-        setMaxPages(data.total_pages)
-        setCurrentApiCall(response.url)
-        listContext.exportedData(data.results)
+        let funcData = await getMediaByGenre(e, mediaType, voteCount, 1); 
+        setMaxPages(funcData.data.total_pages)
+        setCurrentApiCall(funcData.url)
+        listContext.exportedData(funcData.data.results)
       } else {
-        const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&with_genres=${e.value}&include_adult=false&include_video=false&page=${renderedPage}&watch_region=US`)
-        const data = await response.json();
-        setMaxPages(data.total_pages)
-        setCurrentApiCall(response.url)
-        listContext.exportedData(data.results)
+        let funcData = await getMediaByGenre(e, mediaType, voteCount, renderedPage);
+        setMaxPages(funcData.data.total_pages)
+        setCurrentApiCall(funcData.url)
+        listContext.exportedData(funcData.data.results)
       }
       setExpandedNav(!expandedNav)
       setMediaNav('root')
       setShowArrow(true)
-    }catch(err) {
-        console.log(err)
-    }
 }
-const queryTrendingMedia = async (mediaType) => {
+const queryTrendingMedia = async(mediaType) => {
   listContext.setMediaSearch(mediaType)
-  try{   
-      const response = await fetch(` https://api.themoviedb.org/3/trending/${mediaType}/week?api_key=${props.apiKey}`)
-      const data = await response.json();
-      listContext.exportedData(data.results)
-      setExpandedNav(!expandedNav)
-      setMediaNav('root')
-      setShowArrow(false)
-  }catch(err) {
-      console.log(err)
-  }
+  let data = await getTrendingByType(mediaType)
+  listContext.exportedData(data.results)
+  setExpandedNav(!expandedNav)
+  setMediaNav('root')
+  setShowArrow(false)
+
 }
 const queryTopMediaAllGenres = async (mediaType, voteCount) => {
   listContext.setMediaSearch(mediaType)
-  try {
     if(renderedPage !== 1) {
       setRenderedPage(1)
-      let renderHelper = 1;
-      const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&page=${renderHelper}&timezone=America%2FTexas&include_null_first_air_dates=false`)
-      const data = await response.json();
-      setCurrentApiCall(response.url)
-      listContext.exportedData(data.results)
+      let funcData = await getTopMediaAllGenres(mediaType, voteCount, 1);
+      setMaxPages(funcData.data.total_pages)
+      setCurrentApiCall(funcData.url)
+      listContext.exportedData(funcData.data.results)
     } else {
-      const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&page=${renderedPage}&timezone=America%2FTexas&include_null_first_air_dates=false`)
-      const data = await response.json();
-      setCurrentApiCall(response.url)
-      listContext.exportedData(data.results)
+      let funcData = await getTopMediaAllGenres(mediaType, voteCount, renderedPage);
+      setMaxPages(funcData.data.total_pages)
+      setCurrentApiCall(funcData.url)
+      listContext.exportedData(funcData.data.results)
     }
-      setExpandedNav(!expandedNav)
-      setMediaNav('root')
-      setShowArrow(true)
-  }catch(err) {
-      console.log(err)
-  }
+    setExpandedNav(!expandedNav)
+    setMediaNav('root')
+    setShowArrow(true)
 }
-const callApiForTvGenre = async (e) => {
-  setMediaNav('topTvShows')
-  try{
-      const responseGenre = await fetch(`https://api.themoviedb.org/3/genre/tv/list?api_key=${props.apiKey}&language=en-US`)
-      const dataGenre = await responseGenre.json();
-      const genreListQuery = dataGenre.genres;
-      setTvGenreList(genreListQuery);
-  }catch(err) {
-      console.log(err)
-  }
-}
-  useEffect(() => {
-    const queryData = async() => {
-      try {
-        const responseGenre = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${props.apiKey}&language=en-US`)
-        const dataGenre = await responseGenre.json(); 
-        setGenreList(dataGenre.genres);
-      }catch(err) {
-        console.log(err)
-      }
-     }
-     queryData()
-  }, [props.apiKey])
 
   useEffect(() => {
-     const nextPage = async () => {
-        setCurrentApiCall(currentApiCall.replace(`page=1`, `page=${renderedPage}`))
-        try {
-          const response = await fetch(currentApiCall);
-          const data = await response.json();
-          data.results.forEach(item => {
-            item['mediaType'] = listContext.mediaSearch
-          })
-          listContext.exportedData(data.results)
-       } catch(err) {
-         console.log(err)
-       }
-     }
-     if(currentApiCall !== '') {
-      nextPage()
+    callApiGenreByMediaType('movie', setGenreList)
+    callApiGenreByMediaType('tv', setTvGenreList)
+    if(currentApiCall !== '') {
+      nextPageHandler(setCurrentApiCall, currentApiCall, renderedPage, 
+        listContext.mediaSearch, listContext.exportedData)
     }
-     // eslint-disable-next-line
-  }, [renderedPage, currentApiCall ])
+  },[renderedPage, currentApiCall, listContext.exportedData, listContext.mediaSearch])
 
   if(showArrow) {
     leftArr = (
@@ -173,7 +126,7 @@ const callApiForTvGenre = async (e) => {
           queryMediaBySelectedGenre={queryMediaBySelectedGenre}
           queryTrendingMedia={queryTrendingMedia}
           queryTopMediaAllGenres={queryTopMediaAllGenres}
-          callApiForTvGenre={callApiForTvGenre}
+          // callApiForTvGenre={callApiForTvGenre}
           renderedPage={renderedPage}
           setRenderedPage={setRenderedPage}
           tvGenreList={tvGenreList}
