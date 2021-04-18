@@ -42,22 +42,16 @@ const FooterNavBar = React.memo(props => {
         let renderHelper = 1;
         const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&with_genres=${e.value}&include_adult=false&include_video=false&page=${renderHelper}&watch_region=US`)
         const data = await response.json();
-        
-        
-
         console.log('MediaBySelectedGenre Ran')
         setMaxPages(data.total_pages)
         setCurrentApiCall(response.url)
         listContext.exportedData(data.results)
-        console.log(mediaType)
       } else {
         const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&with_genres=${e.value}&include_adult=false&include_video=false&page=${renderedPage}&watch_region=US`)
         const data = await response.json();
         setMaxPages(data.total_pages)
         setCurrentApiCall(response.url)
-        console.log('MediaBySelectedGenre Ran')
         listContext.exportedData(data.results)
-        console.log(mediaType)
       }
       setExpandedNav(!expandedNav)
       setMediaNav('root')
