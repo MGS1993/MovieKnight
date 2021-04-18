@@ -16,7 +16,7 @@ const FooterNavBar = React.memo(props => {
   const [ currentApiCall, setCurrentApiCall ] = useState('')
   const [ renderedPage, setRenderedPage] = useState(1)
   const [ maxPages, setMaxPages ] = useState(0);
-  const [ mediaSearch, setMediaSearch ] = useState('');
+
   let expandedStyle = null;
   let expandedCounterStyle = null;
   let icon = <GoSearch color="orange" />
@@ -136,17 +136,10 @@ const callApiForTvGenre = async (e) => {
         try {
           const response = await fetch(currentApiCall);
           const data = await response.json();
-<<<<<<< HEAD
-          data.results.forEach((el, index) => {
-            el['media_type'] = props.mediaSearch
-          })
-          console.log(data)
-=======
           data.results.forEach(item => {
             item['mediaType'] = listContext.mediaSearch
           })
           // console.log(data)
->>>>>>> old-state
           listContext.exportedData(data.results)
           // console.log(data.results)
        } catch(err) {
@@ -187,8 +180,8 @@ const callApiForTvGenre = async (e) => {
           genreList={genreList} apiKey={props.apiKey}
           mediaNav={mediaNav}
           setMediaNav={setMediaNav}
-          mediaSearch={mediaSearch}
-          setMediaSearch={setMediaSearch}
+          mediaSearch={props.mediaSearch}
+          setMediaSearch={props.setMediaSearch}
           queryMediaBySelectedGenre={queryMediaBySelectedGenre}
           queryTrendingMedia={queryTrendingMedia}
           queryTopMediaAllGenres={queryTopMediaAllGenres}

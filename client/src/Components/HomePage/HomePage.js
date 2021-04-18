@@ -25,20 +25,6 @@ const HomePage = React.memo(() => {
      
  }, [])
 
-/* So we can probably fix the issue by taking into account the lack of state
-in MiscInfo exceptions. That's just a bandaid though. Unless HomePage 
-renders from getTrendingData() it doesn't seem that LargeMovie cells get thier
-state and therefore cause an error. 
-
-Could be lack of mediaType
-Could be an issue with state rendering and fixed by useRef
-Could be an issue with different types of api calls. search, discover etc.
-I THINK I FOUND IT!!!! 
-IT'S FOR SURE MEDIATYPE. WHEN WE LOOK FOR MOVIES THE MEDIATYPES FROM 
-THE PREVIOUS ARRAY DON'T CHANGE. WE MADE AN ERROR WHEN BUILDING THAT
-PART OF THE APP. WE CAN FIX THIS. */
-
-
  let pathType
  let imagePath = (path, item) => {
    if (path === null) {
@@ -69,12 +55,13 @@ console.log('homepage rendered...')
           countryOrigin={item.origin_country}
           apiKey={apiKey}
           mediaType={item.mediaType}
-          mediaSearch={mediaSearch} />
+          mediaSearch={mediaSearch}
+          pathType={pathType} />
         })}
       </div>
       <listContext.Provider value={{exportedData: setMovieData,
          mediaSearch: mediaSearch, setMediaSearch: setMediaSearch}}>
-      <FooterNavBar apiKey={apiKey} />
+      <FooterNavBar apiKey={apiKey} mediaSearch={mediaSearch} setMediaSearch={setMediaSearch} />
       </listContext.Provider>
     </div>
   )

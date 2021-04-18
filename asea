@@ -1,0 +1,223 @@
+[33mcommit 3978349b5343cc4cb9cc3bf3ed7e32c137b71734[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Merge: 850036b 411a97e
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sat Apr 17 02:49:51 2021 -0500
+
+    merging
+
+[33mcommit 411a97e21a843438f4860ee92108abcb21b37711[m[33m ([m[1;32mold-state[m[33m)[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sat Apr 17 02:46:20 2021 -0500
+
+    stashed changes
+
+[33mcommit 850036b2230d494b8db9b651b2d353c9c08241ec[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mtest[m[33m)[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Fri Apr 16 23:09:16 2021 -0500
+
+    post misc removal
+
+[33mcommit 82bd0988091243bdb81f6d02b45efe6f77947dfa[m[33m ([m[1;31mheroku/master[m[33m, [m[1;32mmobileWork[m[33m)[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sun Mar 28 20:22:36 2021 -0600
+
+    removed subheader
+
+[33mcommit 5bf54bf7421d5fbe018feffd0baea5e79612fdc8[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sun Mar 28 19:58:43 2021 -0600
+
+    added miscinfo to desktop view
+
+[33mcommit 34b75394af15ff0f7e8fed489cbf58bc6996430b[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sun Mar 28 19:55:23 2021 -0600
+
+    small css tweeks for desktop grid layout
+
+[33mcommit a14a285309b97541ee70be2ff64f90b57b41a156[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sun Mar 28 00:50:55 2021 -0600
+
+    fixed poster sizing, added button css
+
+[33mcommit 958ec2700849561de7b33662b950f3c2801472b8[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sat Mar 27 22:56:48 2021 -0600
+
+    minor code cleanup
+
+[33mcommit 230b022fc0de08a71bde6c6e4e9bc96f67031af9[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sat Mar 27 22:45:18 2021 -0600
+
+    added stream / buy / rent options on each moviecell
+
+[33mcommit 7e426217bb68bc26a636def1e08e64e7c4cd7880[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Mon Mar 22 20:26:07 2021 -0600
+
+    troubleshooting multi search bugs
+
+[33mcommit 6b35fd337946e94fe9c33b9c83a42cc03f9041e5[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Mon Mar 22 18:16:35 2021 -0600
+
+    added logos on largeMovieCells
+
+[33mcommit 72a8c9b53ab2e203101b9d460d2e11bc6b39aea5[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sun Mar 21 16:04:54 2021 -0600
+
+    further work on desktop css. adding misc info in movie cards
+
+[33mcommit ba94824fa164bd28cfc780ad1675b64d71925350[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sat Mar 20 12:04:00 2021 -0600
+
+    search feature added
+
+[33mcommit bc554af12f26c54ee08fcc1e824db34077822e7f[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sat Mar 20 08:06:24 2021 -0600
+
+    minor css fixes for desktop view
+
+[33mcommit 91bf70330dbcf2b30956dade5c9777a37f5bd1b2[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Mon Mar 15 20:34:25 2021 -0600
+
+    fixed NavArrow bugs
+
+[33mcommit cd79a57d01e80120c837a9d426e8f8dc57cb586d[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Mon Mar 15 18:34:43 2021 -0600
+
+    polished page change function
+
+[33mcommit cffdc4e38dd4733200a80263977fea3b5bc4fb0b[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sun Mar 14 14:26:55 2021 -0600
+
+    rough draft impl of page change
+
+[33mcommit a9611d2e996cbd3c8f0529ed337d1c1a2ea22f7c[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sun Mar 14 07:29:30 2021 -0600
+
+    misc to last commit
+
+[33mcommit 665e9a84d54873d7dccb745a3a2789af5e533614[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sun Mar 14 07:28:33 2021 -0600
+
+    moved navSearch functionality to FooterNavBar for easier pageview impl
+
+[33mcommit 19b0d498184ac13ee89357772df46a14a18cec2d[m
+Author: Manuel <mannyg1218@yahoo.com>
+Date:   Sat Mar 13 13:23:48 2021 -0600
+
+    wokring on adding different page search funcs
+
+[33mcommit 1fdcc5a2f743e8a69eada5c83286d9bddbbc07c7[m
+Merge: c85417b db5f6d3
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Fri Mar 12 11:04:53 2021 -0600
+
+    css fixes
+
+[33mcommit db5f6d3abbc2e2cce29bb6465a44f42e9ab9e87c[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Fri Mar 12 11:02:25 2021 -0600
+
+    css fixes
+
+[33mcommit c85417b9886f3a65022a9b0bd8acade745748e8a[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Tue Mar 9 08:47:11 2021 -0600
+
+    css changes to MovieCell
+
+[33mcommit 1dc5e6a31deffd44049278a54414c8913dd389bf[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Mon Mar 8 21:33:27 2021 -0600
+
+    misc mobile css
+
+[33mcommit e98019c4cac096e4648605345e0632a7129adec6[m[33m ([m[1;31mheroku/prod[m[33m)[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Mon Mar 8 19:23:03 2021 -0600
+
+    prep for deployment
+
+[33mcommit 4e932cd89c239e352b6ad42ded958b3f2b6764e2[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Mon Mar 8 19:03:55 2021 -0600
+
+    initial commit of prod, pre heroku attempt
+
+[33mcommit b4ff53c4e6084c93b05aa9ff7a2b9c256bccd6cc[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Mon Mar 8 18:21:47 2021 -0600
+
+    reduced functions and code cleanup @NavSearch
+
+[33mcommit a86f26c7866ea8a90eee28acc4aaf00673eb7b65[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sun Mar 7 14:34:34 2021 -0600
+
+    added get top 10 and trending movies/tv shows
+
+[33mcommit 286d3b211c72d78934f5272e646291ecdf2b4fd1[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sun Mar 7 09:56:34 2021 -0600
+
+    troubleshoot npm, updated node. Pushing streaming provider feature for a later date
+
+[33mcommit 59dc1680b7e9327d4522cd1716db3a340bfd636b[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sat Mar 6 13:17:12 2021 -0600
+
+    implemented basic checkboxes for streaming services
+
+[33mcommit 4b4c7060a7ad1768526f758e07d0ce7a87162212[m
+Author: Manuel <mannyg1218@yahoo.com>
+Date:   Wed Mar 3 13:47:40 2021 -0600
+
+    rudimentary search based on genre.
+
+[33mcommit 48867d10552462ed3c3660c8ea9a11d5410907df[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Wed Mar 3 09:07:12 2021 -0600
+
+    WIP footer nav
+
+[33mcommit 53c6ad9c4f64c690ad6569b943044e22f5d0d798[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sun Feb 28 15:19:20 2021 -0600
+
+    movie detail code ready for implementation.
+
+[33mcommit e6d38816f7264daf7ed350b9874ea1fe74810100[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sun Feb 28 14:36:41 2021 -0600
+
+    deleted misplaced install
+
+[33mcommit be48297347fb96a1870621a9283ad0ad0ca684a9[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sun Feb 28 14:33:48 2021 -0600
+
+    css improvements
+
+[33mcommit 6a7add48e2a95d7129acd1f6bbe818a1f7457ee9[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sun Feb 28 11:42:47 2021 -0600
+
+    added expand/contract moviecellwrapper on click
+
+[33mcommit 1b85429aa8deba4c5512f6e417d6bf4ef1f4de3c[m
+Author: Manuel Guzman <m_guzman74@yahoo.com>
+Date:   Sun Feb 28 10:04:38 2021 -0600
+
+    initial commit
