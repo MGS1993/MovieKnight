@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './NavSearch.module.css';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
@@ -9,32 +9,33 @@ const NavSearch = props => {
   let expandedStyle = null;
   let genreListNames = [];
   let tvGenreListNames = [];
-  // const [ mediaSearch, setMediaSearch ] = useState('')
-
   let renderedSearch
   let renderedMediaTypeBtn
 
-  if (props.mediaSearch === '') {
-    renderedSearch = null
-    renderedMediaTypeBtn = <MediaTypeBtn clickedBtn={(e) => props.setMediaSearch(e.target.value)}/>
+  const handleShowSearchBar = (e, bool) => {
+    props.setMediaSearch(e.target.value)
+    props.setShowSearchBar(bool)
   }
-  if (props.mediaSearch === 'movie') {
+
+  if (props.showSearchBar === false) {
+    renderedSearch = null
+    renderedMediaTypeBtn = <MediaTypeBtn clickedBtn={(e) => handleShowSearchBar(e, true)}/>
+  }
+  if (props.showSearchBar === true && props.mediaSearch === 'movie') {
     renderedSearch = <CustomSearch searchType={'movie'} />
     renderedMediaTypeBtn = null
   }
-  if(props.mediaSearch === 'tv') {
+  if(props.showSearchBar === true && props.mediaSearch === 'tv') {
     renderedSearch = <CustomSearch searchType={'tv'} />
     renderedMediaTypeBtn = null
   }
+  
 
-  // useEffect(() => {
-  //   if (props.expandedNav === false) {
-  //     setMediaSearch('')
-  //   }
-  // }, [props.expandedNav])
-  //     listContext.setMediaSearch('')
-  //   }
-  // }, [props.expandedNav, listContext])
+  useEffect(() => {
+    if (props.expandedNav === false) {
+      props.setShowSearchBar(false)
+    }
+  }, [props])
   
   //props passed down from footer to get labels and values for dropdown
   if (props.genreList !== "") {

@@ -16,7 +16,7 @@ const FooterNavBar = React.memo(props => {
   const [ currentApiCall, setCurrentApiCall ] = useState('')
   const [ renderedPage, setRenderedPage] = useState(1)
   const [ maxPages, setMaxPages ] = useState(0);
-
+  const [ showSearchBar, setShowSearchBar ] = useState(false);
   let expandedStyle = null;
   let expandedCounterStyle = null;
   let icon = <GoSearch color="orange" />
@@ -49,8 +49,6 @@ const FooterNavBar = React.memo(props => {
         setMaxPages(data.total_pages)
         setCurrentApiCall(response.url)
         listContext.exportedData(data.results)
-        // console.log('if func ran')
-        // console.log(data.results)
         console.log(mediaType)
       } else {
         const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${props.apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&with_genres=${e.value}&include_adult=false&include_video=false&page=${renderedPage}&watch_region=US`)
@@ -59,8 +57,6 @@ const FooterNavBar = React.memo(props => {
         setCurrentApiCall(response.url)
         console.log('MediaBySelectedGenre Ran')
         listContext.exportedData(data.results)
-        // console.log('the else func ran')
-        // console.log(data.results)
         console.log(mediaType)
       }
       setExpandedNav(!expandedNav)
@@ -139,9 +135,7 @@ const callApiForTvGenre = async (e) => {
           data.results.forEach(item => {
             item['mediaType'] = listContext.mediaSearch
           })
-          // console.log(data)
           listContext.exportedData(data.results)
-          // console.log(data.results)
        } catch(err) {
          console.log(err)
        }
@@ -189,6 +183,8 @@ const callApiForTvGenre = async (e) => {
           renderedPage={renderedPage}
           setRenderedPage={setRenderedPage}
           tvGenreList={tvGenreList}
+          showSearchBar={showSearchBar}
+          setShowSearchBar={setShowSearchBar}
         />
       </expandedContext.Provider>
       <div onClick={() => setExpandedNav(!expandedNav)} 

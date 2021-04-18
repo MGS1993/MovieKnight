@@ -2,10 +2,12 @@ import React from 'react';
 import styles from './MediaTypeBtn.module.css';
 
 const MediaTypeBtn = props => (
-    <div>
+    <div >
       <h3>Search for...</h3>
-      <button onClick={props.clickedBtn} value='movie'>Movie</button>
-      <button onClick={props.clickedBtn} value='tv'>TV</button>
+      <button className={styles.mediaBtn} 
+      onClick={props.clickedBtn} value='movie'>Movie</button>
+      <button className={styles.mediaBtn} 
+      onClick={props.clickedBtn} value='tv'>TV</button>
     </div>
   
 )
