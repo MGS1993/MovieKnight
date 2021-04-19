@@ -27,7 +27,7 @@ if ( movieData !== null ) { mediaTypeAssigner(movieData, mediaSearch)}
      return item.backdrop_path
    }
  }
-console.log('homepage rendered...')
+console.log('%cHOMEPAGE RENDERED...', 'color: red')
   return(
     <div className={styles.homePageLayout}>
       <HomePageHeader />

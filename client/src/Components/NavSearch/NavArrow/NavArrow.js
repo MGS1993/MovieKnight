@@ -27,6 +27,9 @@ const NavArrow = props => {
     if (props.renderedPage <= 1) {
       return null;
     } else {
+      ////WE ALMOST HAVE THIS IN THE BAG. FOCUS ON NAVARROW AND API CALLS. 
+      //LOOKS LIKE NEXTPAGE HANDLER AND THE FUNCTIONS HERE ARE DOING THE SAME THING.
+      //MIGHT BE CASUING CONFLICTS BUT THIS IS DEFINITELY THE RIGHT THING TO FOCUS ON
       props.setRenderedPage(currPage => currPage -1);
       props.setCurrentApiCall(
         props.currentApiCall.replace(

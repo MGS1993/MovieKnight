@@ -67,15 +67,15 @@ const nextPageHandler = async (
   renderedPage, exportedData
 ) => {
   console.log("next page handler ran...");
-  setCurrentApiCall(currentApiCall.replace(`page=1`, `page=${renderedPage}`));
+  
   try {
+    setCurrentApiCall(currentApiCall.replace(`page=1`, `page=${renderedPage}`));
     const response = await fetch(currentApiCall);
     const data = await response.json();
     exportedData(data.results)
     
    }catch(err){
     console.log(err)
-    
    }
 };
 /////////////////////////
