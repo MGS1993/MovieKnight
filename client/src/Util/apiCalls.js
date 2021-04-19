@@ -12,11 +12,7 @@ const getAllTrendingData = async(setState) => {
     
   }
 }
-
-// const mediaTypeAssigner = (movieData) => {
-
-// }
-///////////
+///////////////////////////////////////
 
 //FOOTERNAVBAR/////////////////////////
 const getTrendingByType = async (mediaType) => {
@@ -67,12 +63,20 @@ const callApiGenreByMediaType = async(mediaType, setState, e) => {
 }
 
 const nextPageHandler = async (
-  setCurrentApiCall,
-  currentApiCall,
-  renderedPage
+  setCurrentApiCall, currentApiCall,
+  renderedPage, exportedData
 ) => {
   console.log("next page handler ran...");
   setCurrentApiCall(currentApiCall.replace(`page=1`, `page=${renderedPage}`));
+  try {
+    const response = await fetch(currentApiCall);
+    const data = await response.json();
+    exportedData(data.results)
+    
+   }catch(err){
+    console.log(err)
+    
+   }
 };
 /////////////////////////
 
@@ -100,6 +104,18 @@ const mediaTypeAssigner = (movieData, mediaSearch) => {
    })
 }
 /////////////////////////
+//CUSTOMSEARCH//////////
+const handleSearch = async(
+  searchType, searchData, renderedPage ) => {
+    const response = await fetch(`https://api.themoviedb.org/3/search/${searchType}?api_key=${apiKey}&language=en-US&query=${searchData}&page=${renderedPage}&include_adult=false`)                                  
+    const data = await response.json()
+    return { 
+      results: data.results,
+      url: response.url,
+      maxPage: data.total_pages }
+  }
+
+////////////////////////
 export { getAllTrendingData, callApiGenreByMediaType, getStreamingData,
   getTrendingByType, getTopMediaAllGenres, getMediaByGenre, nextPageHandler,
-mediaTypeAssigner  }
+  mediaTypeAssigner, handleSearch  }

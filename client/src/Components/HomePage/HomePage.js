@@ -11,7 +11,6 @@ const HomePage = React.memo(() => {
   const [ mediaSearch, setMediaSearch ] = useState('');
   const apiKey = 'b88a57406d9a87698d307358f3e4f4ab';
  useEffect(()=> {
-   console.log('useEffect ran in HomePage...')
     getAllTrendingData(setMovieData)
  }, [])
 

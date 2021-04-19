@@ -85,13 +85,12 @@ const queryTopMediaAllGenres = async (mediaType, voteCount) => {
 }
 
   useEffect(() => {
-    console.log('useEffect ran in footerNavBar...')
     callApiGenreByMediaType('movie', setMovieGenreList)
     callApiGenreByMediaType('tv', setTvGenreList)
     if(currentApiCall !== '') {
-      nextPageHandler(setCurrentApiCall, currentApiCall, renderedPage )
+      nextPageHandler(setCurrentApiCall, currentApiCall, renderedPage, listContext.exportedData )
     }
-  },[renderedPage, currentApiCall ])
+  },[renderedPage, currentApiCall, listContext.exportedData ])
 
   if(showArrow) {
     leftArr = (
