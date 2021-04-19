@@ -12,8 +12,22 @@ const HomePage = React.memo(() => {
   const apiKey = 'b88a57406d9a87698d307358f3e4f4ab';
  useEffect(()=> {
     getAllTrendingData(setMovieData)
+    
+    
  }, [])
 
+ const mediaTypeAssigner = () => {
+   const found = 'media_type';
+   movieData?.forEach((item, array) => {
+    for (const property in item) {
+      if (property === found) {
+        console.log(`${property} found in ${array}`)
+      }
+    }
+   })
+  console.log(movieData)
+}
+mediaTypeAssigner();
  let pathType
  let imagePath = (path, item) => {
    if (path === null) {
@@ -41,10 +55,11 @@ console.log('homepage rendered...')
           mediaId={item.id}
           countryOrigin={item.origin_country}
           apiKey={apiKey}
-          mediaType={item.mediaType}
+          mediaType={item.mediaType || item.media_type}
           mediaSearch={mediaSearch}
           pathType={pathType} />
         })}
+        {/* media type and media search are in conflict. create an absolute path */}
       </div>
       <listContext.Provider value={{exportedData: setMovieData,
          mediaSearch: mediaSearch, setMediaSearch: setMediaSearch}}>

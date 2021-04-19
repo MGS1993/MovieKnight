@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./MovieCell.module.css";
 import { AiOutlineStar } from "react-icons/ai";
 import MiscInfo from './MiscInfo/MiscInfo';
+import { getStreamingData } from '../../Util/apiCalls';
 const MovieCell = React.memo( function MemoCell(props) {
   let [clickedLarger, setClickedLarger] = useState(false);
   const [ streamingServices, setStreamingServices ] = useState('')
@@ -14,33 +15,14 @@ const MovieCell = React.memo( function MemoCell(props) {
   props.yearReleased === undefined
     ? (releaseRender = null)
     : (releaseRender = <div>Release Date {props.yearReleased}</div>);
-  // console.log(streamingServices)
-  // console.log(props.mediaType)
+
     useEffect(() => {
-      const getStreamingData = async() => {
-        if (props.mediaSearch === 'movie') {
-          try {
-            const response = await fetch(` https://api.themoviedb.org/3/movie/${props.mediaId}/watch/providers?api_key=${props.apiKey}`)
-            const data = await response.json();
-            const item = data
-            setStreamingServices(item)
-          }catch(err) {
-            console.log(err)
-          } } 
-        if (props.mediaSearch === 'tv') {
-          try {
-            const response = await fetch(` https://api.themoviedb.org/3/tv/${props.mediaId}/watch/providers?api_key=${props.apiKey}`)
-            const data = await response.json();
-            const item = data
-            setStreamingServices(item)
-          }catch(err) {
-            console.log(err)
-          }
-          
-        }
-      }
-      getStreamingData()
-    }, [props.apiKey, props.mediaId, props.mediaSearch])
+      getStreamingData(
+        props.mediaSearch === "" ? props.mediaType : props.mediaSearch,
+        props.mediaId,
+        setStreamingServices
+      );
+    }, [props.mediaId, props.mediaSearch, props.mediaType]);
 
     if (props.pathType === 'poster') {
       movieImageAppendedStyle = {
@@ -70,7 +52,8 @@ const MovieCell = React.memo( function MemoCell(props) {
           {releaseRender}
           <div className={styles.largeBio}>{props.bio}</div>
           <MiscInfo streamingServices={streamingServices}
-            mediaType={props.mediaType} />
+            mediaType={props.mediaType } 
+            />
         </div>
       </React.Fragment>
     );

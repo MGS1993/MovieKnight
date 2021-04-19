@@ -85,6 +85,7 @@ const queryTopMediaAllGenres = async (mediaType, voteCount) => {
 }
 
   useEffect(() => {
+    console.log('useEffect ran in footerNavBar...')
     callApiGenreByMediaType('movie', setMovieGenreList)
     callApiGenreByMediaType('tv', setTvGenreList)
     if(currentApiCall !== '') {
