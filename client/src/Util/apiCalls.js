@@ -66,35 +66,40 @@ const callApiGenreByMediaType = async(mediaType, setState, e) => {
   }
 }
 
-const nextPageHandler = async(setCurrentApiCall,currentApiCall, renderedPage,
-   mediaSearch, exportedData) => {
-    setCurrentApiCall(currentApiCall.replace(`page=1`, `page=${renderedPage}`))
-     try {
-      const response = await fetch(currentApiCall);
-      const data = await response.json();
-      data.results.forEach(item => {
-        item['mediaType'] = mediaSearch
-      })
-      exportedData(data.results)
-      
-     }catch(err){
-      console.log(err)
-      
-     }
-   }
+const nextPageHandler = async (
+  setCurrentApiCall,
+  currentApiCall,
+  renderedPage
+) => {
+  console.log("next page handler ran...");
+  setCurrentApiCall(currentApiCall.replace(`page=1`, `page=${renderedPage}`));
+};
 /////////////////////////
 
 //MOVIECELL//////////////
-const getStreamingData = async(mediaSearch, mediaId, setState) => {
+const getStreamingData = async(mediaType, mediaId, setState) => {
   try {
-    const response = await fetch(` https://api.themoviedb.org/3/${mediaSearch}/${mediaId}/watch/providers?api_key=${apiKey}`)
+    const response = await fetch(` https://api.themoviedb.org/3/${mediaType}/${mediaId}/watch/providers?api_key=${apiKey}`)
     const data = await response.json();
     setState(data)
   } catch(err) {
     console.log(err)
-    console.log('test')
   }
+}
+
+const mediaTypeAssigner = (movieData, mediaSearch) => {
+  let modData = [...movieData]
+   modData.forEach(async(item, array) => {
+     
+     if(item.media_type === undefined) {
+       console.log('item does not contain media_type. Modifying state...')
+       item['media_type'] = mediaSearch
+     } else {
+       console.log('does contain media_type')
+     }
+   })
 }
 /////////////////////////
 export { getAllTrendingData, callApiGenreByMediaType, getStreamingData,
-  getTrendingByType, getTopMediaAllGenres, getMediaByGenre, nextPageHandler  }
+  getTrendingByType, getTopMediaAllGenres, getMediaByGenre, nextPageHandler,
+mediaTypeAssigner  }

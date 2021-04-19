@@ -89,10 +89,9 @@ const queryTopMediaAllGenres = async (mediaType, voteCount) => {
     callApiGenreByMediaType('movie', setMovieGenreList)
     callApiGenreByMediaType('tv', setTvGenreList)
     if(currentApiCall !== '') {
-      nextPageHandler(setCurrentApiCall, currentApiCall, renderedPage, 
-        listContext.mediaSearch, listContext.exportedData)
+      nextPageHandler(setCurrentApiCall, currentApiCall, renderedPage )
     }
-  },[renderedPage, currentApiCall, listContext.exportedData, listContext.mediaSearch])
+  },[renderedPage, currentApiCall ])
 
   if(showArrow) {
     leftArr = (

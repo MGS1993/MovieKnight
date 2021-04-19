@@ -17,12 +17,9 @@ const MovieCell = React.memo( function MemoCell(props) {
     : (releaseRender = <div>Release Date {props.yearReleased}</div>);
 
     useEffect(() => {
-      getStreamingData(
-        props.mediaSearch === "" ? props.mediaType : props.mediaSearch,
-        props.mediaId,
-        setStreamingServices
-      );
-    }, [props.mediaId, props.mediaSearch, props.mediaType]);
+      //THIS IS THE CAUSE OF THE INITIAL RE RENDER
+      getStreamingData(props.mediaType, props.mediaId, setStreamingServices);
+    }, [props.mediaType, props.mediaId ]);
 
     if (props.pathType === 'poster') {
       movieImageAppendedStyle = {
