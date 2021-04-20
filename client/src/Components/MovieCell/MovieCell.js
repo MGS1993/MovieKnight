@@ -3,6 +3,7 @@ import styles from "./MovieCell.module.css";
 import { AiOutlineStar } from "react-icons/ai";
 import MiscInfo from './MiscInfo/MiscInfo';
 import { getStreamingData } from '../../Util/apiCalls';
+
 const MovieCell = React.memo( function MemoCell(props) {
   let [clickedLarger, setClickedLarger] = useState(false);
   const [ streamingServices, setStreamingServices ] = useState('')
@@ -16,17 +17,22 @@ const MovieCell = React.memo( function MemoCell(props) {
     ? (releaseRender = null)
     : (releaseRender = <div>Release Date {props.yearReleased}</div>);
 
+  
     useEffect(() => {
       getStreamingData(props.mediaType, props.mediaId, setStreamingServices);
     }, [props.mediaType, props.mediaId ]);
 
-    if (props.pathType === 'poster') {
-      movieImageAppendedStyle = {
-        width: 'auto',
-        height: '100%',
-        margin: '0 auto'
-      }
+    useEffect(() => {
+      setClickedLarger(false)
+    },[ props.movieData ])
+
+  if (props.pathType === 'poster') {
+    movieImageAppendedStyle = {
+      width: 'auto',
+      height: '100%',
+      margin: '0 auto'
     }
+  }
   if (clickedLarger === true && mq.matches) {
     renderedCell = (
       <React.Fragment>

@@ -6,7 +6,7 @@ import FooterNavBar from '../FooterNavBar/FooterNavBar';
 import listContext from '../context/listContext';
 import { getAllTrendingData, mediaTypeAssigner } from '../../Util/apiCalls';
 const HomePage = React.memo(() => {
-  const [movieData, setMovieData] = useState(null)
+  const [ movieData, setMovieData ] = useState(null)
   const [ mediaSearch, setMediaSearch ] = useState('');
   const apiKey = 'b88a57406d9a87698d307358f3e4f4ab';
  useEffect(()=> {
@@ -14,7 +14,6 @@ const HomePage = React.memo(() => {
  }, [])
 
 if ( movieData !== null ) { mediaTypeAssigner(movieData, mediaSearch)} 
-
 
  let pathType
  let imagePath = (path, item) => {
@@ -30,7 +29,6 @@ if ( movieData !== null ) { mediaTypeAssigner(movieData, mediaSearch)}
     <div className={styles.homePageLayout}>
       <HomePageHeader />
       <div className={styles.movieCellWrapper}>
-        {/*optional chaining */}
         {movieData?.map((item, index) => {
           return <MovieCell
           key={index}
@@ -43,7 +41,8 @@ if ( movieData !== null ) { mediaTypeAssigner(movieData, mediaSearch)}
           countryOrigin={item.origin_country}
           apiKey={apiKey}
           mediaType={item.media_type}
-          pathType={pathType} />
+          pathType={pathType}
+          movieData={movieData} />
         })}
       </div>
       <listContext.Provider value={{exportedData: setMovieData,
