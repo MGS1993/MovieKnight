@@ -8,7 +8,7 @@ import NavSearch from '../NavSearch/NavSearch';
 import expandedContext from '../context/expandedNavContext';
 import {
   getTrendingByType, getTopMediaAllGenres, getMediaByGenre,
-  callApiGenreByMediaType, nextPageHandler
+  callApiGenreByMediaType, nextPageStateHandler
 } from "../../Util/apiCalls";
 const FooterNavBar = React.memo(props => {
   const [ expandedNav, setExpandedNav ] = useState(false)
@@ -38,23 +38,23 @@ const FooterNavBar = React.memo(props => {
     }
   }
  
-  const queryMediaBySelectedGenre = async (e, mediaType, voteCount) => {
-    listContext.setMediaSearch(mediaType)
-      if(renderedPage !== 1) {
-        setRenderedPage(1)
-        let funcData = await getMediaByGenre(e, mediaType, voteCount, 1); 
-        setMaxPages(funcData.data.total_pages)
-        setCurrentApiCall(funcData.url)
-        listContext.exportedData(funcData.data.results)
-      } else {
-        let funcData = await getMediaByGenre(e, mediaType, voteCount, renderedPage);
-        setMaxPages(funcData.data.total_pages)
-        setCurrentApiCall(funcData.url)
-        listContext.exportedData(funcData.data.results)
-      }
-      setExpandedNav(!expandedNav)
-      setMediaNav('root')
-      setShowArrow(true)
+const queryMediaBySelectedGenre = async (e, mediaType, voteCount) => {
+  listContext.setMediaSearch(mediaType)
+    if(renderedPage !== 1) {
+      setRenderedPage(1)
+      let funcData = await getMediaByGenre(e, mediaType, voteCount, 1); 
+      setMaxPages(funcData.data.total_pages)
+      setCurrentApiCall(funcData.url)
+      listContext.exportedData(funcData.data.results)
+    } else {
+      let funcData = await getMediaByGenre(e, mediaType, voteCount, renderedPage);
+      setMaxPages(funcData.data.total_pages)
+      setCurrentApiCall(funcData.url)
+      listContext.exportedData(funcData.data.results)
+    }
+    setExpandedNav(!expandedNav)
+    setMediaNav('root')
+    setShowArrow(true)
 }
 const queryTrendingMedia = async(mediaType) => {
   listContext.setMediaSearch(mediaType)
@@ -87,11 +87,15 @@ const queryTopMediaAllGenres = async (mediaType, voteCount) => {
   useEffect(() => {
     callApiGenreByMediaType('movie', setMovieGenreList)
     callApiGenreByMediaType('tv', setTvGenreList)
+    // if(currentApiCall !== '') {
+    //   nextPageHandler(setCurrentApiCall, currentApiCall, renderedPage, listContext.exportedData )
+    // }
+  },[/*renderedPage, currentApiCall, listContext.exportedData*/ ])
+  useEffect(() => {
     if(currentApiCall !== '') {
-      nextPageHandler(setCurrentApiCall, currentApiCall, renderedPage, listContext.exportedData )
+      nextPageStateHandler(currentApiCall, listContext.exportedData )
     }
-  },[renderedPage, currentApiCall, listContext.exportedData ])
-
+  }, [currentApiCall, listContext.exportedData])
   if(showArrow) {
     leftArr = (
     <NavArrow arrowDir='left' apiKey={props.apiKey} 

@@ -62,18 +62,13 @@ const callApiGenreByMediaType = async(mediaType, setState, e) => {
   }
 }
 
-const nextPageHandler = async (
-  setCurrentApiCall, currentApiCall,
-  renderedPage, exportedData
-) => {
+const nextPageStateHandler = async ( currentApiCall, exportedData ) => {
   console.log("next page handler ran...");
-  
   try {
-    setCurrentApiCall(currentApiCall.replace(`page=1`, `page=${renderedPage}`));
     const response = await fetch(currentApiCall);
     const data = await response.json();
+    console.log(data)
     exportedData(data.results)
-    
    }catch(err){
     console.log(err)
    }
@@ -117,5 +112,5 @@ const handleSearch = async(
 
 ////////////////////////
 export { getAllTrendingData, callApiGenreByMediaType, getStreamingData,
-  getTrendingByType, getTopMediaAllGenres, getMediaByGenre, nextPageHandler,
+  getTrendingByType, getTopMediaAllGenres, getMediaByGenre, nextPageStateHandler,
   mediaTypeAssigner, handleSearch  }

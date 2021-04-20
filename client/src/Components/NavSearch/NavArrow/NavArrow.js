@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./NavArrow.module.css";
 import { IoMdPlay } from "react-icons/io";
+
 const NavArrow = props => {
  const [ timePause, setTimePause ] = useState(false); 
  let rendered;
@@ -8,6 +9,7 @@ const NavArrow = props => {
     //'let' instead of 'const' to modify content based on timePause
   let nextPage = () => {
     //Infinite loop on 10th page.
+    console.log('next page ran in NavArrow')
     setTimePause(true);
     if (props.renderedPage <= 8 && props.renderedPage < props.maxPages) {
         //second argument prevents loading a page that isn't there.
@@ -38,6 +40,7 @@ const NavArrow = props => {
         )
       );
     }
+    
   };
   if(timePause === true) {
     nextPage = null;
