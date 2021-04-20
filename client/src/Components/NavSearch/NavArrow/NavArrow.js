@@ -6,10 +6,9 @@ const NavArrow = props => {
  const [ timePause, setTimePause ] = useState(false); 
  let rendered;
  let rotateLeftStyle = { transform: "rotate(180deg" };
-    //'let' instead of 'const' to modify content based on timePause
+  //'let' instead of 'const' to modify content based on timePause
   let nextPage = () => {
     //Infinite loop on 10th page.
-    console.log('next page ran in NavArrow')
     setTimePause(true);
     if (props.renderedPage <= 8 && props.renderedPage < props.maxPages) {
         //second argument prevents loading a page that isn't there.
@@ -29,9 +28,6 @@ const NavArrow = props => {
     if (props.renderedPage <= 1) {
       return null;
     } else {
-      ////WE ALMOST HAVE THIS IN THE BAG. FOCUS ON NAVARROW AND API CALLS. 
-      //LOOKS LIKE NEXTPAGE HANDLER AND THE FUNCTIONS HERE ARE DOING THE SAME THING.
-      //MIGHT BE CASUING CONFLICTS BUT THIS IS DEFINITELY THE RIGHT THING TO FOCUS ON
       props.setRenderedPage(currPage => currPage -1);
       props.setCurrentApiCall(
         props.currentApiCall.replace(
@@ -47,7 +43,6 @@ const NavArrow = props => {
     prevPage = null;
 }
     const shiftNext = () => {
-        //optional chaining('?.') skips nextPage() if it's undefined or null
         nextPage?.();
         setTimeout(() => {
             setTimePause(false)

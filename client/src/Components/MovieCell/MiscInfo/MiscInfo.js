@@ -5,7 +5,6 @@ import styles from './MiscInfo.module.css';
 const MiscInfo = (props) => {
   let results = props.streamingServices.results
   let masterLogo = {}
-  // console.log(results)
     if ( results === undefined || props.streamingServices.results.US === undefined || props.streamingServices.results.US.flatrate === undefined) {
       masterLogo.stream = null
     } else {

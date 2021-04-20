@@ -5,7 +5,6 @@ import MovieCell from '../MovieCell/MovieCell';
 import FooterNavBar from '../FooterNavBar/FooterNavBar';
 import listContext from '../context/listContext';
 import { getAllTrendingData, mediaTypeAssigner } from '../../Util/apiCalls';
-// import { getMediaType } from '../../Util/apiCalls';
 const HomePage = React.memo(() => {
   const [movieData, setMovieData] = useState(null)
   const [ mediaSearch, setMediaSearch ] = useState('');
@@ -27,7 +26,6 @@ if ( movieData !== null ) { mediaTypeAssigner(movieData, mediaSearch)}
      return item.backdrop_path
    }
  }
-console.log('%cHOMEPAGE RENDERED...', 'color: red')
   return(
     <div className={styles.homePageLayout}>
       <HomePageHeader />
