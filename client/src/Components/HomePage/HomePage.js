@@ -8,7 +8,6 @@ import { getAllTrendingData, mediaTypeAssigner } from '../../Util/apiCalls';
 const HomePage = React.memo(() => {
   const [ movieData, setMovieData ] = useState(null)
   const [ mediaSearch, setMediaSearch ] = useState('');
-  const apiKey = 'b88a57406d9a87698d307358f3e4f4ab';
  useEffect(()=> {
     getAllTrendingData(setMovieData)
  }, [])
@@ -25,32 +24,38 @@ if ( movieData !== null ) { mediaTypeAssigner(movieData, mediaSearch)}
      return item.backdrop_path
    }
  }
-  return(
+  return (
     <div className={styles.homePageLayout}>
       <HomePageHeader />
       <div className={styles.movieCellWrapper}>
         {movieData?.map((item, index) => {
-          return <MovieCell
-          key={index}
-          title={item.title || item.name}
-          image={imagePath(item.backdrop_path, item)}
-          score={item.vote_average}
-          bio={item.overview}
-          yearReleased={item.release_date}
-          mediaId={item.id}
-          countryOrigin={item.origin_country}
-          apiKey={apiKey}
-          mediaType={item.media_type}
-          pathType={pathType}
-          movieData={movieData} />
+          return (
+            <MovieCell
+              key={index}
+              title={item.title || item.name}
+              image={imagePath(item.backdrop_path, item)}
+              score={item.vote_average}
+              bio={item.overview}
+              yearReleased={item.release_date}
+              mediaId={item.id}
+              countryOrigin={item.origin_country}
+              mediaType={item.media_type}
+              pathType={pathType}
+              movieData={movieData}
+            />
+          );
         })}
       </div>
-      <listContext.Provider value={{exportedData: setMovieData,
-         mediaSearch: mediaSearch, setMediaSearch: setMediaSearch}}>
-      <FooterNavBar apiKey={apiKey} mediaSearch={mediaSearch} setMediaSearch={setMediaSearch} />
+      <listContext.Provider
+        value={{ exportedData: setMovieData, setMediaSearch: setMediaSearch }}
+      >
+        <FooterNavBar
+          mediaSearch={mediaSearch}
+          setMediaSearch={setMediaSearch}
+        />
       </listContext.Provider>
     </div>
-  )
+  );
 })
 
 export default HomePage

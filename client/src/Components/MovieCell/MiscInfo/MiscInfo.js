@@ -1,54 +1,53 @@
 import React from 'react';
+import MiscIcon from '../MiscIcon/MiscIcon';
 import styles from './MiscInfo.module.css';
 
 
 const MiscInfo = (props) => {
   let results = props.streamingServices.results
   let masterLogo = {}
-    if ( results === undefined || props.streamingServices.results.US === undefined || props.streamingServices.results.US.flatrate === undefined) {
+    if ( results === undefined || 
+      results.US === undefined || results.US.flatrate === undefined) {
       masterLogo.stream = null
     } else {
-      masterLogo.stream = <img className={styles.streamLogos}
-            src={'https://image.tmdb.org/t/p/w92/' + props.streamingServices.results?.US?.flatrate[0]?.logo_path} alt="logo" />
-     
+      masterLogo.stream = results.US.flatrate;
     }
-    if ( results === undefined || props.streamingServices.results.US === undefined || props.streamingServices.results.US.buy === undefined  ) {
+
+    if ( results === undefined || 
+      results.US === undefined || results.US.buy === undefined  ) {
       masterLogo.buy = null
     } else {
-      
-      masterLogo.buy = 
-      <img className={styles.streamLogos}
-      src={'https://image.tmdb.org/t/p/w92/' + props.streamingServices.results?.US?.buy[0]?.logo_path} alt="logo" />
+
+      masterLogo.buy = results.US.buy;
     }
-    if ( results === undefined || props.streamingServices.results.US === undefined || props.streamingServices.results.US.rent === undefined  ) {
+    if ( results === undefined || 
+      results.US === undefined || results.US.rent === undefined  ) {
       masterLogo.rent = null
     } else {
-      masterLogo.rent = 
-      <img className={styles.streamLogos}
-            src={'https://image.tmdb.org/t/p/w92/' + props.streamingServices.results?.US?.rent[0]?.logo_path} alt="logo" />
+      masterLogo.rent = results.US.rent
     }
 
   return (
     <div className={styles.mainWrapper}>
-      {masterLogo.buy !== undefined ? <div>
-        {masterLogo.buy !== null ? <h3>Buy</h3> : null}
-        <div className={styles.iconWrapper}>
-         {masterLogo.buy}
+      {masterLogo.buy !== null ? (
+        <div>
+           <h3>Buy</h3>
+          <div className={styles.iconWrapper}><MiscIcon logo={masterLogo.buy} /></div>
         </div>
-      </div> : null}
-      {masterLogo.rent !== undefined ? <div>
-        {masterLogo.rent !== null ? <h3>Rent</h3> : null}
-        <div className={styles.iconWrapper}>
-          {masterLogo.rent}
+      ) : null}
+      {masterLogo.rent !== null ? (
+        <div>
+          <h3>Rent</h3>
+          <div className={styles.iconWrapper}><MiscIcon logo={masterLogo.rent} /></div>
         </div>
-      </div> : null}
+      ) : null}
 
-      {masterLogo.stream !== undefined ? <div>
-        {masterLogo.stream !==null ? <h3>Stream</h3> : null}
-        <div className={styles.iconWrapper}>
-          {masterLogo.stream}
+      {masterLogo.stream !== null ? (
+        <div>
+           <h3>Stream</h3>
+          <div className={styles.iconWrapper}><MiscIcon logo={masterLogo.stream} /></div>
         </div>
-      </div> : null}
+      ) : null}
     </div>
   );
 };
