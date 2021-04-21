@@ -99,7 +99,8 @@ const MovieCell = React.memo( function MemoCell(props) {
       transition: ".9s ease-out",
       color: "white",
       textAlign: "center",
-      height: "auto"
+      height: "auto",
+      overflow: 'hidden'
     };
   } else {
     renderedCell = (
