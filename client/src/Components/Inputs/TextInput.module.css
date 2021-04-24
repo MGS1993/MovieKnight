@@ -1,0 +1,9 @@
+.mainInputWrapper {
+  margin: 20px 0px;
+}
+input {
+  margin: 10px 0px;
+  border: 1px solid #ccc;
+  padding: 6px 5px;
+  font-size: 16px;
+}

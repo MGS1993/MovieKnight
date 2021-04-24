@@ -5,9 +5,11 @@ import MovieCell from '../MovieCell/MovieCell';
 import FooterNavBar from '../FooterNavBar/FooterNavBar';
 import listContext from '../context/listContext';
 import { getAllTrendingData, mediaTypeAssigner } from '../../Util/apiCalls';
+import Login from '../profile/Login/Login';
 const HomePage = React.memo(() => {
   const [ movieData, setMovieData ] = useState(null)
   const [ mediaSearch, setMediaSearch ] = useState('');
+  const [ showLogin, setShowLogin ] = useState(false);
  useEffect(()=> {
     getAllTrendingData(setMovieData)
  }, [])
@@ -24,10 +26,12 @@ if ( movieData !== null ) { mediaTypeAssigner(movieData, mediaSearch)}
      return item.backdrop_path
    }
  }
+
   return (
     <div className={styles.homePageLayout}>
-      <HomePageHeader />
+      <HomePageHeader clicked={(e) => setShowLogin(!showLogin)} />
       <div className={styles.movieCellWrapper}>
+      {showLogin ? <Login /> : null}
         {movieData?.map((item, index) => {
           return (
             <MovieCell

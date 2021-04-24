@@ -1,0 +1,34 @@
+.loginMainWrapper {
+  height: auto;
+  width: 250px;
+  background-color: #022249;
+  position: fixed;
+  align-self: center;
+  z-index: 2;
+  padding: 10px 15px;
+  color: #f07b40;
+  font-weight: bold;
+  border-radius: 3px;
+}
+
+.header {
+  margin: 25px;
+  border-bottom: 1px solid #683216;
+}
+.header > h2 {
+  margin: 0;
+}
+
+button {
+  border: 1px solid #683216;
+  padding: 8px;
+  width: 100%;
+  margin: 5px 0px;
+  background-color: #f07b40;
+  font-weight: bold;
+  color: #022249;
+  font-size: 15px;
+}
+.errorText {
+  color: red;
+}

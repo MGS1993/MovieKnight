@@ -12,3 +12,12 @@
   font-weight: bold;
   font-family: 'Oswald', 'sans-serif';
 }
+.loginText {
+  position: absolute;
+  left: 0;
+  padding-left: 10px;
+}
+
+.loginText:hover {
+  cursor: pointer;
+}
