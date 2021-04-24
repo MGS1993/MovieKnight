@@ -33,7 +33,9 @@
     align-items: center;
     transition: width .5s ease-in-out;
     padding: 0px 5px;
+    justify-content: center;
   }
+  
 }
 .largeMovieImageWrapper {
   width: 100%;
@@ -54,6 +56,16 @@
   transition: .5s ease;
   color: white;
   max-height: 100%;
+}
+@media only screen and (min-width: 768px) {
+  .movieImage {
+    height: auto;
+    width: auto;
+    transition: .5s ease;
+    color: white;
+    max-height: 100%;
+  }
+  
 }
 .largeMovieImage {
   height: auto;
@@ -107,6 +119,7 @@
 @media only screen and (min-width: 768px) {
   .largeBio {
     overflow: hidden;
+    height: auto;
   }
 }
 .titleScore {

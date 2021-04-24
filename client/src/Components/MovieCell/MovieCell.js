@@ -61,7 +61,7 @@ const MovieCell = React.memo( function MemoCell(props) {
     );
     mainWrapperAppendedStyle = {
       height: "700px",
-      backgroundColor: "rgb(77, 64, 42)",
+      // backgroundColor: "rgb(77, 64, 42)",
       flexDirection: "column",
       transition: ".9s ease-out",
       color: "white",
