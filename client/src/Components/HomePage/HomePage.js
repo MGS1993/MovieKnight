@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, /*useContext*/ } from 'react'
 import styles from './HomePage.module.css';
 import HomePageHeader from './HomePageHeader/HomePageHeader';
 import MovieCell from '../MovieCell/MovieCell';
@@ -6,10 +6,12 @@ import FooterNavBar from '../FooterNavBar/FooterNavBar';
 import listContext from '../context/listContext';
 import { getAllTrendingData, mediaTypeAssigner } from '../../Util/apiCalls';
 import Login from '../profile/Login/Login';
+// import routerContext from '../context/routerContext';
 const HomePage = React.memo(() => {
   const [ movieData, setMovieData ] = useState(null)
   const [ mediaSearch, setMediaSearch ] = useState('');
   const [ showLogin, setShowLogin ] = useState(false);
+  
  useEffect(()=> {
     getAllTrendingData(setMovieData)
  }, [])

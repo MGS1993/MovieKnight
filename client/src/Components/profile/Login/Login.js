@@ -35,6 +35,7 @@ const Login = props => {
         localStorage.setItem('user', data.user.userName)
         props.setShowLogin(false)
       }
+      window.location.reload();
     }catch(err) {
       console.log(err)
     }
