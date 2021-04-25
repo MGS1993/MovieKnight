@@ -1,0 +1,15 @@
+.mainWrapper {
+  position: relative;
+  height: 35px;
+  width: 35px;
+  left: 30px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.icon {
+  width: auto;
+  height: 35px;
+  margin: auto;
+}

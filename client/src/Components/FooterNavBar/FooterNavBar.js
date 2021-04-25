@@ -6,6 +6,8 @@ import ListContext from '../context/listContext';
 import NavArrow from '../NavSearch/NavArrow/NavArrow';
 import NavSearch from '../NavSearch/NavSearch';
 import expandedContext from '../context/expandedNavContext';
+import ProfileIcon from '../profile/ProfileIcon/ProfileIcon';
+import routerContext from '../context/routerContext';
 import {
   getTrendingByType, getTopMediaAllGenres, getMediaByGenre,
   callApiGenreByMediaType, nextPageStateHandler
@@ -14,6 +16,7 @@ const FooterNavBar = React.memo(props => {
   const [ expandedNav, setExpandedNav ] = useState(false)
   const [ movieGenreList, setMovieGenreList ] = useState('');
   const listContext = useContext(ListContext)
+  const routerState = useContext(routerContext);
   const [ mediaNav, setMediaNav ] = useState('root')
   const [ tvGenreList, setTvGenreList ] = useState('')
   const [ showArrow, setShowArrow ] = useState(false)
@@ -114,6 +117,7 @@ const queryTopMediaAllGenres = async (mediaType, voteCount) => {
   return(
     <div style={expandedStyle} className={styles.navBarWrapper}>
       {expandedNav ? null: leftArr}
+      {routerState.loggedIn && expandedNav === false ? <ProfileIcon /> : null}
       <expandedContext.Provider value={{setExpandedNav: setExpandedNav, 
         renderedPage: renderedPage, setRenderedPage: setRenderedPage,
         currentApiCall: currentApiCall, setCurrentApiCall: setCurrentApiCall,

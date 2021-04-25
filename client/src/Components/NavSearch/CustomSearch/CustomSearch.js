@@ -39,6 +39,7 @@ const expanded = useContext(expandedContext)
       <SearchBar searchData={searchData} 
       setSearchData={setSearchData}
       clickedSearchHandler={clickedSearchHandler}  />
+      {/* add button back in desktop view */}
       {/* <button className={styles.submitBtn} 
       onClick={clickedSearchHandler}>Submit</button> */}
     </div>

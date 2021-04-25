@@ -94,7 +94,6 @@ const Login = props => {
           inputName='password'
           value={password}
           changed={(e) => setPassword(e.target.value)} />
-
           <button className={styles.btn} onClick={(e) => handleLogin(e)}>Login</button>
         </form>
         <div className={styles.registerLink}>
@@ -117,7 +116,6 @@ const Login = props => {
           inputName="user"
           value={registerUserName}
           changed={(e) => setRegisterUserName(e.target.value)} />
-
           <TextInput
           labelName="Password"
           inputType='password'

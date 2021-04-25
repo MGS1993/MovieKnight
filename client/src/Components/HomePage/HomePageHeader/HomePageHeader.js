@@ -3,7 +3,6 @@ import styles from './HomePageHeader.module.css';
 import routerContext from '../../context/routerContext';
 const HomePageHeader = props => {
   const routerState = useContext(routerContext);
-  console.log(routerState)
   return (
     <div className={styles.headerWrapper}>
       {routerState.loggedIn ? (

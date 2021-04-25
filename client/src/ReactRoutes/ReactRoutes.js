@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import routerContext from '../Components/context/routerContext';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import HomePage from '../Components/HomePage/HomePage';
+import Profile from '../Components/profile/Profile';
 
 const ReactRouter = () => {
   const [ loggedIn, setLoggedIn ] = useState(false);
@@ -29,6 +30,7 @@ const ReactRouter = () => {
       <routerContext.Provider 
         value={{currentUser, handleLogout, loggedIn, setLoggedIn}}>
         <Route exact path ='/' component={HomePage} />
+        <Route exact path ='/profile' component={Profile} />
       </routerContext.Provider>
     </Switch>
     </BrowserRouter>
