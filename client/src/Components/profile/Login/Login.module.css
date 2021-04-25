@@ -19,7 +19,7 @@
   margin: 0;
 }
 
-button {
+.btn {
   border: 1px solid #683216;
   padding: 8px;
   width: 100%;
@@ -31,4 +31,11 @@ button {
 }
 .errorText {
   color: red;
+  opacity: 1;
+  animation: fadeOut 2s forwards;
+  animation-delay: 3s;
+}
+@keyframes fadeOut {
+  from {opacity: 1;}
+  to {opacity: 0;}
 }

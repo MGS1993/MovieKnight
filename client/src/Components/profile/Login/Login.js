@@ -12,10 +12,6 @@ const Login = props => {
   const [ errmsg, setErrmsg ] = useState('');
   let rendered
   const handleLogin = async (e) => {
-    /* WE GOT A LOT WORKING. WE GOT ERROR MESSAGES ON REGISTER MODULE
-    ADD ERRORS TO LOGIN MODULE. ALSO THE LAST THING WE DID WAS FIGURE OUT
-    LOCAL STORAGE. USE THAT TO HAVE A PERSON LOGGED IN WITH A CHECKER FUNC
-    LIKE ON PAY.ME */
     try {
       e.preventDefault()
       let dataBody = {
@@ -31,42 +27,50 @@ const Login = props => {
       })
       const data = await response.json()
       
+      if (response.status === 400 ) {
+        setErrmsg(data.msg)
+      }
+
       if(response.status === 200) {
         localStorage.setItem('user', data.user.userName)
-        console.log('sucess!')
-  
+        props.setShowLogin(false)
       }
-      console.log(data.user.userName)
     }catch(err) {
       console.log(err)
     }
   }
 
   const handleRegister = async (e) => {
-    e.preventDefault()
-    let dataBody = {
-     userName: registerUserName,
-     passWord: registerPassWord1,
-     passWordCheck: registerPassWord2,
-    }
-    const response = await fetch(`/api/create_user`, {
-      method: 'POST',
-      body: JSON.stringify(dataBody),
-      headers: {
-        'Content-Type': 'application/json'
+    try {
+      e.preventDefault()
+      let dataBody = {
+       userName: registerUserName,
+       passWord: registerPassWord1,
+       passWordCheck: registerPassWord2,
       }
-    }) 
-    const data = await response.json();
-    if (response.status === 400 ) {
-      setErrmsg(data.msg)
+     
+      const response = await fetch('api/create_user', {
+        method: 'POST',
+        body: JSON.stringify(dataBody),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }) 
+      const data = await response.json();
+
+      if (response.status === 400 ) {
+        setErrmsg(data.msg)
+      }
+      setRegisterUserName('');
+      setRegisterPassWord1('');
+      setRegisterPassWord2('');
+
+      if (response.status === 200) {
+        setModuleRender('login');
+      }
+    } catch(err) {
+      console.log(err)
     }
-    setRegisterUserName('');
-    setRegisterPassWord1('');
-    setRegisterPassWord2('');
-    // setModuleRender('login');
-      
-
-
   }
   if (moduleRender === 'login') {
     rendered = (
@@ -74,6 +78,7 @@ const Login = props => {
         <div className={styles.header}>
           <h2>Log in</h2>
         </div>
+        {errmsg !== '' ? <p className={`${styles.errorText} ${styles.fadeOut}`}>{errmsg}</p> : ''}
         <form>
         <TextInput
           labelName="User"
@@ -89,10 +94,11 @@ const Login = props => {
           value={password}
           changed={(e) => setPassword(e.target.value)} />
 
-          <button onClick={(e) => handleLogin(e)}>Login</button>
+          <button className={styles.btn} onClick={(e) => handleLogin(e)}>Login</button>
         </form>
         <div className={styles.registerLink}>
-          <button onClick={() => setModuleRender('register')}>Register</button>
+          <button className={styles.btn} 
+          onClick={() => setModuleRender('register')}>Register</button>
         </div>
       </div>
     )
@@ -124,7 +130,7 @@ const Login = props => {
           value={registerPassWord2}
           changed={(e) => setRegisterPassWord2(e.target.value)} />
 
-          <button onClick={(e) => handleRegister(e)}>Register</button>
+          <button className={styles.btn} onClick={(e) => handleRegister(e)}>Register</button>
         </form>
       </div>
     )

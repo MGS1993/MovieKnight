@@ -31,7 +31,7 @@ if ( movieData !== null ) { mediaTypeAssigner(movieData, mediaSearch)}
     <div className={styles.homePageLayout}>
       <HomePageHeader clicked={(e) => setShowLogin(!showLogin)} />
       <div className={styles.movieCellWrapper}>
-      {showLogin ? <Login /> : null}
+      {showLogin ? <Login setShowLogin={setShowLogin} /> : null}
         {movieData?.map((item, index) => {
           return (
             <MovieCell

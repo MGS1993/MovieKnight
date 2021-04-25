@@ -3,13 +3,20 @@ const bcrypt = require("bcrypt");
 
 
 exports.login = async (req, res, next) => {
-  console.log(req.body)
+  
   try {
-    const user = await userModel.findOne({userName: req.body.userName.trim()})
+    const {userName, passWord } = req.body;
+    const user = await userModel.findOne({userName: userName.trim()})
+    if ( userName === '' || passWord === '' ) {
+      return res
+      .status(400)
+      .json({msg: 'Not all fields have been entered.'})
+    }
     if (user === null) {
       return res.status(500).send('Cannot find user.').end()
     }
-    if( await bcrypt.compare(req.body.passWord, user.passWord.trim())) {
+    
+    if( await bcrypt.compare(passWord, user.passWord.trim())) {
       return res
      .send({user})
      .status(200)
@@ -17,7 +24,7 @@ exports.login = async (req, res, next) => {
    } else {
      res.status(500)
      res.send('Not allowed')
-   }
+   } 
   }catch(err) {
     console.log(err)
   }
@@ -46,7 +53,7 @@ try {
           return res
           .status(400)
           .json({msg: "UserName already taken"})
-        }
+        } 
 
   const salt = await bcrypt.genSalt();
   const passwordHash = await bcrypt.hash(passWord, salt);
@@ -57,11 +64,18 @@ try {
       passWord: passwordHash
     }
   )
-  user.save( function(err) {
-    if(err) return next(err)
-    console.log('user added to db')
+  //Lesson: In order to return a status you must als return JSON
+  user.save( await function(err) {
+    if (err) {
+      res.status(500).json({msg: 'Internal server error possibly'})
+    } else {
+      res
+        .json({
+        msg: 'data saved'
+      })
+        .status(200)
+    }
   })
-
 }catch(err) {
   res.status(500)
   console.log(err)
