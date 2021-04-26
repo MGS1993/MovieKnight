@@ -30,6 +30,7 @@ const getTopMediaAllGenres = async (mediaType, voteCount, renderHelper) => {
   try {
     const response = await fetch(`https://api.themoviedb.org/3/discover/${mediaType}?api_key=${apiKey}&language=en-US&sort_by=vote_average.desc&vote_count.gte=${voteCount}&page=${renderHelper}&timezone=America%2FTexas&include_null_first_air_dates=false`)
     const data = await response.json(); 
+    console.log(data)
     return { data: data, url: response.url};
   }catch(err) {
     console.log(err)
