@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import styles from "./MovieCell.module.css";
 import { AiOutlineStar } from "react-icons/ai";
 import MiscInfo from './MiscInfo/MiscInfo';
-import { getStreamingData } from '../../Util/apiCalls';
+import { getStreamingData, getProdStatus } from '../../Util/apiCalls';
+import ProdStatus from './ProdStatus/ProdStatus';
 
 const MovieCell = React.memo( function MemoCell(props) {
   let [clickedLarger, setClickedLarger] = useState(false);
   const [ streamingServices, setStreamingServices ] = useState('')
+  const [ ongoingStatus, setOngoingStatus ] = useState('')
   let mainWrapperAppendedStyle;
   let renderedCell;
   let releaseRender;
@@ -20,6 +22,7 @@ const MovieCell = React.memo( function MemoCell(props) {
   
     useEffect(() => {
       getStreamingData(props.mediaType, props.mediaId, setStreamingServices);
+      getProdStatus(props.mediaId, props.mediaType, setOngoingStatus);
     }, [props.mediaType, props.mediaId ]);
 
     useEffect(() => {
@@ -87,6 +90,7 @@ const MovieCell = React.memo( function MemoCell(props) {
             </div>
           </div>
           {releaseRender}
+          <ProdStatus prodStatus={ongoingStatus}/>
           <div className={styles.largeBio}>{props.bio}</div>
           <MiscInfo streamingServices={streamingServices} />
         </div>

@@ -1,0 +1,18 @@
+.mainWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.textWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+  max-width: 85px;
+  border-radius: 5px;
+}
+.prodStatusText {
+  margin: 0px;
+  font-weight: bold;
+  color: white;
+}
