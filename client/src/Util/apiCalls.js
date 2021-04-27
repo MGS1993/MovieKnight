@@ -99,8 +99,27 @@ const getProdStatus = async (tvId, mediaType, setState) => {
     try {
       const response = await fetch(` https://api.themoviedb.org/3/tv/${tvId}?api_key=${apiKey}&language=en-US`);
       const data = await response.json();
-      console.log(data);
+      // console.log(data)
       setState(data.status);
+    } catch(err) {
+      console.log(err)
+    }
+  } else {
+    return 
+  }
+}
+const getTvData = async (tvId, mediaType, setState ) => {
+  if (mediaType === "tv") {
+    try {
+      const response = await fetch(` https://api.themoviedb.org/3/tv/${tvId}?api_key=${apiKey}&language=en-US`);
+      const data = await response.json();
+      // console.log(data)
+      setState({
+        firstAirDate: data.first_air_date,
+        lastAirDate: data.last_air_date,
+        noEpisodes: data.number_of_episodes,
+        noSeasons: data.number_of_seasons,
+      });
     } catch(err) {
       console.log(err)
     }
@@ -123,4 +142,4 @@ const handleSearch = async(
 ////////////////////////
 export { getAllTrendingData, callApiGenreByMediaType, getStreamingData,
   getTrendingByType, getTopMediaAllGenres, getMediaByGenre, nextPageStateHandler,
-  mediaTypeAssigner, handleSearch, getProdStatus  }
+  mediaTypeAssigner, handleSearch, getProdStatus, getTvData  }

@@ -4,8 +4,6 @@ import styles from './Profile.module.css';
 
 const Profile = () => {
 
-
-
   return(
     <div className={styles.mainWrapper}>
       <h1>Test</h1>

@@ -2,13 +2,23 @@ import React, { useState, useEffect } from "react";
 import styles from "./MovieCell.module.css";
 import { AiOutlineStar } from "react-icons/ai";
 import MiscInfo from './MiscInfo/MiscInfo';
-import { getStreamingData, getProdStatus } from '../../Util/apiCalls';
+import { getStreamingData, getProdStatus, getTvData } from '../../Util/apiCalls';
 import ProdStatus from './ProdStatus/ProdStatus';
-
+import TrackIcon from './TrackIcon/TrackIcon';
+import { handleTvTrack } from '../../Util/backendCalls';
 const MovieCell = React.memo( function MemoCell(props) {
   let [clickedLarger, setClickedLarger] = useState(false);
-  const [ streamingServices, setStreamingServices ] = useState('')
-  const [ ongoingStatus, setOngoingStatus ] = useState('')
+  const [ streamingServices, setStreamingServices ] = useState('');
+  const [ ongoingStatus, setOngoingStatus ] = useState('');
+  const [ trackedStatus, setTrackedStatus ] = useState(false);
+  const [ tvData, setTvData ] = useState({
+    firstAirDate: '',
+    lastAirDate: '',
+    noEpisodes: 0,
+    noSeasons: 0,
+    //get title from props
+    //get id from props
+  })
   let mainWrapperAppendedStyle;
   let renderedCell;
   let releaseRender;
@@ -19,16 +29,26 @@ const MovieCell = React.memo( function MemoCell(props) {
     ? (releaseRender = null)
     : (releaseRender = <div>Release Date {props.yearReleased}</div>);
 
-  
     useEffect(() => {
       getStreamingData(props.mediaType, props.mediaId, setStreamingServices);
       getProdStatus(props.mediaId, props.mediaType, setOngoingStatus);
+      getTvData(props.mediaId, props.mediaType, setTvData )
     }, [props.mediaType, props.mediaId ]);
 
     useEffect(() => {
       setClickedLarger(false)
     },[ props.movieData ])
 
+    useEffect(() => {
+      if (trackedStatus) {
+        handleTvTrack(props.title, props.mediaId, tvData)
+      }
+    }, [ trackedStatus, props.title, props.mediaId, tvData ])
+
+    const handleTrackedStatus = e => {
+      e.stopPropagation();
+      setTrackedStatus(!trackedStatus)
+    }
   if (props.pathType === 'poster') {
     movieImageAppendedStyle = {
       width: 'auto',
@@ -82,15 +102,26 @@ const MovieCell = React.memo( function MemoCell(props) {
         </div>
         <div className={styles.movieInfoWrapper}>
           <div className={styles.largeTitle}>
-            <div data-testid='titleTest' >{props.title}</div>
-            
+            <div data-testid="titleTest">{props.title}</div>
+
             <div className={styles.titleScore}>
               <AiOutlineStar />
               {props.score}
             </div>
           </div>
           {releaseRender}
-          <ProdStatus prodStatus={ongoingStatus}/>
+          
+            {props.mediaType === "tv" ? (
+              <div className={styles.trackedWrapper}>
+                <TrackIcon
+                  trackedStatus={trackedStatus}
+                  setTrackedStatus={setTrackedStatus}
+                  handleTrackedStatus={handleTrackedStatus}
+                />
+              </div>
+            ) : null}
+          
+          <ProdStatus prodStatus={ongoingStatus} />
           <div className={styles.largeBio}>{props.bio}</div>
           <MiscInfo streamingServices={streamingServices} />
         </div>
