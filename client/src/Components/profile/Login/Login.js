@@ -32,7 +32,9 @@ const Login = props => {
       }
 
       if(response.status === 200) {
-        localStorage.setItem('user', data.user.userName)
+        localStorage.setItem('user', data.user.userName);
+        localStorage.setItem('userId', data.user._id);
+        //TODO - remove local storage and use route state context
         props.setShowLogin(false)
       }
       window.location.reload();

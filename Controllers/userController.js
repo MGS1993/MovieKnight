@@ -61,7 +61,7 @@ try {
   let user = new userModel(
     {
       userName: userName,
-      passWord: passwordHash
+      passWord: passwordHash,
     }
   )
   //Lesson: In order to return a status you must als return JSON

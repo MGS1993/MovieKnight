@@ -8,7 +8,8 @@ const handleTvTrack = async (title, id, tvData) => {
       firstAirDate: tvData.firstAirDate,
       lastAirDate: tvData.lastAirDate,
       noEpisodes: tvData.noEpisodes,
-      noSeasons: tvData.noSeasons
+      noSeasons: tvData.noSeasons,
+      savedBy: tvData.savedBy
     }
     const response = await fetch('api/track_tv_show', {
       method: 'POST',

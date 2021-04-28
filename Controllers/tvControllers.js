@@ -4,7 +4,7 @@ const TvModel = require('../models/TvModel');
 exports.trackTvShow = async (req, res, next) => {
   try {
     const { title, id, firstAirDate, 
-      lastAirDate, noEpisodes, noSeasons } = req.body;
+      lastAirDate, noEpisodes, noSeasons, savedBy } = req.body;
 
     let tvShow = new TvModel (
       {
@@ -13,7 +13,8 @@ exports.trackTvShow = async (req, res, next) => {
         firstAirDate,
         lastAirDate,
         noEpisodes,
-        noSeasons
+        noSeasons,
+        savedBy
       }
     )
     /* WE GOT BASIC BACKEND WORKING. NEXT WE WORK ON MAKING THE EYE TRACK

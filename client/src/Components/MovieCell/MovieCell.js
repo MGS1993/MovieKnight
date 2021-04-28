@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./MovieCell.module.css";
 import { AiOutlineStar } from "react-icons/ai";
 import MiscInfo from './MiscInfo/MiscInfo';
@@ -6,8 +6,11 @@ import { getStreamingData, getProdStatus, getTvData } from '../../Util/apiCalls'
 import ProdStatus from './ProdStatus/ProdStatus';
 import TrackIcon from './TrackIcon/TrackIcon';
 import { handleTvTrack } from '../../Util/backendCalls';
+import routerContext from '../context/routerContext';
+
 const MovieCell = React.memo( function MemoCell(props) {
   let [clickedLarger, setClickedLarger] = useState(false);
+  const routerState = useContext(routerContext);
   const [ streamingServices, setStreamingServices ] = useState('');
   const [ ongoingStatus, setOngoingStatus ] = useState('');
   const [ trackedStatus, setTrackedStatus ] = useState(false);
@@ -16,8 +19,8 @@ const MovieCell = React.memo( function MemoCell(props) {
     lastAirDate: '',
     noEpisodes: 0,
     noSeasons: 0,
-    //get title from props
-    //get id from props
+    savedBy: ''
+    //check to see if localstate is needed if this works 
   })
   let mainWrapperAppendedStyle;
   let renderedCell;
@@ -32,8 +35,8 @@ const MovieCell = React.memo( function MemoCell(props) {
     useEffect(() => {
       getStreamingData(props.mediaType, props.mediaId, setStreamingServices);
       getProdStatus(props.mediaId, props.mediaType, setOngoingStatus);
-      getTvData(props.mediaId, props.mediaType, setTvData )
-    }, [props.mediaType, props.mediaId ]);
+      getTvData(props.mediaId, props.mediaType, setTvData, routerState.currentUserId )
+    }, [props.mediaType, props.mediaId, routerState.currentUserId ]);
 
     useEffect(() => {
       setClickedLarger(false)
