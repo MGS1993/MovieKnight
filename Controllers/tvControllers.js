@@ -43,3 +43,9 @@ exports.trackTvShow = async (req, res, next) => {
     console.log(err)
   }
 }
+
+exports.getTrackedShows = async (req, res) => {
+  TvModel.find({trackedBy: req.params.id})
+  .then(tvList => res.json(tvList))
+  .catch(err => res.status(400).json({'Error': + err}))
+}

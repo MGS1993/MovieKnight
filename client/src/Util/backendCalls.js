@@ -1,5 +1,6 @@
 
 
+
 const handleTvTrack = async (title, id, tvData, userId ) => {
   try {
     let dataBody = {
@@ -25,4 +26,15 @@ const handleTvTrack = async (title, id, tvData, userId ) => {
   }
 }
 
-export { handleTvTrack }
+const handleGetTracked = async (userId, setState) => {
+  try {
+    const response = await fetch(`api/get_tracked_shows/${userId}`)
+    const data = await response.json();
+    setState(data)
+    console.log(data)
+  } catch(err) {
+    console.log(err)
+  }
+}
+
+export { handleTvTrack, handleGetTracked }
