@@ -4,7 +4,7 @@ const TvModel = require('../models/TvModel');
 exports.trackTvShow = async (req, res, next) => {
   try {
     const { title, id, firstAirDate, 
-      lastAirDate, noEpisodes, noSeasons, savedBy } = req.body;
+      lastAirDate, noEpisodes, noSeasons, trackedBy } = req.body;
 
     let tvShow = new TvModel (
       {
@@ -14,21 +14,19 @@ exports.trackTvShow = async (req, res, next) => {
         lastAirDate,
         noEpisodes,
         noSeasons,
-        savedBy
+        trackedBy
       }
     )
-    /* WE GOT BASIC BACKEND WORKING. NEXT WE WORK ON MAKING THE EYE TRACK
-    STATE STAY ON IT'S STATE DEPENDING ON WEATHER ITS BEING TRACKED OR NOT
-    BUT MORE IMPORTANTLY! WE HAVE TO GET TRACKING ON YOUR OWN ACCOUNT INSTEAD 
-    OF GLOBALLY LIKE IT CURRENTLY IS. LOOK AT YOUR OLD PROJECTS FOR CODE 
-    THAT WILL HELP*/
-    const existingTvShow = await TvModel.findOne({ id:id })
-      if(existingTvShow) {
+    const existingTvShows = await TvModel.find({id:id})
+    let trackedArr = existingTvShows.map((item) => {
+      return item.trackedBy.toString()
+    })
+      if(existingTvShows !== null && trackedArr.includes(tvShow.trackedBy[0].toString())) {
         return res
-        .status(400)
-        .json({msg: 'Tv show already tracked' })
+        .status(500)
+        .json({msg: "Tv show already being tracked."})
+        
       }
-
 
     tvShow.save( await function(err) {
       if(err) {

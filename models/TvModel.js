@@ -9,7 +9,7 @@ const TvSchema = new Schema (
   lastAirDate: {type: String, required: true },
   noEpisodes: {type: Number, required: true },
   noSeasons: {type: Number, required: true },
-  savedBy: {type: Schema.Types.ObjectId, required: true, ref: 'Users'}
+  trackedBy: [{ type: Schema.Types.ObjectId, ref: 'Users' }]
   }
 )
 

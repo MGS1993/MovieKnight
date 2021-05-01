@@ -19,7 +19,6 @@ const MovieCell = React.memo( function MemoCell(props) {
     lastAirDate: '',
     noEpisodes: 0,
     noSeasons: 0,
-    savedBy: ''
     //check to see if localstate is needed if this works 
   })
   let mainWrapperAppendedStyle;
@@ -35,8 +34,8 @@ const MovieCell = React.memo( function MemoCell(props) {
     useEffect(() => {
       getStreamingData(props.mediaType, props.mediaId, setStreamingServices);
       getProdStatus(props.mediaId, props.mediaType, setOngoingStatus);
-      getTvData(props.mediaId, props.mediaType, setTvData, routerState.currentUserId )
-    }, [props.mediaType, props.mediaId, routerState.currentUserId ]);
+      getTvData(props.mediaId, props.mediaType, setTvData )
+    }, [props.mediaType, props.mediaId ]);
 
     useEffect(() => {
       setClickedLarger(false)
@@ -44,9 +43,9 @@ const MovieCell = React.memo( function MemoCell(props) {
 
     useEffect(() => {
       if (trackedStatus) {
-        handleTvTrack(props.title, props.mediaId, tvData)
+        handleTvTrack(props.title, props.mediaId, tvData, routerState.currentUserId)
       }
-    }, [ trackedStatus, props.title, props.mediaId, tvData ])
+    }, [ trackedStatus, props.title, props.mediaId, tvData, routerState.currentUserId ])
 
     const handleTrackedStatus = e => {
       e.stopPropagation();

@@ -108,7 +108,7 @@ const getProdStatus = async (tvId, mediaType, setState) => {
     return 
   }
 }
-const getTvData = async (tvId, mediaType, setState, routerContext ) => {
+const getTvData = async (tvId, mediaType, setState ) => {
   if (mediaType === "tv") {
     try {
       const response = await fetch(` https://api.themoviedb.org/3/tv/${tvId}?api_key=${apiKey}&language=en-US`);
@@ -118,7 +118,7 @@ const getTvData = async (tvId, mediaType, setState, routerContext ) => {
         lastAirDate: data.last_air_date,
         noEpisodes: data.number_of_episodes,
         noSeasons: data.number_of_seasons,
-        savedBy: routerContext
+        
       });
     } catch(err) {
       console.log(err)

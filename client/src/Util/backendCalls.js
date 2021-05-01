@@ -1,6 +1,6 @@
 
 
-const handleTvTrack = async (title, id, tvData) => {
+const handleTvTrack = async (title, id, tvData, userId ) => {
   try {
     let dataBody = {
       title: title,
@@ -9,7 +9,7 @@ const handleTvTrack = async (title, id, tvData) => {
       lastAirDate: tvData.lastAirDate,
       noEpisodes: tvData.noEpisodes,
       noSeasons: tvData.noSeasons,
-      savedBy: tvData.savedBy
+      trackedBy: userId
     }
     const response = await fetch('api/track_tv_show', {
       method: 'POST',
