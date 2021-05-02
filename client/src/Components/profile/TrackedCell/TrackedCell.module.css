@@ -1,0 +1,33 @@
+
+.mainWrapper {
+  margin: 20px;
+  background-color: #1D3437;
+  border-radius: 4px;
+  justify-content: center;
+}
+
+.miscInfoWrapper {
+  min-height: 65px;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.mainWrapper > div > div {
+  margin: 0 10px;
+}
+.titleWrapper {
+  color: #f07b40;
+  font-weight: bold;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.headerText {
+  color: #f07b40;
+  font-weight: bold;
+}
+
+.mainWrapper > div :nth-child(2) {
+  font-size: 1rem;
+}

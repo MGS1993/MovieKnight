@@ -140,6 +140,17 @@ const handleSearch = async(
   }
 
 ////////////////////////
+//PROFILE///////////////
+const getTvImages = async (tvId) => {
+  try {
+    const response = await fetch(`https://api.themoviedb.org/3/tv/${tvId}/images?api_key=${apiKey}&language=en-US&include_image_language=en`)
+    const data = await response.json()
+    console.log(data)
+  } catch(err) {
+    console.log(err)
+  }
+}
+////////////////////////
 export { getAllTrendingData, callApiGenreByMediaType, getStreamingData,
   getTrendingByType, getTopMediaAllGenres, getMediaByGenre, nextPageStateHandler,
-  mediaTypeAssigner, handleSearch, getProdStatus, getTvData  }
+  mediaTypeAssigner, handleSearch, getProdStatus, getTvData, getTvImages  }

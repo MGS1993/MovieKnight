@@ -3,3 +3,8 @@
   flex-direction: column;
   min-height: 100vh;
 }
+
+h2 {
+  margin: 10px auto 0px;
+  color: #f07b40;
+}
