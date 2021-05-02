@@ -1,5 +1,5 @@
 .mainWrapper {
-  height: 10%;
+  height: 8vh;
   width: 100%;
   background-color: #1D3437;
   display: flex;
@@ -9,4 +9,10 @@
   color: #F07B40;
   font-weight: bold;
   font-family: 'Oswald', 'sans-serif';
+}
+
+
+.headerGreeting {
+  font-size: 24px;
+  margin: 0;
 }

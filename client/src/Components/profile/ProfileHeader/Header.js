@@ -8,7 +8,7 @@ const Header = props => {
   return (
     <div className={styles.mainWrapper}>
       
-        <h2>Welcome, {props.user}</h2> 
+        <p className={styles.headerGreeting}>Welcome, {props.user}</p> 
  
     </div>
   )
