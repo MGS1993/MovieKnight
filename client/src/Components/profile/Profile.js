@@ -11,7 +11,11 @@ const Profile = () => {
 
   useEffect(() => {
     routerState.currentUserId
-      ? handleGetTracked(routerState.currentUserId, setTrackedShows)
+      ? handleGetTracked(
+          routerState.currentUserId,
+          setTrackedShows,
+          // setUpdatedAirDate
+        )
       : console.log("Loading data...");
   }, [routerState.currentUserId]);
   
@@ -28,7 +32,8 @@ const Profile = () => {
             title={item.title}
             lastAirDate={item.lastAirDate}
             noEpisodes={item.noEpisodes}
-            noSeasons={item.noSeasons} />
+            noSeasons={item.noSeasons}
+            />
           }): null}
       </div>
     </div>

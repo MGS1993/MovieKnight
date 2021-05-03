@@ -152,6 +152,21 @@ const getTvImages = async (tvId, setState) => {
   }
 }
 ////////////////////////
+//TRACKED CELL//////////
+
+const handleGetUpdatedAirDate = async (id, setState) => {
+  try {
+    const response = await fetch(` https://api.themoviedb.org/3/tv/${id}?api_key=${apiKey}&language=en-US`);
+    const data = await response.json();
+    setState(data.last_air_date)
+  } catch(err) {
+    console.log(err)
+  }
+  
+}
+
+////////////////////////
 export { getAllTrendingData, callApiGenreByMediaType, getStreamingData,
   getTrendingByType, getTopMediaAllGenres, getMediaByGenre, nextPageStateHandler,
-  mediaTypeAssigner, handleSearch, getProdStatus, getTvData, getTvImages  }
+  mediaTypeAssigner, handleSearch, getProdStatus, getTvData, getTvImages,
+  handleGetUpdatedAirDate  }

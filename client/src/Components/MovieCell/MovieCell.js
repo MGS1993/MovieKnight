@@ -19,7 +19,6 @@ const MovieCell = React.memo( function MemoCell(props) {
     lastAirDate: '',
     noEpisodes: 0,
     noSeasons: 0,
-    //check to see if localstate is needed if this works 
   })
   let mainWrapperAppendedStyle;
   let renderedCell;
