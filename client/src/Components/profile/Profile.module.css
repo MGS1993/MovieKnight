@@ -8,3 +8,10 @@ h2 {
   margin: 10px auto 0px;
   color: #f07b40;
 }
+
+.footer {
+  position: fixed;
+  bottom: 0px;
+  height: 7vh;
+  width: 100%;
+}

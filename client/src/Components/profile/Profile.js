@@ -4,6 +4,7 @@ import routerContext from '../context/routerContext';
 import Header from './ProfileHeader/Header';
 import { handleGetTracked } from '../../Util/backendCalls';
 import TrackedCell from './TrackedCell/TrackedCell';
+import TrashCan from './TrackedCell/TrashCan';
 
 const Profile = () => {
   const  routerState = useContext(routerContext);
@@ -18,7 +19,13 @@ const Profile = () => {
         )
       : console.log("Loading data...");
   }, [routerState.currentUserId]);
-  
+  /*TODO: 
+  first get the delete button working. 
+  find out why teh app tracks a tv show in the same index as the previous
+    page without telling it to do so.
+  find a way to make title texts smaller depending on how much is in the div
+    to avoid overflow.
+   */
   return(
     <div className={styles.mainWrapper}>
       <Header user={routerState.currentUser} />
@@ -36,6 +43,7 @@ const Profile = () => {
             />
           }): null}
       </div>
+      <footer className={styles.footer}><TrashCan /></footer>
     </div>
   )
 }
