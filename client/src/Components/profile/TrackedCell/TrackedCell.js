@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import styles from './TrackedCell.module.css';
 import UpdatedTag from './UpdatedTag';
 import { getTvImages, handleGetUpdatedAirDate } from '../../../Util/apiCalls'
+import DelBtn from './DelBtn';
 
-const TrackedCell =  props => {
+const TrackedCell = props => {
   const [ backdrop, setBackDrop ] = useState('');
   const [ newEpisode, setNewEpisode ] = useState(false);
   const [ updatedAirDate, setUpdatedAirDate ] = useState('')
+  // const [ showDel, setShowDel ] = useState(false);
 
   let fullPath 
     backdrop !== undefined ? fullPath = backdrop[0]?.file_path : fullPath = null
@@ -40,6 +42,7 @@ const TrackedCell =  props => {
      
   return (
     <div className={styles.mainWrapper} style={newEpisodeStyle}>
+      <DelBtn deleteMode={props.deleteMode} /> 
       <div className={styles.titleWrapper}>
         {newEpisode ? <UpdatedTag /> : null}
         <div>{props.title}</div>

@@ -9,6 +9,7 @@ import TrashCan from './TrackedCell/TrashCan';
 const Profile = () => {
   const  routerState = useContext(routerContext);
   const [ trackedShows, setTrackedShows ] = useState({})
+  const [ deleteMode, setDeleteMode ] = useState(false);
 
   useEffect(() => {
     routerState.currentUserId
@@ -26,26 +27,32 @@ const Profile = () => {
   find a way to make title texts smaller depending on how much is in the div
     to avoid overflow.
    */
-  return(
+  return (
     <div className={styles.mainWrapper}>
       <Header user={routerState.currentUser} />
       <h2>Tracked Shows</h2>
       <div className={styles.trackedContainer}>
-        {trackedShows.length > 0 ?
-        trackedShows.map((item, index) => {
-            return <TrackedCell
-            key={index}
-            id={item.id}
-            title={item.title}
-            lastAirDate={item.lastAirDate}
-            noEpisodes={item.noEpisodes}
-            noSeasons={item.noSeasons}
-            />
-          }): null}
+        {trackedShows.length > 0
+          ? trackedShows.map((item, index) => {
+              return (
+                <TrackedCell
+                  key={index}
+                  id={item.id}
+                  title={item.title}
+                  lastAirDate={item.lastAirDate}
+                  noEpisodes={item.noEpisodes}
+                  noSeasons={item.noSeasons}
+                  deleteMode={deleteMode}
+                />
+              );
+            })
+          : null}
       </div>
-      <footer className={styles.footer}><TrashCan /></footer>
+      <footer className={styles.footer}>
+        <TrashCan setDeleteMode={setDeleteMode} deleteMode={deleteMode} />
+      </footer>
     </div>
-  )
+  );
 }
 
 

@@ -1,0 +1,19 @@
+.mainWrapper {
+  position: absolute;
+  bottom: 50%;
+  left: -178vw;
+  right: 0;
+  z-index: 1;
+  background-color: #d74d4d;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  width: 280px;
+  margin: auto;
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity .5s ease, left .4s ease;
+}

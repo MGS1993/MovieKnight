@@ -8,6 +8,7 @@
   background-color: #9b2323;
   border-radius: 24px;
   margin: 0 auto;
+  transition: all .4 ease;
 }
 
 .trashCanWrapper {

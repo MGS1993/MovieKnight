@@ -5,6 +5,7 @@
   border-radius: 4px;
   height: 113px;
   transition: height .4s ease;
+  position: relative;
 }
 
 .miscInfoWrapper {
