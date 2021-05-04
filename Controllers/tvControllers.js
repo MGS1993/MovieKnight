@@ -49,3 +49,9 @@ exports.getTrackedShows = async (req, res) => {
   .then(tvList => res.json(tvList))
   .catch(err => res.status(400).json({'Error': + err}))
 }
+
+exports.deleteShow = async (req, res) => {
+  TvModel.findByIdAndDelete(req.params.id)
+  .then(() => res.json('Show no longer being tracked'))
+  .catch(err => res.status(400).json('Error: ' + err))
+}

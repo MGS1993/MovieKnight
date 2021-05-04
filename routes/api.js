@@ -13,5 +13,6 @@ router.post('/login', userController.login);
 /*tvControllers */
 router.post('/track_tv_show', tvControllers.trackTvShow);
 router.get('/get_tracked_shows/:id', tvControllers.getTrackedShows);
+router.delete('/delete_tv_show/:id', tvControllers.deleteShow )
 
 module.exports = router

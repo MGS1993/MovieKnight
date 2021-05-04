@@ -29,19 +29,19 @@ const handleGetTracked = async (userId, setState ) => {
   try {
     const response = await fetch(`api/get_tracked_shows/${userId}`)
     const data = await response.json();
-    
-    // data.forEach(async el => {
-    //   const response2 = await fetch(` https://api.themoviedb.org/3/tv/${el.id}?api_key=${apiKey}&language=en-US`);
-    //   const data2 = await response2.json();
-    //   secondState(data2) 
-    // });
-
-
-
     setState(data)
   } catch(err) {
     console.log(err)
   }
 }
 
-export { handleTvTrack, handleGetTracked }
+const deleteHandler = async( showId ) => {
+  try {
+    const response = await fetch(`api/delete_tv_show/${showId}`)
+    const data = await response.json();
+    console.log(data)
+  } catch(err) {
+    console.log(err)
+  }
+}
+export { handleTvTrack, handleGetTracked, deleteHandler }

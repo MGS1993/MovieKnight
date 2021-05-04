@@ -15,7 +15,7 @@ const DelBtn = props => {
 
   return(
     <div className={styles.mainWrapper} style={toggledStyle}
-    onClick={() => console.log('test')}>
+    onClick={props.clicked}>
       Stop tracking
     </div>
   )

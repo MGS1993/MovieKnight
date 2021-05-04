@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './TrackedCell.module.css';
 import UpdatedTag from './UpdatedTag';
 import { getTvImages, handleGetUpdatedAirDate } from '../../../Util/apiCalls'
+import { deleteHandler } from '../../../Util/backendCalls';
 import DelBtn from './DelBtn';
 
 const TrackedCell = props => {
@@ -18,7 +19,7 @@ const TrackedCell = props => {
     const lastAirDate = localStorage.getItem(props.title);
     // console.log('updated air Date', updatedAirDate)
     // console.log('last air date',lastAirDate)
-    
+
     useEffect(() => {
       getTvImages(parseInt(props.id), setBackDrop);
       handleGetUpdatedAirDate(props.id, setUpdatedAirDate);
@@ -42,7 +43,7 @@ const TrackedCell = props => {
      
   return (
     <div className={styles.mainWrapper} style={newEpisodeStyle}>
-      <DelBtn deleteMode={props.deleteMode} /> 
+      <DelBtn deleteMode={props.deleteMode} /*  clicked={ () => deleteHandler(props.id) } */  /> 
       <div className={styles.titleWrapper}>
         {newEpisode ? <UpdatedTag /> : null}
         <div>{props.title}</div>
