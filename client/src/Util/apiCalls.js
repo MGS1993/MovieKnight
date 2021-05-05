@@ -143,7 +143,7 @@ const handleSearch = async(
 //PROFILE///////////////
 const getTvImages = async (tvId, setState) => {
   try {
-    const response = await fetch(`https://api.themoviedb.org/3/tv/${tvId}/images?api_key=${apiKey}&language=en-US&include_image_language=en`)
+    const response = await fetch(`https://api.themoviedb.org/3/tv/${tvId}/images?api_key=${apiKey}&language=en-US&include_image_language=en,null`)
     const data = await response.json()
     // console.log(data.backdrops)
     setState(data.backdrops)
