@@ -21,12 +21,19 @@ const Profile = () => {
       : console.log("Loading data...");
   }, [routerState.currentUserId]);
   /*TODO: 
-  first get the delete button working. 
+  
   find out why teh app tracks a tv show in the same index as the previous
-    page without telling it to do so.
+    page without telling it to do so. ****
     (probably need to return state on track button back to false before rerender)
-  find a way to make title texts smaller depending on how much is in the div
+  
+    find a way to make title texts smaller depending on how much is in the div
     to avoid overflow.
+
+    fix background img not working if not in us language *****
+
+    local storage shouldn't be used for data compare --probably
+
+    add error messages on login modal ****
    */
   return (
     <div className={styles.mainWrapper}>
