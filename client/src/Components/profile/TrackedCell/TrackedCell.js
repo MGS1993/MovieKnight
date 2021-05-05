@@ -9,7 +9,6 @@ const TrackedCell = props => {
   const [ backdrop, setBackDrop ] = useState('');
   const [ newEpisode, setNewEpisode ] = useState(false);
   const [ updatedAirDate, setUpdatedAirDate ] = useState('')
-  // const [ showDel, setShowDel ] = useState(false);
 
   let fullPath 
     backdrop !== undefined ? fullPath = backdrop[0]?.file_path : fullPath = null
@@ -17,8 +16,7 @@ const TrackedCell = props => {
     newEpisode ? newEpisodeStyle = {height: '226px'}
     : newEpisodeStyle = null
     const lastAirDate = localStorage.getItem(props.title);
-    // console.log('updated air Date', updatedAirDate)
-    // console.log('last air date',lastAirDate)
+
 
     useEffect(() => {
       getTvImages(parseInt(props.id), setBackDrop);
@@ -43,7 +41,12 @@ const TrackedCell = props => {
      
   return (
     <div className={styles.mainWrapper} style={newEpisodeStyle}>
-      <DelBtn deleteMode={props.deleteMode} /*  clicked={ () => deleteHandler(props.id) } */  /> 
+      <DelBtn
+        deleteMode={props.deleteMode}
+        clicked={() =>
+          deleteHandler(props.documentId, props.userId, props.setTrackedShows)
+        }
+      />
       <div className={styles.titleWrapper}>
         {newEpisode ? <UpdatedTag /> : null}
         <div>{props.title}</div>

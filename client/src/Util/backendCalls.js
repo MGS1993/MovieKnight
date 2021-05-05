@@ -35,11 +35,15 @@ const handleGetTracked = async (userId, setState ) => {
   }
 }
 
-const deleteHandler = async( showId ) => {
+const deleteHandler = async( showId, userId, setState ) => {
   try {
-    const response = await fetch(`api/delete_tv_show/${showId}`)
-    const data = await response.json();
-    console.log(data)
+    await fetch(`api/delete_tv_show/${showId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    await handleGetTracked(userId, setState)
   } catch(err) {
     console.log(err)
   }

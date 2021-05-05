@@ -10,7 +10,7 @@ const Profile = () => {
   const  routerState = useContext(routerContext);
   const [ trackedShows, setTrackedShows ] = useState({})
   const [ deleteMode, setDeleteMode ] = useState(false);
-
+  //^passed to DelBtn to trigger delete
   useEffect(() => {
     routerState.currentUserId
       ? handleGetTracked(
@@ -24,6 +24,7 @@ const Profile = () => {
   first get the delete button working. 
   find out why teh app tracks a tv show in the same index as the previous
     page without telling it to do so.
+    (probably need to return state on track button back to false before rerender)
   find a way to make title texts smaller depending on how much is in the div
     to avoid overflow.
    */
@@ -43,6 +44,9 @@ const Profile = () => {
                   noEpisodes={item.noEpisodes}
                   noSeasons={item.noSeasons}
                   deleteMode={deleteMode}
+                  documentId={item._id}
+                  setTrackedShows={setTrackedShows}
+                  userId={routerState.currentUserId}
                 />
               );
             })
