@@ -13,17 +13,18 @@ exports.login = async (req, res, next) => {
       .json({msg: 'Not all fields have been entered.'})
     }
     if (user === null) {
-      return res.status(500).send('Cannot find user.').end()
+      return res
+      .status(404)
+      .json({msg: 'Password or User is incorrect'})
     }
-    
     if( await bcrypt.compare(passWord, user.passWord.trim())) {
       return res
      .send({user})
      .status(200)
      
    } else {
-     res.status(500)
-     res.send('Not allowed')
+     res.status(404)
+     res.json({msg: 'Password or User is incorrect'})
    } 
   }catch(err) {
     console.log(err)

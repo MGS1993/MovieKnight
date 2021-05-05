@@ -26,8 +26,9 @@ const Login = props => {
         }
       })
       const data = await response.json()
-      
-      if (response.status === 400 ) {
+      console.log(data)
+      if (response.status !== 200 ) {
+
         setErrmsg(data.msg)
       }
 
@@ -37,7 +38,10 @@ const Login = props => {
         //TODO - remove local storage and use route state context
         props.setShowLogin(false)
       }
-      window.location.reload();
+      if( response.status === 200 ) {
+        window.location.reload();
+      }
+      
     }catch(err) {
       console.log(err)
     }
@@ -61,7 +65,7 @@ const Login = props => {
       }) 
       const data = await response.json();
 
-      if (response.status === 400 ) {
+      if (response.status !== 200 ) {
         setErrmsg(data.msg)
       }
       setRegisterUserName('');
@@ -81,7 +85,7 @@ const Login = props => {
         <div className={styles.header}>
           <h2>Log in</h2>
         </div>
-        {errmsg !== '' ? <p className={`${styles.errorText} ${styles.fadeOut}`}>{errmsg}</p> : ''}
+        {errmsg !== '' ? <p className={`${styles.errorText} `}>{errmsg}</p> : null}
         <form>
         <TextInput
           labelName="User"
@@ -110,7 +114,7 @@ const Login = props => {
         <div className={styles.header}>
           <h2>Register</h2>
         </div>
-        {errmsg !== '' ? <p className={styles.errorText}>{errmsg}</p> : ''}
+        {errmsg !== '' ? <p className={`${styles.errorText}`}>{errmsg}</p> : ''}
         <form>
           <TextInput 
           labelName="Register username"

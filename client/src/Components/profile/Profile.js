@@ -21,13 +21,7 @@ const Profile = () => {
       : console.log("Loading data...");
   }, [routerState.currentUserId]);
   /*TODO: 
-  
-    find a way to make title texts smaller depending on how much is in the div
-    to avoid overflow. /can use height auto instead but will break transition/
-
     local storage shouldn't be used for data compare --probably
-
-    add error messages on login modal ****
    */
   return (
     <div className={styles.mainWrapper}>
