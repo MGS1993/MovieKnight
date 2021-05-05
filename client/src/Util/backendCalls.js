@@ -35,7 +35,7 @@ const handleGetTracked = async (userId, setState ) => {
   }
 }
 
-const deleteHandler = async( showId, userId, setState ) => {
+const deleteHandler = async( showId, userId, setState, storageItem ) => {
   try {
     await fetch(`api/delete_tv_show/${showId}`, {
       method: 'DELETE',
@@ -44,6 +44,7 @@ const deleteHandler = async( showId, userId, setState ) => {
       }
     })
     await handleGetTracked(userId, setState)
+    localStorage.removeItem(storageItem)
   } catch(err) {
     console.log(err)
   }

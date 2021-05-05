@@ -44,7 +44,7 @@ const TrackedCell = props => {
       <DelBtn
         deleteMode={props.deleteMode}
         clicked={() =>
-          deleteHandler(props.documentId, props.userId, props.setTrackedShows)
+          deleteHandler(props.documentId, props.userId, props.setTrackedShows, props.title)
         }
       />
       <div className={styles.titleWrapper}>

@@ -16,13 +16,10 @@ const Profile = () => {
       ? handleGetTracked(
           routerState.currentUserId,
           setTrackedShows,
-          // setUpdatedAirDate
         )
       : console.log("Loading data...");
   }, [routerState.currentUserId]);
-  /*TODO: 
-    local storage shouldn't be used for data compare --probably
-   */
+
   return (
     <div className={styles.mainWrapper}>
       <Header user={routerState.currentUser} />
