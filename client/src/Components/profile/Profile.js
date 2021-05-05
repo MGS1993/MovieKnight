@@ -5,6 +5,7 @@ import Header from './ProfileHeader/Header';
 import { handleGetTracked } from '../../Util/backendCalls';
 import TrackedCell from './TrackedCell/TrackedCell';
 import TrashCan from './TrackedCell/TrashCan';
+import BackIcon from './BackIcon/BackIcon';
 
 const Profile = () => {
   const  routerState = useContext(routerContext);
@@ -45,6 +46,7 @@ const Profile = () => {
           : null}
       </div>
       <footer className={styles.footer}>
+        <BackIcon />
         <TrashCan setDeleteMode={setDeleteMode} deleteMode={deleteMode} />
       </footer>
     </div>

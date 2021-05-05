@@ -1,0 +1,11 @@
+.mainWrapper {
+  position: absolute;
+  transform: rotate(180deg);
+  display: flex;
+  left: 5vw;
+}
+
+.icon {
+  width: auto;
+  height: 35px;
+}
