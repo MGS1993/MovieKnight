@@ -100,9 +100,10 @@ const Login = props => {
           inputName='password'
           value={password}
           changed={(e) => setPassword(e.target.value)} />
-          <button className={styles.btn} onClick={(e) => handleLogin(e)}>Login</button>
+          
         </form>
         <div className={styles.registerLink}>
+        <button className={styles.btn} onClick={(e) => handleLogin(e)}>Login</button>
           <button className={styles.btn} 
           onClick={() => setModuleRender('register')}>Register</button>
         </div>
@@ -134,9 +135,9 @@ const Login = props => {
           inputName='password2'
           value={registerPassWord2}
           changed={(e) => setRegisterPassWord2(e.target.value)} />
-
+          </form>
           <button className={styles.btn} onClick={(e) => handleRegister(e)}>Register</button>
-        </form>
+        
       </div>
     )
   }
