@@ -23,7 +23,7 @@ const Profile = () => {
   /*TODO: 
   
     find a way to make title texts smaller depending on how much is in the div
-    to avoid overflow.
+    to avoid overflow. /can use height auto instead but will break transition/
 
     local storage shouldn't be used for data compare --probably
 

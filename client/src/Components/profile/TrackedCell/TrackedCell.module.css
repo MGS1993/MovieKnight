@@ -3,9 +3,10 @@
   margin: 20px;
   background-color: #1D3437;
   border-radius: 4px;
-  height: 113px;
+  height: auto;
   transition: height .4s ease;
   position: relative;
+  padding-bottom: 20px;
 }
 
 .miscInfoWrapper {
@@ -27,7 +28,7 @@
   filter: blur(.012rem);
 }
 .mainWrapper > div > div {
-  margin: 0 10px;
+  margin: 4px 10px;
 }
 .titleWrapper {
   color: #f07b40;
@@ -44,7 +45,3 @@
   color: #f07b40;
   font-weight: bold;
 }
-
-/* .mainWrapper > div :nth-child(2) {
-  font-size: 1rem;
-} */
