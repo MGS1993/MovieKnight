@@ -1,6 +1,6 @@
 
 
-const handleTvTrack = async (title, id, tvData, userId ) => {
+const handleTvTrack = async (title, id, tvData, userId, setState ) => {
   try {
     let dataBody = {
       title: title,
@@ -19,7 +19,9 @@ const handleTvTrack = async (title, id, tvData, userId ) => {
       }
     })
     const data = await response.json();
-    console.log(data)
+    
+    setState(data.msg)
+    
   } catch(err) {
     console.log(err)
   }

@@ -13,6 +13,7 @@ const MovieCell = React.memo( function MemoCell(props) {
   const routerState = useContext(routerContext);
   const [ streamingServices, setStreamingServices ] = useState('');
   const [ ongoingStatus, setOngoingStatus ] = useState('');
+  const [ trackerRes, setTrackerRes ] = useState('');
   const [ tvData, setTvData ] = useState({
     firstAirDate: '',
     lastAirDate: '',
@@ -41,7 +42,7 @@ const MovieCell = React.memo( function MemoCell(props) {
 
     const handleTrackedStatus = e => {
       e.stopPropagation();
-      handleTvTrack(props.title, props.mediaId, tvData, routerState.currentUserId)
+      handleTvTrack(props.title, props.mediaId, tvData, routerState.currentUserId, setTrackerRes )
     }
   if (props.pathType === 'poster') {
     movieImageAppendedStyle = {
@@ -107,6 +108,7 @@ const MovieCell = React.memo( function MemoCell(props) {
           
             {props.mediaType === "tv" ? (
               <div className={styles.trackedWrapper}>
+                {<p className={styles.trackerText}>{trackerRes}</p>}
                 <TrackIcon
                   
                   handleTrackedStatus={handleTrackedStatus}

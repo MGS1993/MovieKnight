@@ -35,11 +35,3 @@
   animation: fadeOut 2s;
   animation-delay: 3s;
 }
-/* @keyframes fadeOut {
-  from {opacity: 1;}
-  to {opacity: 0;}
-} */
-
- /* removed keyframes ergo error fade 
-TODO: find a way to implement it in way that doesn't cause
-the new error to be at opacity 0 */

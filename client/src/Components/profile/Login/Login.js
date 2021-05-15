@@ -35,7 +35,6 @@ const Login = props => {
       if(response.status === 200) {
         localStorage.setItem('user', data.user.userName);
         localStorage.setItem('userId', data.user._id);
-        //TODO - remove local storage and use route state context
         props.setShowLogin(false)
       }
       if( response.status === 200 ) {
@@ -47,7 +46,7 @@ const Login = props => {
     }
   }
   const handleKeyPress = event => {
-    //toDO: make handleKeyPress work on either register or login
+    //TODO: make handleKeyPress work on either register or login
     if(event.key === 'Enter') {
       handleLogin(event)
     }

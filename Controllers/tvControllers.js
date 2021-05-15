@@ -35,7 +35,7 @@ exports.trackTvShow = async (req, res, next) => {
         .json({ msg: 'Error in tvController save function' })
       } else {
         res
-        .json({ msg: 'tv Show Saved' })
+        .json({ msg: 'TV Show Saved' })
         .status(200)
       }
     })

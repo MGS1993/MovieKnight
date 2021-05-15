@@ -131,3 +131,8 @@
   position: relative;
   top:2px;
 }
+
+.trackerText {
+  color: green;
+  font-weight: bold;
+}

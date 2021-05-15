@@ -11,7 +11,6 @@ const HomePage = React.memo(() => {
   const [ movieData, setMovieData ] = useState(null)
   const [ mediaSearch, setMediaSearch ] = useState('');
   const [ showLogin, setShowLogin ] = useState(false);
-  
  useEffect(()=> {
     getAllTrendingData(setMovieData)
  }, [])
