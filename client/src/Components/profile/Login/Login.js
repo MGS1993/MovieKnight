@@ -46,6 +46,12 @@ const Login = props => {
       console.log(err)
     }
   }
+  const handleKeyPress = event => {
+    //toDO: make handleKeyPress work on either register or login
+    if(event.key === 'Enter') {
+      handleLogin(event)
+    }
+  }
 
   const handleRegister = async (e) => {
     try {
@@ -86,7 +92,7 @@ const Login = props => {
           <h2>Log in</h2>
         </div>
         {errmsg !== '' ? <p className={`${styles.errorText} `}>{errmsg}</p> : null}
-        <form>
+        <form onKeyPress={handleKeyPress}>
         <TextInput
           labelName="User"
           inputType='text'
@@ -104,8 +110,8 @@ const Login = props => {
         </form>
         <div className={styles.registerLink}>
         <button className={styles.btn} onClick={(e) => handleLogin(e)}>Login</button>
-          <button className={styles.btn} 
-          onClick={() => setModuleRender('register')}>Register</button>
+        <button className={styles.btn} 
+        onClick={() => setModuleRender('register')}>Register</button>
         </div>
       </div>
     )
