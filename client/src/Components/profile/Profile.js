@@ -20,7 +20,6 @@ const Profile = () => {
         )
       : console.log("Loading data...");
   }, [routerState.currentUserId]);
-  useEffect(() => console.log('test'))
   return (
     <div className={styles.mainWrapper}>
       <Header user={routerState.currentUser} />
