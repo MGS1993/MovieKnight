@@ -4,7 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const apiRoutes = require('./routes/api');
 require('dotenv').config();
-
+console.log("Database_URL", process.env.DATABASE_URL);
 const app = express();
 app.use(express.json());
 app.use('/api', apiRoutes);
@@ -21,11 +21,9 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 if (process.env.NODE_ENV === 'production') {
   // set static folder
   app.use(express.static('client/build'));
-  // RE COMMIT TO HEROKU ASAP. LAST COMMIT CRASHED SERVER IMMEDIATELY
-  // THEN FIGURE OUT WHY THE WEBSITE CRASHES IF YOU RELOAD ON PROFILE 
-  // AND NOT ON HOME COMPONENT 
-  app.get('/*', () => (req, res) => {
-    console.log(req)
+  
+  app.get('/*', (req, res) => {
+    
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
