@@ -20,11 +20,13 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
   // set static folder
-  app.use(express.static(__dirname, 'build'));
-
+  app.use(express.static('client/build'));
+  // RE COMMIT TO HEROKU ASAP. LAST COMMIT CRASHED SERVER IMMEDIATELY
+  // THEN FIGURE OUT WHY THE WEBSITE CRASHES IF YOU RELOAD ON PROFILE 
+  // AND NOT ON HOME COMPONENT 
   app.get('/*', () => (req, res) => {
     console.log(req)
-    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
 
