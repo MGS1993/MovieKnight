@@ -11,6 +11,11 @@ const ReactRouter = () => {
 
   
   const handleLogout = () => {
+    navigator.serviceWorker.getRegistrations().then(function (registrations) {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
     setCurrentUser("");
     localStorage.clear();
     window.location.reload();

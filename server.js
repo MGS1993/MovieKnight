@@ -3,13 +3,20 @@ const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
 const apiRoutes = require('./routes/api');
+const webPush = require('web-push');
 require('dotenv').config();
-console.log("Database_URL", process.env.DATABASE_URL);
+
+
 const app = express();
 app.use(express.json());
 app.use('/api', apiRoutes);
-
 app.use(cors());
+
+webPush.setVapidDetails(
+  "mailto:test@test.com",
+  process.env.PUBLIC_VAPID_KEY,
+  process.env.PRIVATE_VAPID_KEY
+);
 
 const uri = process.env.ATLAS_URI;
 

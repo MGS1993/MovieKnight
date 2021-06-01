@@ -8,5 +8,8 @@
     "serv",
     "serviceworker",
     "stream"
+  ],
+  "cSpell.words": [
+    "iife"
   ]
 }
