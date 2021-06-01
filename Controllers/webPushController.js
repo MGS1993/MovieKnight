@@ -6,8 +6,13 @@ exports.subscribe = async (req, res) => {
   try {
     // Get pushSubscription object from client
     const subscription = req.body;
-    console.log(subscription)
-    if ( subscription.userId !== null ) {
+    // Get user to compare subscriptions
+    const user = await userModel.findById(subscription.userId);
+    // Only runs if req endpoint is different than userModel endpoint
+    if (
+      subscription.userId !== null &&
+      subscription.endPoint !== user.subscription.endPoint
+    ) {
       await userModel
         .findOneAndUpdate(
           { _id: subscription.userId },
@@ -16,8 +21,9 @@ exports.subscribe = async (req, res) => {
             upsert: true,
             new: true,
           }
-        ).exec();
-        
+        )
+        .exec();
+
       // Send back 201 - resource created successfully
       res.status(201).json({ msg: "User subscription updated successfully" });
     } 

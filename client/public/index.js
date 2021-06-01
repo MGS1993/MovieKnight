@@ -28,8 +28,11 @@ const urlBase64ToUint8Array = (base64String) => {
 
 // function as IIFE - asks permission automatically
 window.subscribe = (async () => {
-  if (!('serviceWorker' in navigator)) return;
   const userId = localStorage.getItem('userId');
+  // exit function if serviceworker isn't supported
+  if (!('serviceWorker' in navigator)) return;
+
+
   if ( userId !== null ) {
     const registration = await navigator.serviceWorker.ready;
 
@@ -38,20 +41,14 @@ window.subscribe = (async () => {
       userVisibleOnly: true,
       applicationServerKey: urlBase64ToUint8Array(publicVapidKey),
     });
+    
     // Add userId to object in order to easily pass info in one variable
-  
     let dataBody = { 
       endPoint: subscription.endpoint,
       expirationTime: subscription.expirationTime,
-      // keys: {
-      //   p256dh: subscription.keys.p256dh,
-      //   auth: subscription.keys.auth
-      // },
       userId
     }
-  console.log(dataBody)
-    // console.log(subscription)
-  
+
     await fetch('api/subscribe', {
       method: 'PATCH',
       body: JSON.stringify(dataBody),
